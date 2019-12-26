@@ -31,6 +31,7 @@
 		8EE2C791238FB83D00CE710B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE2C790238FB83D00CE710B /* ViewController.swift */; };
 		8EE2C796238FB83E00CE710B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EE2C795238FB83E00CE710B /* Assets.xcassets */; };
 		8EE2C799238FB83E00CE710B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EE2C797238FB83E00CE710B /* LaunchScreen.storyboard */; };
+		8EE7838D23B4B1C6006E99FC /* BottomRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE7838C23B4B1C6006E99FC /* BottomRefresh.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		8EE2C795238FB83E00CE710B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8EE2C798238FB83E00CE710B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8EE2C79A238FB83E00CE710B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8EE7838C23B4B1C6006E99FC /* BottomRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomRefresh.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				8EAE89D32395356B003D32B3 /* StatsViewCell.swift */,
 				8EAE89D52395360A003D32B3 /* StatusView.swift */,
 				8E2FE60F2398A1DD000117A7 /* StatsItemView.swift */,
+				8EE7838C23B4B1C6006E99FC /* BottomRefresh.swift */,
 			);
 			path = Stats;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				8E70F4DB23920AA0005847E3 /* StatsViewNaviController.swift in Sources */,
 				8E55AB3A23AF34A4007632F6 /* MatchDetail.swift in Sources */,
 				8E325072239489AD002B47E1 /* TierCollectionView.swift in Sources */,
+				8EE7838D23B4B1C6006E99FC /* BottomRefresh.swift in Sources */,
 				8E1C40E923ACCEF60069F238 /* SummonerInfo.swift in Sources */,
 				8EE2C791238FB83D00CE710B /* ViewController.swift in Sources */,
 				8E2FE6102398A1DD000117A7 /* StatsItemView.swift in Sources */,

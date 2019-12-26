@@ -97,7 +97,7 @@ class StatsMainViewController: UIViewController, cellDelegate{
         var status: [StatusModel] = [StatusModel]()
         var index = 0
         matches.match.forEach { (match) in
-            if(index == 20) { return }
+            if(index == 5) { return }
             index += 1
             ClientAPI.shard.getMatchInfoByID(gameId: match.gameId) { (match) in
                 if let data = match {

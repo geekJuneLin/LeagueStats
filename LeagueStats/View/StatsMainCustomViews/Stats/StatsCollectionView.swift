@@ -9,12 +9,7 @@
 import UIKit
 
 class StatsCollectionView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate{
-//    var matchList: MatchList?{
-//        didSet{
-//            if let matches = matchList{
-//            }
-//        }
-//    }
+    var refreshFlag: Bool = false
     
     var cellDelegate: cellDelegate?
     
@@ -26,12 +21,10 @@ class StatsCollectionView: UIView, UICollectionViewDataSource, UICollectionViewD
         }
     }
     
-    // - TODO: Customize the UIRefreshControll 
-    let refreshControll: UIRefreshControl = {
-        let controll = UIRefreshControl()
-        controll.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
-        controll.tintColor = UIColor(red: 44/255, green: 128/255, blue: 255/255, alpha: 0.5)
-        return controll
+    let refresh: BottomRefresh = {
+        let view = BottomRefresh()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     let collectionView: UICollectionView = {
@@ -56,28 +49,61 @@ class StatsCollectionView: UIView, UICollectionViewDataSource, UICollectionViewD
         collectionView.dataSource = self
         
         addSubview(collectionView)
-        collectionView.addSubview(refreshControll)
         
         // register cell
         collectionView.register(StatsViewCell.self, forCellWithReuseIdentifier: cellId)
+        
+        collectionView.register(BottomRefresh.self, forCellWithReuseIdentifier: "refresh")
+        
         
         collectionView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         collectionView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
     }
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return status?.count ?? 0
+        if section == 0{
+            return status?.count ?? 0
+        }else if section == 1 && refreshFlag{
+            return 1
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! StatsViewCell
-        cell.backgroundColor = .white
-        cell.status = status?[indexPath.item]
-        return cell
+        if indexPath.section == 0{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! StatsViewCell
+            cell.backgroundColor = .white
+            cell.status = status?[indexPath.item]
+            return cell
+        }else{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "refresh", for: indexPath) as! BottomRefresh
+            cell.indicator.startAnimating()
+            return cell
+        }
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let height = scrollView.contentSize.height
+        
+        if offsetY > height - scrollView.frame.height && !refreshFlag{
+            print("reach the bottom")
+            refreshFlag = true
+            collectionView.reloadSections(IndexSet(integer: 1))
+        }
+    }
+    
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.frame.width, height: 120)
+        if indexPath.section == 0 {
+            return CGSize(width: self.frame.width, height: 120)
+        }else{
+            return CGSize(width: self.frame.width, height: 60)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -88,17 +114,6 @@ class StatsCollectionView: UIView, UICollectionViewDataSource, UICollectionViewD
         print("you've selected \(indexPath.item) cell")
         
         cellDelegate?.presentMatchView()
-    }
-    
-    @objc
-    fileprivate func handleRefresh(){
-        print("refreshed!")
-//        status.append(StatusModel(status: "L", time: "28:28"))
-//        status.append(StatusModel(status: "W", time: "30:26"))
-//        status.append(StatusModel(status: "W", time: "38:12"))
-//        status.append(StatusModel(status: "L", time: "25:39"))
-        refreshControll.endRefreshing()
-        collectionView.reloadData()
     }
     
     required init?(coder aDecoder: NSCoder) {

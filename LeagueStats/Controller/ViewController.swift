@@ -31,7 +31,7 @@ class ViewController: UIViewController, cardViewDelegate {
         super.viewDidLoad()
         
         // API Test
-        ClientAPI.shard.setApiKey("RGAPI-0ae64666-8dac-43be-867d-86a973d2e32a")
+        ClientAPI.shard.setApiKey("RGAPI-6386c8fa-8333-4375-8311-773127da3a71")
         ClientAPI.shard.getSummonerByName(value: "0x73002")
         
         setUpViews()

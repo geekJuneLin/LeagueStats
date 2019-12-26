@@ -9,6 +9,7 @@
 import Foundation
 
 class ClientAPI{
+    // MARK: - variables
     static var shard: ClientAPI = ClientAPI()
     private var name: String?
     private var accountId: String?
@@ -110,14 +111,6 @@ class ClientAPI{
                 }
             }
             
-//            executeQuery(endPoint: endPoint, value: id) { (data) in
-//                if let data = data,
-//                    let matchList = try? decoder.decode(MatchList.self, from: data){
-//                    completion(matchList)
-//                }else{
-//                    completion(nil)
-//                }
-//            }
         }else{
             print("No account id has been found")
         }
