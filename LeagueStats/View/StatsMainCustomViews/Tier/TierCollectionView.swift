@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TierCollectionView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+class TierCollectionView: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     let cellId = "cellId"
     
     let tierInfo: [TierModel] = [TierModel(type: "Flex Solo", tier: TierInfo(tier: "Silver 1", tierImg: UIImage(named: "dinosaur")!, point: 38, win: 46, loss: 25)),

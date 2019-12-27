@@ -142,7 +142,7 @@ class StatsViewCell: UICollectionViewCell{
         statusView.widthAnchor.constraint(equalToConstant: 45).isActive = true
         statusView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
         
-        champImg.topAnchor.constraint(equalTo: topAnchor, constant: 12).isActive = true
+        champImg.topAnchor.constraint(equalTo: topAnchor, constant: self.frame.height * 0.1).isActive = true
         champImg.leftAnchor.constraint(equalTo: statusView.rightAnchor, constant: 8).isActive = true
         champImg.widthAnchor.constraint(equalToConstant: 60).isActive = true
         champImg.heightAnchor.constraint(equalToConstant: 60).isActive = true

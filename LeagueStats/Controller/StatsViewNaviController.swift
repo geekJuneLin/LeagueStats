@@ -19,7 +19,7 @@ class StatsViewNaviController: UINavigationController{
     }
     
     let vc: StatsMainViewController = {
-       let view = StatsMainViewController()
+       let view = StatsMainViewController(collectionViewLayout: UICollectionViewFlowLayout())
         return view
     }()
     

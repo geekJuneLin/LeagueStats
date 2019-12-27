@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StatsTopView: UIView{
+class StatsTopView: UICollectionReusableView{
     var summonerInfo: SummonerInfoModel? {
         didSet{
             if let level = summonerInfo?.level {
@@ -28,6 +28,15 @@ class StatsTopView: UIView{
             }
         }
     }
+    
+    let background: UIView = {
+       let view = UIView()
+        view.layer.masksToBounds = true
+        view.layer.cornerRadius = 8
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     let heroImg: UIImageView = {
        let view = UIImageView()
@@ -71,13 +80,19 @@ class StatsTopView: UIView{
     }
     
     fileprivate func setUpViews(){
-        addSubview(heroImg)
-        addSubview(levelLabel)
-        addSubview(nameLabel)
-        addSubview(tierLabel)
+        addSubview(background)
+        background.addSubview(heroImg)
+        background.addSubview(levelLabel)
+        background.addSubview(nameLabel)
+        background.addSubview(tierLabel)
         
-        heroImg.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
-        heroImg.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
+        background.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        background.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        background.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9).isActive = true
+        background.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.8).isActive = true
+        
+        heroImg.topAnchor.constraint(equalTo: background.topAnchor, constant: 15).isActive = true
+        heroImg.leftAnchor.constraint(equalTo: background.leftAnchor, constant: 15).isActive = true
         heroImg.widthAnchor.constraint(equalToConstant: 80).isActive = true
         heroImg.heightAnchor.constraint(equalToConstant: 80).isActive = true
         

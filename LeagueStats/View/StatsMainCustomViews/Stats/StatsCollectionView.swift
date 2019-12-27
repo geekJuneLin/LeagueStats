@@ -9,11 +9,15 @@
 import UIKit
 
 class StatsCollectionView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate{
+    
+    // MARK: - variable
     var refreshFlag: Bool = false
     
     var cellDelegate: cellDelegate?
     
     let cellId = "cellId"
+    
+    var count: Int = 0
     
     var status: [StatusModel]?{
         didSet{
@@ -37,12 +41,14 @@ class StatsCollectionView: UIView, UICollectionViewDataSource, UICollectionViewD
         return cv
     }()
     
+    // MARK: - init func
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setUpViews()
     }
     
+    // MARK: - setUpViews func
     fileprivate func setUpViews(){
         // set delegate and data source
         collectionView.delegate = self
@@ -60,13 +66,16 @@ class StatsCollectionView: UIView, UICollectionViewDataSource, UICollectionViewD
         collectionView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
     }
     
+    // MARK: - numberOfSections
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
     
+    // MARK: - UICollectionViewDataSource delegate
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0{
-            return status?.count ?? 0
+            count = status?.count ?? 0
+            return Int(Double(count) * 0.1)
         }else if section == 1 && refreshFlag{
             return 1
         }
@@ -86,21 +95,21 @@ class StatsCollectionView: UIView, UICollectionViewDataSource, UICollectionViewD
         }
     }
     
+    // MARK: - scrollView delegate func
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let height = scrollView.contentSize.height
         
         if offsetY > height - scrollView.frame.height && !refreshFlag{
             print("reach the bottom")
-            refreshFlag = true
-            collectionView.reloadSections(IndexSet(integer: 1))
+            loadMoreData()
         }
     }
     
-    
+    // MARK: - UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 {
-            return CGSize(width: self.frame.width, height: 120)
+            return CGSize(width: self.frame.width, height: self.frame.height * 0.22)
         }else{
             return CGSize(width: self.frame.width, height: 60)
         }
@@ -114,6 +123,12 @@ class StatsCollectionView: UIView, UICollectionViewDataSource, UICollectionViewD
         print("you've selected \(indexPath.item) cell")
         
         cellDelegate?.presentMatchView()
+    }
+    
+    fileprivate func loadMoreData(){
+        refreshFlag = true
+        collectionView.reloadSections(IndexSet(integer: 1))
+        refreshFlag = false
     }
     
     required init?(coder aDecoder: NSCoder) {
