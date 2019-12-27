@@ -13,6 +13,8 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
     // MARK: - variables
     let headerId = "headerId"
     
+    var refreshFlag = false
+    
     var status: [StatusModel] = [StatusModel]()
     
     var matchList: MatchList?
@@ -59,6 +61,7 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
         return view
     }()
     
+    // MARK: - viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -94,12 +97,6 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
         indicator.hidesWhenStopped = true
         indicator.center = self.view.center
         indicator.startAnimating()
-        
-//        ClientAPI.shard.getMatcheList { (matches) in
-//            if let matches = matches{
-//                self.matchList = matches
-//            }
-//        }
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -110,8 +107,10 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0{
             return 0
+        }else if section == 1 && !refreshFlag{
+            return (status.count) + 1
         }
-        return (status.count) + 1
+        return status.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -121,12 +120,16 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! StatsViewCell
         cell.backgroundColor = .white
-        cell.status = status[indexPath.item]
+        if indexPath.item < status.count{
+            cell.status = status[indexPath.item]
+        }
         return cell
     }
     
     
     // MARK: - collectionView delegate flow layout
+    
+    // Header
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader{
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId, for: indexPath) as! StatsTopView
@@ -134,7 +137,9 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
             header.summonerInfo = summonerInfo
             return header
         }
-        return UICollectionReusableView()
+        let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footerId", for: indexPath) as! BottomRefresh
+        footer.indicator.startAnimating()
+        return footer
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -144,11 +149,39 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
         return CGSize(width: self.collectionView.frame.width * 0.8, height: self.collectionView.frame.height * 0.25)
     }
     
+    // Footer
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        if section == 0{
+            return .zero
+        }
+        return CGSize(width: self.collectionView.frame.width, height: 25)
+    }
+    
+    // size for cell items
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.item == 0{
             return CGSize(width: self.collectionView.frame.width, height: 90)
         }
         return CGSize(width: self.collectionView.frame.width, height: self.collectionView.frame.height * 0.12)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
+    }
+    
+    // scroll method for scrollView
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let height = scrollView.contentSize.height
+        
+        if offsetY > height - scrollView.frame.height{
+            refreshFlag = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                self.collectionView.reloadSections(IndexSet(integer: 1))
+                self.collectionView.reloadData()
+            }
+            refreshFlag = false
+        }
     }
     
     
@@ -158,6 +191,7 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
         collectionView.register(StatsViewCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.register(TierCollectionView.self, forCellWithReuseIdentifier: "tierCell")
         collectionView.register(StatsTopView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
+        collectionView.register(BottomRefresh.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footerId")
     }
     
     // MARK: - fetch data func
@@ -197,50 +231,6 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
         }
         
     }
-    
-    
-//    fileprivate func fetchData(matches: MatchList, completion: @escaping ([StatusModel]) -> Void){
-//        guard ClientAPI.shard.getSummonerName() != nil else{
-//            print("No summoner's name has been found!")
-//            return
-//        }
-//        let name = ClientAPI.shard.getSummonerName()
-//        var participantId: Int = 0
-//        var teamId: Int = 0
-//
-//        var status: [StatusModel] = [StatusModel]()
-//        var index = 0
-//
-//        matches.match.forEach { (match) in
-////            if(index == 5) { return }
-////            index += 1
-//            ClientAPI.shard.getMatchInfoByID(gameId: match.gameId) { (match) in
-//                if let data = match {
-//                    let hour = data.duration / 60
-//                    let mins = data.duration % 60
-//
-//                    // find the current summoner's participant id
-//                    data.participandIds.forEach({ (participant) in
-//                        if participant.player.name == name{
-//                            participantId = participant.id
-//                            return
-//                        }
-//                    })
-//
-//                    teamId = participantId > 5 ? 200 : 100
-//
-//                    data.teams.forEach({ (team) in
-//                        if team.teamId == teamId{
-//                            let win: String = team.win == "Win" ? "W" : "L"
-//                            status.append(StatusModel(status: win, time: "\(hour):\(mins)"))
-//                            return
-//                        }
-//                    })
-//                }
-//                completion(status)
-//            }
-//        }
-//    }
     
     func presentMatchView() {
         let matchViewController = MatchStatsViewController(collectionViewLayout: UICollectionViewFlowLayout())
