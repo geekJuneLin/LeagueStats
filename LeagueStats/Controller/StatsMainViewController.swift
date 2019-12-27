@@ -9,24 +9,20 @@
 import UIKit
 
 class StatsMainViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout,cellDelegate{
+    
+    // MARK: - variables
     let headerId = "headerId"
-    var matchList: MatchList?{
-        didSet{
-            if let matches = matchList {
-//                DispatchQueue.main.async {
-//                    self.statsCollectionView.isHidden = true
-//                }
-//                DispatchQueue.main.async {
-//                    self.fetchData(matches: matches) { (status) in
-//                        self.statsCollectionView.status = status
-//                        DispatchQueue.main.async {
-//                            self.statsCollectionView.collectionView.reloadData()
-//                        }
-//                    }
-//                }
-            }
-        }
-    }
+    
+    var status: [StatusModel] = [StatusModel]()
+    
+    var matchList: MatchList?
+//    var matchList: MatchList?{
+//        didSet{
+//            if let matches = matchList {
+//            }
+//        }
+//    }
+    
     
 //    let topView: StatsTopView = {
 //       let view = StatsTopView()
@@ -49,21 +45,73 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
 //        return cv
 //    }()
     
+    let loadingView: UIView = {
+        let view = UIView()
+        view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        view.backgroundColor = .white
+        view.alpha = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let indicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+        return view
+    }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        ClientAPI.shard.getMatcheList { (matches) in
+            if let matches = matches{
+                self.matchList = matches
+            }
+        }
+    }
+    
+    // MARK: - viewDidAppear
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        DispatchQueue.global(qos: .background).async {
+            self.fetchData {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                    self.collectionView.reloadData()
+                    self.loadingView.removeFromSuperview()
+                    self.indicator.stopAnimating()
+                })
+            }
+        }
+    }
+    
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpViews()
+        self.view.addSubview(loadingView)
+        self.view.addSubview(indicator)
+        indicator.hidesWhenStopped = true
+        indicator.center = self.view.center
+        indicator.startAnimating()
+        
+//        ClientAPI.shard.getMatcheList { (matches) in
+//            if let matches = matches{
+//                self.matchList = matches
+//            }
+//        }
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
     
+    // MARK： - data source delegate
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0{
             return 0
         }
-        return (matchList?.match.count ?? 0) + 1
+        return (status.count) + 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -76,6 +124,8 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
         return cell
     }
     
+    
+    // MARK: - collectionView delegate flow layout
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader{
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId, for: indexPath) as! StatsTopView
@@ -100,6 +150,8 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
         return CGSize(width: self.collectionView.frame.width, height: 20)
     }
     
+    
+    // MARK: - set up views
     fileprivate func setUpViews(){
         collectionView.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
@@ -107,22 +159,14 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
         collectionView.register(StatsTopView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
     }
     
-    fileprivate func fetchData(matches: MatchList, completion: @escaping ([StatusModel]) -> Void){
-        guard ClientAPI.shard.getSummonerName() != nil else{
-            print("No summoner's name has been found!")
-            return
-        }
+    // MARK: - fetch data func
+    fileprivate func fetchData(completion: @escaping ()->Void){
         let name = ClientAPI.shard.getSummonerName()
         var participantId: Int = 0
         var teamId: Int = 0
-        
-        var status: [StatusModel] = [StatusModel]()
-        var index = 0
-        
-        matches.match.forEach { (match) in
-//            if(index == 5) { return }
-//            index += 1
-            ClientAPI.shard.getMatchInfoByID(gameId: match.gameId) { (match) in
+        DispatchQueue.main.async {
+            self.matchList?.match.forEach({ (match) in
+                ClientAPI.shard.getMatchInfoByID(gameId: match.gameId) { (match) in
                 if let data = match {
                     let hour = data.duration / 60
                     let mins = data.duration % 60
@@ -140,15 +184,62 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
                     data.teams.forEach({ (team) in
                         if team.teamId == teamId{
                             let win: String = team.win == "Win" ? "W" : "L"
-                            status.append(StatusModel(status: win, time: "\(hour):\(mins)"))
+                            self.status.append(StatusModel(status: win, time: "\(hour):\(mins)"))
                             return
                         }
                     })
                 }
-                completion(status)
             }
+          })
+            print("status count: \(self.status.count)")
+            completion()
         }
+        
     }
+    
+    
+//    fileprivate func fetchData(matches: MatchList, completion: @escaping ([StatusModel]) -> Void){
+//        guard ClientAPI.shard.getSummonerName() != nil else{
+//            print("No summoner's name has been found!")
+//            return
+//        }
+//        let name = ClientAPI.shard.getSummonerName()
+//        var participantId: Int = 0
+//        var teamId: Int = 0
+//
+//        var status: [StatusModel] = [StatusModel]()
+//        var index = 0
+//
+//        matches.match.forEach { (match) in
+////            if(index == 5) { return }
+////            index += 1
+//            ClientAPI.shard.getMatchInfoByID(gameId: match.gameId) { (match) in
+//                if let data = match {
+//                    let hour = data.duration / 60
+//                    let mins = data.duration % 60
+//
+//                    // find the current summoner's participant id
+//                    data.participandIds.forEach({ (participant) in
+//                        if participant.player.name == name{
+//                            participantId = participant.id
+//                            return
+//                        }
+//                    })
+//
+//                    teamId = participantId > 5 ? 200 : 100
+//
+//                    data.teams.forEach({ (team) in
+//                        if team.teamId == teamId{
+//                            let win: String = team.win == "Win" ? "W" : "L"
+//                            status.append(StatusModel(status: win, time: "\(hour):\(mins)"))
+//                            return
+//                        }
+//                    })
+//                }
+//                completion(status)
+//            }
+//        }
+//    }
     
     func presentMatchView() {
         let matchViewController = MatchStatsViewController(collectionViewLayout: UICollectionViewFlowLayout())

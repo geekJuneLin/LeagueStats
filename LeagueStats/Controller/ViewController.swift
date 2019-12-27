@@ -58,14 +58,13 @@ class ViewController: UIViewController, cardViewDelegate {
     @objc fileprivate func handleClick(){
         print("Card view clicked!")
         let viewController = StatsViewNaviController()
-        ClientAPI.shard.getMatcheList { (matches) in
-            if let matchList = matches{
-                viewController.matchList = matchList
-//                ClientAPI.shard.getMatchInfoByID(gameId: matchList.match[0].gameId)
-            }else{
-                print("ViewController hasn't got the match list")
-            }
-        }
+//        ClientAPI.shard.getMatcheList { (matches) in
+//            if let matchList = matches{
+//                viewController.matchList = matchList
+//            }else{
+//                print("ViewController hasn't got the match list")
+//            }
+//        }
         viewController.cardDelegate = self
         viewController.modalPresentationStyle = .custom
         viewController.transitioningDelegate = self

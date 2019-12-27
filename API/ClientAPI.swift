@@ -61,7 +61,6 @@ class ClientAPI{
     fileprivate func executeQuery(endPoint: String, value: String, query: String, completion: @escaping (Data?) -> Void){
         if let key = API_KEY,
             let url = URL(string: uri_origin + endPoint + value + "?" + query + "&api_key=" + key){
-            print("URL: \(url)")
             URLSession.shared.dataTask(with: url) { (data, response, error) in
                 if error != nil {
                     print("Executing query with errors \(error)")
@@ -131,7 +130,6 @@ class ClientAPI{
         executeQuery(endPoint: endPoint, value: String(format: "%.0f", id)) { (data) in
             if let data = data,
                 let match = try? decoder.decode(MatchDetail.self, from: data){
-                print(match)
                 completion(match)
             }else{
                 print("unsuccessfully extract the data")

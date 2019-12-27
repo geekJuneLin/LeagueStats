@@ -13,7 +13,6 @@ class StatsViewNaviController: UINavigationController{
     var matchList: MatchList?{
         didSet{
             if let matches = matchList {
-                vc.matchList = matches
             }
         }
     }
