@@ -119,8 +119,9 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tierCell", for: indexPath)
             return cell
         }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .yellow
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! StatsViewCell
+        cell.backgroundColor = .white
+        cell.status = status[indexPath.item]
         return cell
     }
     
@@ -147,14 +148,14 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
         if indexPath.item == 0{
             return CGSize(width: self.collectionView.frame.width, height: 90)
         }
-        return CGSize(width: self.collectionView.frame.width, height: 20)
+        return CGSize(width: self.collectionView.frame.width, height: self.collectionView.frame.height * 0.12)
     }
     
     
     // MARK: - set up views
     fileprivate func setUpViews(){
         collectionView.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(StatsViewCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.register(TierCollectionView.self, forCellWithReuseIdentifier: "tierCell")
         collectionView.register(StatsTopView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
     }
