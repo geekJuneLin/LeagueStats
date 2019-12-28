@@ -35,6 +35,8 @@ class StatsViewNaviController: UINavigationController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        modalPresentationStyle = .custom
+        transitioningDelegate = self
         viewControllers = [vc]
         self.navigationBar.topItem?.leftBarButtonItem = goBackBarBtn
     }
@@ -51,6 +53,12 @@ class StatsViewNaviController: UINavigationController{
 
 protocol cardViewDelegate{
     func recoverCardView()
+}
+
+extension StatsViewNaviController: UIViewControllerTransitioningDelegate{
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return DismissTransitioning()
+    }
 }
 
 
