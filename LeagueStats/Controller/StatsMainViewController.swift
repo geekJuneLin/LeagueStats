@@ -15,37 +15,28 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
     
     var refreshFlag = false
     
+    var showImg = false
+    
     var status: [StatusModel] = [StatusModel]()
     
     var matchList: MatchList?
-//    var matchList: MatchList?{
-//        didSet{
-//            if let matches = matchList {
-//            }
-//        }
-//    }
     
+    let imageView: UIView = {
+        let view = UIView()
+        view.frame = CGRect(x: 0, y: 0, width: 10, height: 10)
+       return view
+    }()
     
-//    let topView: StatsTopView = {
-//       let view = StatsTopView()
-//        view.backgroundColor = .white
-//        view.layer.masksToBounds = true
-//        view.layer.cornerRadius = 10
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        return view
-//    }()
-//
-//    let collection: TierCollectionView = {
-//       let view = TierCollectionView()
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        return view
-//    }()
-//
-//    let statsCollectionView: StatsCollectionView = {
-//       let cv = StatsCollectionView()
-//        cv.translatesAutoresizingMaskIntoConstraints = false
-//        return cv
-//    }()
+    let avatorImg: UIImageView = {
+       let view = UIImageView()
+        view.contentMode = .scaleAspectFill
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.masksToBounds = true
+        view.layer.cornerRadius = 20
+        view.image = UIImage(named: "dinosaur")
+        return view
+    }()
+
     
     let loadingView: UIView = {
         let view = UIView()
@@ -91,12 +82,9 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUpNavigationBar()
         setUpViews()
-        self.view.addSubview(loadingView)
-        self.view.addSubview(indicator)
-        indicator.hidesWhenStopped = true
-        indicator.center = self.view.center
-        indicator.startAnimating()
+        setUpProgressIndicator()
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -107,10 +95,10 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0{
             return 0
-        }else if section == 1 && !refreshFlag{
-            return (status.count) + 1
+        }else if section == 1 && refreshFlag{
+            return (status.count) + 2
         }
-        return status.count
+        return status.count + 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -162,7 +150,7 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
         if indexPath.item == 0{
             return CGSize(width: self.collectionView.frame.width, height: 90)
         }
-        return CGSize(width: self.collectionView.frame.width, height: self.collectionView.frame.height * 0.12)
+        return CGSize(width: self.collectionView.frame.width, height: self.collectionView.frame.height * 0.15)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -174,6 +162,23 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
         let offsetY = scrollView.contentOffset.y
         let height = scrollView.contentSize.height
         
+        // check if the summoner's info card view has been scrolled off the screen
+        if offsetY > (UIScreen.main.bounds.height * 0.15) && !showImg{
+            showImg = true
+            UIView.animate(withDuration: 0.5) {
+                self.avatorImg.isHidden = false
+            }
+            
+            print("display it on the nav bar")
+        }
+        if  offsetY < (UIScreen.main.bounds.height * 0.15) && showImg{
+            showImg = false
+            UIView.animate(withDuration: 0.5) {
+                self.avatorImg.isHidden = true
+            }
+            print("hide the img on the nav bar")
+        }
+        
         if offsetY > height - scrollView.frame.height{
             refreshFlag = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -182,6 +187,30 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
             }
             refreshFlag = false
         }
+    }
+    
+    // MARK: - set up progress indicator
+    fileprivate func setUpProgressIndicator(){
+        self.view.addSubview(loadingView)
+        self.view.addSubview(indicator)
+        indicator.hidesWhenStopped = true
+        indicator.center = self.view.center
+        indicator.startAnimating()
+    }
+    
+    // MARK: - set up navigation bar
+    fileprivate func setUpNavigationBar(){
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        imageView.addSubview(avatorImg)
+        
+        avatorImg.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        avatorImg.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        avatorImg.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
+        navigationController?.navigationBar.topItem?.titleView = imageView
+        navigationController?.navigationBar.barTintColor = UIColor(red: 44/255, green: 128/255, blue: 255/255, alpha: 0.9)
+        avatorImg.isHidden = true
     }
     
     

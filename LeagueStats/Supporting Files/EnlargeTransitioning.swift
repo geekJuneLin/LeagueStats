@@ -25,7 +25,7 @@ extension EnlargeTransitioning: UIViewControllerAnimatedTransitioning{
         let containerView = transitionContext.containerView
         
         containerView.insertSubview(toVC.view, aboveSubview: fromVC.view)
-        toVC.view.frame = CGRect(origin: CGPoint(x: 0, y: UIScreen.main.bounds.height/4), size:
+        toVC.view.frame = CGRect(origin: CGPoint(x: UIScreen.main.bounds.width, y: 0), size:
         CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         
         UIView.animateKeyframes(withDuration: 1, delay: 0, options: .allowUserInteraction, animations: {

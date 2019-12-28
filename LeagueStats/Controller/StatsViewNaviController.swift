@@ -25,6 +25,7 @@ class StatsViewNaviController: UINavigationController{
     let goBackBarBtn: UIBarButtonItem = {
         let btn = UIButton(type: .system)
         btn.setTitle("Go back", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
         btn.addTarget(self, action: #selector(handleGoBack), for: .touchUpInside)
         let button = UIBarButtonItem(customView: btn)
         return button
