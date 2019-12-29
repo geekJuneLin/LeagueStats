@@ -15,10 +15,10 @@ class StatsViewCell: UICollectionViewCell{
                 switch result{
                 case "W":
                     statusView.statusLabel.text = "W"
-                    statusView.backgroundColor = UIColor(red: 44/255, green: 128/255, blue: 255/255, alpha: 0.9)
+                    statusView.backgroundColor = .winColor
                 case "L":
                     statusView.statusLabel.text = "L"
-                    statusView.backgroundColor = UIColor(red: 255/255, green: 44/255, blue: 61/255, alpha: 0.9)
+                    statusView.backgroundColor = .lossColor
                 default:
                     break
                 }

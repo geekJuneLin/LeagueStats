@@ -31,7 +31,7 @@ class ViewController: UIViewController, cardViewDelegate {
         super.viewDidLoad()
         
         // API Test
-        ClientAPI.shard.setApiKey("RGAPI-0d12ab65-4a7c-49ff-8308-dbcd5d1a4c84")
+        ClientAPI.shard.setApiKey("RGAPI-c38286fb-bd46-4832-ae4f-81cfcd166cb5")
         ClientAPI.shard.getSummonerByName(value: "0x73002")
         
         setUpViews()
@@ -52,19 +52,14 @@ class ViewController: UIViewController, cardViewDelegate {
         cardView.topAnchor.constraint(equalTo: mainView.nameText.bottomAnchor, constant: 60).isActive = true
         cardView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9).isActive = true
         cardView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2).isActive = true
+        cardView.avator.loadImgWithUrl("https://avatar.leagueoflegends.com/oce/0x73002.png")
         
     }
     
     @objc fileprivate func handleClick(){
         print("Card view clicked!")
         let viewController = StatsViewNaviController()
-//        ClientAPI.shard.getMatcheList { (matches) in
-//            if let matchList = matches{
-//                viewController.matchList = matchList
-//            }else{
-//                print("ViewController hasn't got the match list")
-//            }
-//        }
+
         viewController.cardDelegate = self
         viewController.modalPresentationStyle = .custom
         viewController.transitioningDelegate = self

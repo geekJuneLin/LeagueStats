@@ -10,6 +10,7 @@ import UIKit
 
 class StatsMainViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout,cellDelegate{
     
+    
     // MARK: - variables
     let headerId = "headerId"
     
@@ -33,7 +34,7 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.masksToBounds = true
         view.layer.cornerRadius = 20
-        view.image = UIImage(named: "dinosaur")
+        view.loadImgWithUrl("https://avatar.leagueoflegends.com/oce/0x73002.png")
         return view
     }()
 
@@ -157,6 +158,11 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
         return 5
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("clicked the \(indexPath.item) cell")
+        self.presentMatchView(status[indexPath.item].status)
+    }
+    
     // scroll method for scrollView
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
@@ -178,11 +184,10 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
             }
             print("hide the img on the nav bar")
         }
-        
-        if offsetY > height - scrollView.frame.height{
+        if height > 0 && offsetY > height - scrollView.frame.height{
             refreshFlag = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                self.collectionView.reloadSections(IndexSet(integer: 1))
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                //self.collectionView.reloadSections(IndexSet(integer: 1))
                 self.collectionView.reloadData()
             }
             refreshFlag = false
@@ -209,7 +214,8 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
         avatorImg.heightAnchor.constraint(equalToConstant: 40).isActive = true
         avatorImg.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
         navigationController?.navigationBar.topItem?.titleView = imageView
-        navigationController?.navigationBar.barTintColor = UIColor(red: 44/255, green: 128/255, blue: 255/255, alpha: 0.9)
+        navigationController?.navigationBar.barTintColor = .white
+        //UIColor(red: 44/255, green: 128/255, blue: 255/255, alpha: 0.9)
         avatorImg.isHidden = true
     }
     
@@ -261,8 +267,11 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
         
     }
     
-    func presentMatchView() {
+    func presentMatchView(_ win: String) {
         let matchViewController = MatchStatsViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        present(matchViewController, animated: true, completion: nil)
+        let naviController = UINavigationController(rootViewController: matchViewController)
+        matchViewController.win = win
+//        navController.modalPresentationStyle = .fullScreen
+        present(naviController, animated: true, completion: nil)
     }
 }

@@ -122,7 +122,7 @@ class StatsCollectionView: UIView, UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("you've selected \(indexPath.item) cell")
         
-        cellDelegate?.presentMatchView()
+//        cellDelegate?.presentMatchView()
     }
     
     fileprivate func loadMoreData(){
@@ -137,5 +137,5 @@ class StatsCollectionView: UIView, UICollectionViewDataSource, UICollectionViewD
 }
 
 protocol cellDelegate {
-    func presentMatchView()
+    func presentMatchView(_ win: String)
 }

@@ -14,6 +14,8 @@
 		8E325072239489AD002B47E1 /* TierCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E325071239489AD002B47E1 /* TierCollectionView.swift */; };
 		8E32507423948DC1002B47E1 /* TierViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E32507323948DC1002B47E1 /* TierViewCell.swift */; };
 		8E33B26F23B7FD5F00D7BA08 /* DismissTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33B26E23B7FD5F00D7BA08 /* DismissTransitioning.swift */; };
+		8E33B27123B83BEB00D7BA08 /* UIImageView+loadImgWithUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33B27023B83BEB00D7BA08 /* UIImageView+loadImgWithUrl.swift */; };
+		8E33B27323B8A29B00D7BA08 /* UIColor+CustomizedColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33B27223B8A29B00D7BA08 /* UIColor+CustomizedColor.swift */; };
 		8E40CA7623932BD800848F42 /* StatsMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40CA7523932BD800848F42 /* StatsMainViewController.swift */; };
 		8E40CA7823933F8700848F42 /* StatsTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40CA7723933F8700848F42 /* StatsTopView.swift */; };
 		8E52CD692396030700F8178B /* TierModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E52CD682396030700F8178B /* TierModel.swift */; };
@@ -43,6 +45,8 @@
 		8E325071239489AD002B47E1 /* TierCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierCollectionView.swift; sourceTree = "<group>"; };
 		8E32507323948DC1002B47E1 /* TierViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierViewCell.swift; sourceTree = "<group>"; };
 		8E33B26E23B7FD5F00D7BA08 /* DismissTransitioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissTransitioning.swift; sourceTree = "<group>"; };
+		8E33B27023B83BEB00D7BA08 /* UIImageView+loadImgWithUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+loadImgWithUrl.swift"; sourceTree = "<group>"; };
+		8E33B27223B8A29B00D7BA08 /* UIColor+CustomizedColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomizedColor.swift"; sourceTree = "<group>"; };
 		8E40CA7523932BD800848F42 /* StatsMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsMainViewController.swift; sourceTree = "<group>"; };
 		8E40CA7723933F8700848F42 /* StatsTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTopView.swift; sourceTree = "<group>"; };
 		8E52CD682396030700F8178B /* TierModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierModel.swift; sourceTree = "<group>"; };
@@ -91,6 +95,8 @@
 			children = (
 				8E2FE6122398E23B000117A7 /* EnlargeTransitioning.swift */,
 				8E33B26E23B7FD5F00D7BA08 /* DismissTransitioning.swift */,
+				8E33B27023B83BEB00D7BA08 /* UIImageView+loadImgWithUrl.swift */,
+				8E33B27223B8A29B00D7BA08 /* UIColor+CustomizedColor.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -287,6 +293,7 @@
 				8EB3D13D2390C1FB00B6755B /* GUI.swift in Sources */,
 				8E40CA7823933F8700848F42 /* StatsTopView.swift in Sources */,
 				8E70F4DB23920AA0005847E3 /* StatsViewNaviController.swift in Sources */,
+				8E33B27123B83BEB00D7BA08 /* UIImageView+loadImgWithUrl.swift in Sources */,
 				8E55AB3A23AF34A4007632F6 /* MatchDetail.swift in Sources */,
 				8E325072239489AD002B47E1 /* TierCollectionView.swift in Sources */,
 				8EE7838D23B4B1C6006E99FC /* BottomRefresh.swift in Sources */,
@@ -300,6 +307,7 @@
 				8E32507423948DC1002B47E1 /* TierViewCell.swift in Sources */,
 				8ED2C734239C939700E132C8 /* MatchStatsViewController.swift in Sources */,
 				8E70F4D92391ECB3005847E3 /* CardView.swift in Sources */,
+				8E33B27323B8A29B00D7BA08 /* UIColor+CustomizedColor.swift in Sources */,
 				8E6FAD4723ADC8C10031EE0B /* MatchList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
