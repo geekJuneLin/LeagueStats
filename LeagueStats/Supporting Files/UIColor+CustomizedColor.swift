@@ -9,6 +9,9 @@
 import UIKit
 
 extension UIColor{
+    static var lossTitleColor = UIColor(red: 255/255, green: 44/255, blue: 61/255, alpha: 0.05)
+    static var winTitleColor = UIColor(red: 44/255, green: 128/255, blue: 255/255, alpha: 0.05)
     static var lossColor = UIColor(red: 255/255, green: 44/255, blue: 61/255, alpha: 0.9)
     static var winColor = UIColor(red: 44/255, green: 128/255, blue: 255/255, alpha: 0.9)
+    static var backgroudColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1)
 }

@@ -222,7 +222,7 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
     
     // MARK: - set up views
     fileprivate func setUpViews(){
-        collectionView.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1)
+        collectionView.backgroundColor = .backgroudColor
         collectionView.register(StatsViewCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.register(TierCollectionView.self, forCellWithReuseIdentifier: "tierCell")
         collectionView.register(StatsTopView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)

@@ -9,6 +9,7 @@
 import UIKit
 
 class StatsViewNaviController: UINavigationController{
+    
     var cardDelegate: cardViewDelegate?
     var matchList: MatchList?{
         didSet{

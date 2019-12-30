@@ -11,6 +11,18 @@ import UIKit
 class MatchStatsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout{
     
     // MARK: - variables
+    var matchDetail: MatchStats?{
+        didSet{
+            if let match = matchDetail {
+                titleView.title.text = match.win
+            }
+        }
+    }
+    
+    var titleCellId = "titleCellId"
+    
+    var cellId = "cellId"
+    
     var showWinTitle = false
     
     var win: String?{
@@ -18,22 +30,13 @@ class MatchStatsViewController: UICollectionViewController, UICollectionViewDele
             if let win = win {
                 navigationController?.navigationBar.barTintColor = win == "L" ? .lossColor : .winColor
                 navigationController?.navigationBar.topItem?.title = win == "L" ? "Loss" : "Win"
+                titleView.backgroundColor = win == "L" ? .lossTitleColor : .winTitleColor
             }
         }
     }
     
-    let titleWinView: UILabel = {
-       let label = UILabel()
-        label.text = "LOSS"
-        label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 22)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    let titleView: UIView = {
-       let view = UIView()
-        view.backgroundColor = .cyan
+    let titleView: TitleView = {
+       let view = TitleView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -46,6 +49,7 @@ class MatchStatsViewController: UICollectionViewController, UICollectionViewDele
         setUpNavigation()
     }
     
+    // TODO: - fixed showing n hiding the title
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         
@@ -61,13 +65,39 @@ class MatchStatsViewController: UICollectionViewController, UICollectionViewDele
     }
     
     // MARK: - data source delegate method
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        if section == 0{
+            return UIEdgeInsets(top: collectionView.frame.height * 0.1, left: 0, bottom: 0, right: 0)
+        }
+        if section == 1{
+            return UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
+        }
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 15
+        if section == 0 || section == 1{
+            return 6
+        }
+        return 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
-        cell.backgroundColor = .winColor
+        if indexPath.item == 0 && indexPath.section != 2{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: titleCellId, for: indexPath) as! MatchTitleCell
+            cell.winState = win
+            return cell
+        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        cell.backgroundColor = .white
         return cell
     }
     
@@ -78,22 +108,16 @@ class MatchStatsViewController: UICollectionViewController, UICollectionViewDele
     // MARK: - set up collection view
     fileprivate func setUpCollectionView(){
         // register cell
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellId")
+        collectionView.register(MatchTitleCell.self, forCellWithReuseIdentifier: titleCellId)
+        collectionView.register(MatchStatsCell.self, forCellWithReuseIdentifier: cellId)
         
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .backgroudColor
         
         // set up title view which is below the navigation bar
         collectionView.addSubview(titleView)
         titleView.widthAnchor.constraint(equalTo: collectionView.widthAnchor).isActive = true
-        titleView.heightAnchor.constraint(equalTo: collectionView.heightAnchor, multiplier: 0.08).isActive = true
+        titleView.heightAnchor.constraint(equalTo: collectionView.heightAnchor, multiplier: 0.1).isActive = true
         titleView.topAnchor.constraint(equalTo: collectionView.topAnchor).isActive = true
-        
-        titleView.addSubview(titleWinView)
-        titleWinView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor).isActive = true
-        titleWinView.leftAnchor.constraint(equalTo: titleView.leftAnchor, constant: 8).isActive = true
-        titleWinView.widthAnchor.constraint(equalTo: titleView.widthAnchor, multiplier: 0.3).isActive = true
-        titleWinView.heightAnchor.constraint(equalTo: titleView.heightAnchor
-            , multiplier: 0.8).isActive = true
     }
     
     // TODO: set up navigationbar items
