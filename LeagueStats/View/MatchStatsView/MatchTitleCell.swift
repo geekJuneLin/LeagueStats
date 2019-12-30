@@ -20,7 +20,7 @@ class MatchTitleCell: UICollectionViewCell{
                     towerImg.image = UIImage(named: "tower-red")
                 }else{
                     backgroundColor = .winTitleColor
-                    win.text = "Win (Red)"
+                    win.text = "Win (Blue)"
                     dragonImg.image = UIImage(named: "dragon-blue")
                     baronImg.image = UIImage(named: "baron-blue")
                     towerImg.image = UIImage(named: "tower-blue")

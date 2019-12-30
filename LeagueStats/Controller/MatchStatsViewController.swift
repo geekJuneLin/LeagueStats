@@ -14,7 +14,7 @@ class MatchStatsViewController: UICollectionViewController, UICollectionViewDele
     var matchDetail: MatchStats?{
         didSet{
             if let match = matchDetail {
-                titleView.title.text = match.win
+//                titleView.title.text = match.win
             }
         }
     }
@@ -30,7 +30,8 @@ class MatchStatsViewController: UICollectionViewController, UICollectionViewDele
             if let win = win {
                 navigationController?.navigationBar.barTintColor = win == "L" ? .lossColor : .winColor
                 navigationController?.navigationBar.topItem?.title = win == "L" ? "Loss" : "Win"
-                titleView.backgroundColor = win == "L" ? .lossTitleColor : .winTitleColor
+                titleView.title.text = win == "L" ? "Loss" : "Win"
+                titleView.backgroundColor = win == "L" ? .lossColor : .winColor
             }
         }
     }
@@ -91,9 +92,9 @@ class MatchStatsViewController: UICollectionViewController, UICollectionViewDele
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.item == 0 && indexPath.section != 2{
+        if indexPath.item == 0{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: titleCellId, for: indexPath) as! MatchTitleCell
-            cell.winState = win
+            cell.winState = indexPath.section == 0 ? win : win == "L" ? "W" : "L"
             return cell
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
