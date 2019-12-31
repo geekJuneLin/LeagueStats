@@ -47,21 +47,6 @@ class MatchStatsViewController: UICollectionViewController, UICollectionViewDele
         setUpNavigation()
     }
     
-    // TODO: - fixed showing n hiding the title
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        
-//        if offsetY > collectionView.frame.height * 0.8 && !showWinTitle{
-//            showWinTitle = true
-//            navigationController?.navigationBar.topItem?.titleView?.isHidden = true
-//        }
-//
-//        if offsetY < collectionView.frame.height * 0.8 && showWinTitle {
-//            showWinTitle = false
-//            navigationController?.navigationBar.topItem?.titleView?.isHidden = false
-//        }
-    }
-    
     // MARK: - data source delegate method
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
@@ -124,12 +109,12 @@ class MatchStatsViewController: UICollectionViewController, UICollectionViewDele
     
     // MARK: - set up navigationbar items
     fileprivate func setUpNavigation(){
-//        navigationController?.hidesBarsOnSwipe = true
         navigationController?.navigationBar.prefersLargeTitles = true
 
         if #available(iOS 13.0, *) {
             let app = UINavigationBarAppearance()
             app.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white, NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 26)]
+            app.titleTextAttributes = [.foregroundColor : UIColor.white]
             app.backgroundColor = win == "L" ? .lossColor : .winColor
             navigationController?.navigationBar.scrollEdgeAppearance = app
             navigationController?.navigationBar.standardAppearance = app
