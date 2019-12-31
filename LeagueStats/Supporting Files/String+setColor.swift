@@ -13,7 +13,6 @@ extension String{
         let attributedString = NSMutableAttributedString(string: self)
         str.forEach { (string) in
             let range = (self as NSString).range(of: string)
-            print(range)
             attributedString.addAttributes([.foregroundColor : color], range: range)
         }
         return attributedString
