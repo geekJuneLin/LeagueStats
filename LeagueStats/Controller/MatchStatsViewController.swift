@@ -28,10 +28,7 @@ class MatchStatsViewController: UICollectionViewController, UICollectionViewDele
     var win: String?{
         didSet{
             if let win = win {
-                navigationController?.navigationBar.barTintColor = win == "L" ? .lossColor : .winColor
                 navigationController?.navigationBar.topItem?.title = win == "L" ? "Loss" : "Win"
-                titleView.title.text = win == "L" ? "Loss" : "Win"
-                titleView.backgroundColor = win == "L" ? .lossColor : .winColor
             }
         }
     }
@@ -71,9 +68,6 @@ class MatchStatsViewController: UICollectionViewController, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        if section == 0{
-            return UIEdgeInsets(top: collectionView.frame.height * 0.1, left: 0, bottom: 0, right: 0)
-        }
         if section == 1{
             return UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
         }
@@ -106,24 +100,41 @@ class MatchStatsViewController: UICollectionViewController, UICollectionViewDele
         return CGSize(width: collectionView.frame.width, height: 50)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        if section == 1{
+            return CGSize(width: collectionView.frame.width, height: 200)
+        }
+        return CGSize(width: 0, height: 0)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footerId", for: indexPath)
+            return footer
+    }
+    
     // MARK: - set up collection view
     fileprivate func setUpCollectionView(){
         // register cell
         collectionView.register(MatchTitleCell.self, forCellWithReuseIdentifier: titleCellId)
         collectionView.register(MatchStatsCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footerId")
         
         collectionView.backgroundColor = .backgroudColor
-        
-        // set up title view which is below the navigation bar
-        collectionView.addSubview(titleView)
-        titleView.widthAnchor.constraint(equalTo: collectionView.widthAnchor).isActive = true
-        titleView.heightAnchor.constraint(equalTo: collectionView.heightAnchor, multiplier: 0.1).isActive = true
-        titleView.topAnchor.constraint(equalTo: collectionView.topAnchor).isActive = true
     }
     
-    // TODO: set up navigationbar items
+    // MARK: - set up navigationbar items
     fileprivate func setUpNavigation(){
-        navigationController?.hidesBarsOnSwipe = true
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+//        navigationController?.hidesBarsOnSwipe = true
+        navigationController?.navigationBar.prefersLargeTitles = true
+
+        if #available(iOS 13.0, *) {
+            let app = UINavigationBarAppearance()
+            app.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white, NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 26)]
+            app.backgroundColor = win == "L" ? .lossColor : .winColor
+            navigationController?.navigationBar.scrollEdgeAppearance = app
+            navigationController?.navigationBar.standardAppearance = app
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }
