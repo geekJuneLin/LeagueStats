@@ -99,6 +99,8 @@ class MatchStatsViewController: UICollectionViewController, UICollectionViewDele
     
     // MARK: - set up collection view
     fileprivate func setUpCollectionView(){
+        collectionView.showsVerticalScrollIndicator = false
+        
         // register cell
         collectionView.register(MatchTitleCell.self, forCellWithReuseIdentifier: titleCellId)
         collectionView.register(MatchStatsCell.self, forCellWithReuseIdentifier: cellId)

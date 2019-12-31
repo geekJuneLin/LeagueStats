@@ -14,17 +14,18 @@ class MatchTitleCell: UICollectionViewCell{
             if let state = winState {
                 if state == "L"{
                     backgroundColor = .lossTitleColor
-                    win.text = "Loss (Red)"
+                    win.attributedText = "Loss (Red)".setColor(["(Red)"], .gray)
                     dragonImg.image = UIImage(named: "dragon-red")
                     baronImg.image = UIImage(named: "baron-red")
                     towerImg.image = UIImage(named: "tower-red")
                 }else{
                     backgroundColor = .winTitleColor
-                    win.text = "Win (Blue)"
+                    win.attributedText = "Win (Blue)".setColor(["(Blue)"], .gray)
                     dragonImg.image = UIImage(named: "dragon-blue")
                     baronImg.image = UIImage(named: "baron-blue")
                     towerImg.image = UIImage(named: "tower-blue")
                 }
+                statsLabel.attributedText = "24 / 38 / 27".setColor(["38"], .lossColor)
             }
         }
     }
@@ -46,7 +47,7 @@ class MatchTitleCell: UICollectionViewCell{
     
     let statsLabel: UILabel = {
        let label = UILabel()
-        label.text = "24 / 38 / 27"
+//        label.attributedText = "24 / 38 / 27".setColor(["38"], .red)
         label.textColor = .gray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
