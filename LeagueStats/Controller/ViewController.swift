@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, cardViewDelegate {
     
+    // MARK: - Variables
     let mainView: GUI = {
        let view = GUI()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -21,22 +22,21 @@ class ViewController: UIViewController, cardViewDelegate {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-//    let api: ClientAPI = {
-//        let api = ClientAPI(API: "RGAPI-0599572c-eafd-4c9b-b48f-36cb67895ed4")
-//        return api
-//    }()
 
+    
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // API Test
-        ClientAPI.shard.setApiKey("RGAPI-f171a923-4342-420c-b49b-232972e48041")
+        ClientAPI.shard.setApiKey("RGAPI-ee0514d1-4b3f-4ea0-9306-4975bfb15de9")
         ClientAPI.shard.getSummonerByName(value: "0x73002")
         
         setUpViews()
     }
     
+    
+    /// set up all the views
     fileprivate func setUpViews(){
         view.backgroundColor = .white
         
@@ -56,6 +56,7 @@ class ViewController: UIViewController, cardViewDelegate {
         
     }
     
+    /// handle the click event of the card view
     @objc fileprivate func handleClick(){
         print("Card view clicked!")
         let viewController = StatsViewNaviController()
@@ -71,6 +72,7 @@ class ViewController: UIViewController, cardViewDelegate {
     }
 }
 
+/// using cutomized transition animation
 extension ViewController: UIViewControllerTransitioningDelegate{
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return EnlargeTransitioning()

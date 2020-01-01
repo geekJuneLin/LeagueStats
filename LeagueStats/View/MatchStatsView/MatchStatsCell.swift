@@ -22,7 +22,7 @@ class MatchStatsCell: UICollectionViewCell{
     let levelLabel: UILabel = {
        let label = UILabel()
         label.layer.masksToBounds = true
-        label.layer.cornerRadius = 6
+        label.layer.cornerRadius = 7
         label.backgroundColor = .black
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 10)

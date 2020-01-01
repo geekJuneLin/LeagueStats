@@ -11,19 +11,13 @@ import UIKit
 class StatsViewCell: UICollectionViewCell{
     var status: StatusModel? {
         didSet{
-            if let result = status?.status{
-                switch result{
-                case "W":
-                    statusView.statusLabel.text = "W"
-                    statusView.backgroundColor = .winColor
-                case "L":
-                    statusView.statusLabel.text = "L"
-                    statusView.backgroundColor = .lossColor
-                default:
-                    break
-                }
+            if let result = status?.stats{
+                statusView.statusLabel.text = result.win ? "W" : "L"
+                statusView.backgroundColor = result.win ? .winColor : .lossColor
+                KDALabel.attributedText = "\(result.kills) / \(result.deaths) / \(result.assists)".setColor(["\(result.deaths)"], .lossColor)
+                KPLabel.text = "K/P \(self.calculateKP(result.kills, result.assists, status!.totalKill))%"
             }
-            
+
             if let time = status?.time {
                 statusView.timeLabel.text = time
             }
@@ -84,7 +78,8 @@ class StatsViewCell: UICollectionViewCell{
     let KDALabel: UILabel = {
        let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.text = "12 / 0 / 0"
+        label.textColor = .lightGray
+        label.attributedText = "12 / 0 / 0".setColor(["0"], .lossColor)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -187,5 +182,11 @@ class StatsViewCell: UICollectionViewCell{
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    fileprivate func calculateKP(_ kill: Int, _ assist: Int, _ totalKill: Int) -> String{
+        let value = (Double(kill + assist) / Double(totalKill)) * 100
+        let str = String(format: "%.0f", value)
+        return str
     }
 }

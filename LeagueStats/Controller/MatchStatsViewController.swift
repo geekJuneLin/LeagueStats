@@ -25,10 +25,10 @@ class MatchStatsViewController: UICollectionViewController, UICollectionViewDele
     
     var showWinTitle = false
     
-    var win: String?{
+    var win: Bool?{
         didSet{
             if let win = win {
-                navigationController?.navigationBar.topItem?.title = win == "L" ? "Loss" : "Win"
+                navigationController?.navigationBar.topItem?.title = win ? "Win" : "Lose"
             }
         }
     }
@@ -73,7 +73,7 @@ class MatchStatsViewController: UICollectionViewController, UICollectionViewDele
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.item == 0{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: titleCellId, for: indexPath) as! MatchTitleCell
-            cell.winState = indexPath.section == 0 ? win : win == "L" ? "W" : "L"
+            cell.winState = indexPath.section == 0 ? win! ? "Win" : "Lose" : win! ? "Lose" : "Win"
             return cell
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
@@ -117,7 +117,7 @@ class MatchStatsViewController: UICollectionViewController, UICollectionViewDele
             let app = UINavigationBarAppearance()
             app.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white, NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 26)]
             app.titleTextAttributes = [.foregroundColor : UIColor.white]
-            app.backgroundColor = win == "L" ? .lossColor : .winColor
+            app.backgroundColor = win! ? .winColor : .lossColor
             navigationController?.navigationBar.scrollEdgeAppearance = app
             navigationController?.navigationBar.standardAppearance = app
         } else {

@@ -10,13 +10,14 @@ import UIKit
 
 class StatsViewNaviController: UINavigationController{
     
+    // MARK: - variables
     var cardDelegate: cardViewDelegate?
-    var matchList: MatchList?{
-        didSet{
-            if let matches = matchList {
-            }
-        }
-    }
+//    var matchList: MatchList?{
+//        didSet{
+//            if let matches = matchList {
+//            }
+//        }
+//    }
     
     let vc: StatsMainViewController = {
        let view = StatsMainViewController(collectionViewLayout: UICollectionViewFlowLayout())
@@ -32,7 +33,7 @@ class StatsViewNaviController: UINavigationController{
         return button
     }()
 
-    
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,6 +43,7 @@ class StatsViewNaviController: UINavigationController{
         self.navigationBar.topItem?.leftBarButtonItem = goBackBarBtn
     }
     
+    /// handle the click event of the goBackButton
     @objc fileprivate func handleGoBack(){
         print("Button clicked")
         UIView.animate(withDuration: 1.5, animations: {
@@ -56,6 +58,7 @@ protocol cardViewDelegate{
     func recoverCardView()
 }
 
+/// using cutomized view transition animation
 extension StatsViewNaviController: UIViewControllerTransitioningDelegate{
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return DismissTransitioning()

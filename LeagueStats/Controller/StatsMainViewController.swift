@@ -160,7 +160,7 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("clicked the \(indexPath.item) cell")
-        self.presentMatchView(status[indexPath.item].status)
+        self.presentMatchView(status[indexPath.item].stats.win)
     }
     
     // scroll method for scrollView
@@ -187,7 +187,6 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
         if height > 0 && offsetY > height - scrollView.frame.height{
             refreshFlag = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                //self.collectionView.reloadSections(IndexSet(integer: 1))
                 self.collectionView.reloadData()
             }
             refreshFlag = false
@@ -232,8 +231,8 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
     // MARK: - fetch data func
     fileprivate func fetchData(completion: @escaping ()->Void){
         let name = ClientAPI.shard.getSummonerName()
-        var participantId: Int = 0
-        var teamId: Int = 0
+        var teamId = 0
+        var participantId = 0
         DispatchQueue.main.async {
             self.matchList?.match.forEach({ (match) in
                 ClientAPI.shard.getMatchInfoByID(gameId: match.gameId) { (match) in
@@ -250,14 +249,20 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
                     })
                     
                     teamId = participantId > 5 ? 200 : 100
+                    var st: Stats?
+                    var totalKill: Int = 0
                     
-                    data.teams.forEach({ (team) in
-                        if team.teamId == teamId{
-                            let win: String = team.win == "Win" ? "W" : "L"
-                            self.status.append(StatusModel(status: win, time: "\(hour):\(mins)"))
-                            return
+                    data.participants.forEach({ (participant) in
+                        if participant.participantId == participantId{
+                            st = participant.stats
+                        }
+                        if teamId == participant.teamId{
+                            totalKill += participant.stats.kills
                         }
                     })
+                    if let stat = st {
+                        self.status.append(StatusModel(stats: stat, time: "\(hour):\(mins)", totalKill: totalKill))
+                    }
                 }
             }
           })
@@ -267,11 +272,12 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
         
     }
     
-    func presentMatchView(_ win: String) {
+    /// present the match details of each game in a collectionViewController
+    /// - Parameter win: the win state of each match to be displayed in the collectionViewController
+    func presentMatchView(_ win: Bool) {
         let matchViewController = MatchStatsViewController(collectionViewLayout: UICollectionViewFlowLayout())
         let naviController = UINavigationController(rootViewController: matchViewController)
         matchViewController.win = win
-//        navController.modalPresentationStyle = .fullScreen
         present(naviController, animated: true, completion: nil)
     }
 }

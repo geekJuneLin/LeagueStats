@@ -9,6 +9,7 @@
 import Foundation
 
 struct StatusModel{
-    var status: String
+    var stats: Stats
     var time: String
+    var totalKill: Int
 }

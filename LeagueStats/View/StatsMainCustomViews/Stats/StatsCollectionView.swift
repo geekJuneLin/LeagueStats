@@ -137,5 +137,5 @@ class StatsCollectionView: UIView, UICollectionViewDataSource, UICollectionViewD
 }
 
 protocol cellDelegate {
-    func presentMatchView(_ win: String)
+    func presentMatchView(_ win: Bool)
 }
