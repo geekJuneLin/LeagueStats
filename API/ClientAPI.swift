@@ -130,7 +130,7 @@ class ClientAPI{
         executeQuery(endPoint: endPoint, value: String(format: "%.0f", id)) { (data) in
             if let data = data,
                 let match = try? decoder.decode(MatchDetail.self, from: data){
-                //print(match.participants[0].stats)
+                print(match.participants[0].stats)
                 completion(match)
             }else{
                 print("unsuccessfully extract the data")

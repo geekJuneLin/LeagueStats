@@ -9,6 +9,8 @@
 import UIKit
 
 class StatsViewCell: UICollectionViewCell{
+    
+    let uri_origin = "https://ddragon.leagueoflegends.com/cdn/9.24.2/img/"
     var status: StatusModel? {
         didSet{
             if let result = status?.stats{
@@ -21,6 +23,10 @@ class StatsViewCell: UICollectionViewCell{
             if let time = status?.time {
                 statusView.timeLabel.text = time
             }
+            champImg.loadImgWithUrl(uri_origin + "champion/Aatrox.png")
+            firstSpell.loadImgWithUrl(uri_origin + "spell/\(getSpellName(status!.spell1Id)).png")
+            
+            secondSpell.loadImgWithUrl(uri_origin + "spell/\(getSpellName(status!.spell2Id)).png")
         }
     }
     
@@ -184,9 +190,27 @@ class StatsViewCell: UICollectionViewCell{
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// calculate the KP value of the summoner
+    /// - Parameters:
+    ///   - kill: kills got
+    ///   - assist: assist had
+    ///   - totalKill: total kills of the team
     fileprivate func calculateKP(_ kill: Int, _ assist: Int, _ totalKill: Int) -> String{
         let value = (Double(kill + assist) / Double(totalKill)) * 100
         let str = String(format: "%.0f", value)
+        return str
+    }
+    
+    /// get the spell name in terms of the spell id got from API
+    /// - Parameter id: id of the spell
+    fileprivate func getSpellName(_ id: Int) -> String{
+        var str = ""
+        SummonerSpell.spellMap.forEach { (spell) in
+            if spell.id == id{
+                str = spell.name
+                return
+            }
+        }
         return str
     }
 }

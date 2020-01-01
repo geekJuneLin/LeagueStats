@@ -12,4 +12,6 @@ struct StatusModel{
     var stats: Stats
     var time: String
     var totalKill: Int
+    var spell1Id, spell2Id: Int
+    var championId: Int
 }

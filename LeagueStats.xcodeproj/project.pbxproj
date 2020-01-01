@@ -34,6 +34,8 @@
 		8EB3D13D2390C1FB00B6755B /* GUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3D13C2390C1FB00B6755B /* GUI.swift */; };
 		8ED27256239746CA00125B66 /* StatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED27255239746CA00125B66 /* StatusModel.swift */; };
 		8ED2C734239C939700E132C8 /* MatchStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED2C733239C939700E132C8 /* MatchStatsViewController.swift */; };
+		8ED3ECB323BC88C20002F20E /* SummonerSpell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED3ECB223BC88C20002F20E /* SummonerSpell.swift */; };
+		8ED3ECB523BC94400002F20E /* ChampJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED3ECB423BC94400002F20E /* ChampJSON.swift */; };
 		8EE2B35923BAFD3F00E5E038 /* String+setColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE2B35823BAFD3F00E5E038 /* String+setColor.swift */; };
 		8EE2B35F23BB314900E5E038 /* DamageBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE2B35E23BB314900E5E038 /* DamageBar.swift */; };
 		8EE2C78F238FB83D00CE710B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE2C78E238FB83D00CE710B /* AppDelegate.swift */; };
@@ -71,6 +73,8 @@
 		8EB3D13C2390C1FB00B6755B /* GUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GUI.swift; sourceTree = "<group>"; };
 		8ED27255239746CA00125B66 /* StatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusModel.swift; sourceTree = "<group>"; };
 		8ED2C733239C939700E132C8 /* MatchStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchStatsViewController.swift; sourceTree = "<group>"; };
+		8ED3ECB223BC88C20002F20E /* SummonerSpell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerSpell.swift; sourceTree = "<group>"; };
+		8ED3ECB423BC94400002F20E /* ChampJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampJSON.swift; sourceTree = "<group>"; };
 		8EE2B35823BAFD3F00E5E038 /* String+setColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+setColor.swift"; sourceTree = "<group>"; };
 		8EE2B35E23BB314900E5E038 /* DamageBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamageBar.swift; sourceTree = "<group>"; };
 		8EE2C78B238FB83D00CE710B /* LeagueStats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeagueStats.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +124,7 @@
 				8E55AB3923AF34A4007632F6 /* MatchDetail.swift */,
 				8E6FAD4623ADC8C10031EE0B /* MatchList.swift */,
 				8E1C40E823ACCEF60069F238 /* SummonerInfo.swift */,
+				8ED3ECB423BC94400002F20E /* ChampJSON.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -192,6 +197,7 @@
 				8ED27255239746CA00125B66 /* StatusModel.swift */,
 				8E2FE60B23989460000117A7 /* SummonerInfoModel.swift */,
 				8E9C505B23B99B47005473F3 /* MatchStats.swift */,
+				8ED3ECB223BC88C20002F20E /* SummonerSpell.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -317,8 +323,10 @@
 				8EB3D1382390A75D00B6755B /* ClientAPI.swift in Sources */,
 				8E2FE60C23989460000117A7 /* SummonerInfoModel.swift in Sources */,
 				8EB3D13D2390C1FB00B6755B /* GUI.swift in Sources */,
+				8ED3ECB323BC88C20002F20E /* SummonerSpell.swift in Sources */,
 				8E40CA7823933F8700848F42 /* StatsTopView.swift in Sources */,
 				8E70F4DB23920AA0005847E3 /* StatsViewNaviController.swift in Sources */,
+				8ED3ECB523BC94400002F20E /* ChampJSON.swift in Sources */,
 				8E33B27123B83BEB00D7BA08 /* UIImageView+loadImgWithUrl.swift in Sources */,
 				8E55AB3A23AF34A4007632F6 /* MatchDetail.swift in Sources */,
 				8E325072239489AD002B47E1 /* TierCollectionView.swift in Sources */,

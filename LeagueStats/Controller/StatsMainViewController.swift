@@ -251,17 +251,19 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
                     teamId = participantId > 5 ? 200 : 100
                     var st: Stats?
                     var totalKill: Int = 0
+                    var parti: Participant?
                     
                     data.participants.forEach({ (participant) in
                         if participant.participantId == participantId{
                             st = participant.stats
+                            parti = participant
                         }
                         if teamId == participant.teamId{
                             totalKill += participant.stats.kills
                         }
                     })
                     if let stat = st {
-                        self.status.append(StatusModel(stats: stat, time: "\(hour):\(mins)", totalKill: totalKill))
+                        self.status.append(StatusModel(stats: stat, time: "\(hour):\(mins)", totalKill: totalKill, spell1Id: parti!.spell1Id, spell2Id: parti!.spell2Id, championId: parti!.championId))
                     }
                 }
             }

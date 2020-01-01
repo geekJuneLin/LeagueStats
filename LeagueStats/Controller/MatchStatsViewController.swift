@@ -11,13 +11,12 @@ import UIKit
 class MatchStatsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout{
     
     // MARK: - variables
-    var matchDetail: MatchStats?{
-        didSet{
-            if let match = matchDetail {
-//                titleView.title.text = match.win
-            }
-        }
-    }
+//    var matchDetail: MatchStats?{
+//        didSet{
+//            if let match = matchDetail {
+//            }
+//        }
+//    }
     
     var titleCellId = "titleCellId"
     
