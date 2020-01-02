@@ -183,12 +183,16 @@ class StatsViewCell: UICollectionViewCell{
         itemView.topAnchor.constraint(equalTo: champImg.bottomAnchor, constant: 5).isActive = true
         itemView.leftAnchor.constraint(equalTo: champImg.leftAnchor).isActive = true
         itemView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
-//        itemView.rightAnchor.constraint(equalTo: KPLabel.rightAnchor).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+}
+
+// MARK: - functions
+extension StatsViewCell{
     
     /// calculate the KP value of the summoner
     /// - Parameters:

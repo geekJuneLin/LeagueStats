@@ -152,6 +152,7 @@
 		8EA9A46F23B21474003C4B2D /* Stats */ = {
 			isa = PBXGroup;
 			children = (
+				8E40CA7723933F8700848F42 /* StatsTopView.swift */,
 				8EAE89D123952C01003D32B3 /* StatsCollectionView.swift */,
 				8EAE89D32395356B003D32B3 /* StatsViewCell.swift */,
 				8EAE89D52395360A003D32B3 /* StatusView.swift */,
@@ -164,7 +165,6 @@
 		8EAE89D023952B1F003D32B3 /* StatsMainCustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				8E40CA7723933F8700848F42 /* StatsTopView.swift */,
 				8EA9A46E23B21464003C4B2D /* Tier */,
 				8EA9A46F23B21474003C4B2D /* Stats */,
 			);
@@ -196,8 +196,8 @@
 				8E52CD682396030700F8178B /* TierModel.swift */,
 				8ED27255239746CA00125B66 /* StatusModel.swift */,
 				8E2FE60B23989460000117A7 /* SummonerInfoModel.swift */,
-				8E9C505B23B99B47005473F3 /* MatchStats.swift */,
 				8ED3ECB223BC88C20002F20E /* SummonerSpell.swift */,
+				8E9C505B23B99B47005473F3 /* MatchStats.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

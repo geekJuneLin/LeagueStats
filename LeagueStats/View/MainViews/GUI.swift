@@ -23,15 +23,6 @@ class GUI: UIView{
         return label
     }()
     
-//    let searchView: UIImageView = {
-//       let view = UIImageView()
-//        let image = UIImage(named: "search")
-//        image?.withAlignmentRectInsets(UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0))
-//        view.image = image
-//        view.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-//        return view
-//    }()
-    
     let nameText: UITextField = {
         let text = UITextField()
         text.placeholder = "Please enter the name"

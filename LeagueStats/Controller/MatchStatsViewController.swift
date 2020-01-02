@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MatchStatsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout{
+class MatchStatsViewController: UICollectionViewController{
     
     // MARK: - variables
     var titleCellId = "titleCellId"

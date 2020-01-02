@@ -47,7 +47,6 @@ class MatchTitleCell: UICollectionViewCell{
     
     let statsLabel: UILabel = {
        let label = UILabel()
-//        label.attributedText = "24 / 38 / 27".setColor(["38"], .red)
         label.textColor = .gray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
