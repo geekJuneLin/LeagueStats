@@ -23,29 +23,29 @@ struct ChampJSON: Codable{
 
 struct Champion: Codable{
     var key: Int
-    var image: ChampImage
+    var name: String
     
     enum ChampionCodingKeys: String, CodingKey{
         case key
-        case image
+        case name
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: ChampionCodingKeys.self)
         self.key = try container.decode(Int.self, forKey: ChampionCodingKeys.key)
-        self.image = try container.decode(ChampImage.self, forKey: ChampionCodingKeys.image)
+        self.name = try container.decode(String.self, forKey: ChampionCodingKeys.name)
     }
 }
 
-struct ChampImage: Codable{
-    var full: String
-    
-    enum ImageCodingKeys: String, CodingKey{
-        case full
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: ImageCodingKeys.self)
-        self.full = try container.decode(String.self, forKey: ImageCodingKeys.full)
-    }
-}
+//struct ChampImage: Codable{
+//    var full: String
+//
+//    enum ImageCodingKeys: String, CodingKey{
+//        case full
+//    }
+//
+//    init(from decoder: Decoder) throws {
+//        let container = try decoder.container(keyedBy: ImageCodingKeys.self)
+//        self.full = try container.decode(String.self, forKey: ImageCodingKeys.full)
+//    }
+//}

@@ -8,6 +8,11 @@
 
 import UIKit
 
+// MARK: - card view delegate
+protocol cardViewDelegate{
+    func recoverCardView()
+}
+
 class StatsViewNaviController: UINavigationController{
     
     // MARK: - variables
@@ -48,11 +53,7 @@ class StatsViewNaviController: UINavigationController{
     }
 }
 
-protocol cardViewDelegate{
-    func recoverCardView()
-}
-
-/// using cutomized view transition animation
+// MARK: - using cutomized transition animation
 extension StatsViewNaviController: UIViewControllerTransitioningDelegate{
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return DismissTransitioning()

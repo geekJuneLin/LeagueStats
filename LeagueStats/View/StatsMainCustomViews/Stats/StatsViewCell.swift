@@ -23,7 +23,8 @@ class StatsViewCell: UICollectionViewCell{
             if let time = status?.time {
                 statusView.timeLabel.text = time
             }
-            champImg.loadImgWithUrl(uri_origin + "champion/Aatrox.png")
+            print("champ id: \(status!.championName)")
+            champImg.loadImgWithUrl(uri_origin + "champion/\(status!.championName).png")
             firstSpell.loadImgWithUrl(uri_origin + "spell/\(getSpellName(status!.spell1Id)).png")
             
             secondSpell.loadImgWithUrl(uri_origin + "spell/\(getSpellName(status!.spell2Id)).png")

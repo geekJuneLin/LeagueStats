@@ -38,8 +38,12 @@ class MatchStatsViewController: UICollectionViewController{
         setUpCollectionView()
         setUpNavigation()
     }
+}
+
+// MARK: - other functions
+extension MatchStatsViewController{
     
-    // MARK: - set up collection view
+    /// set up collection view
     fileprivate func setUpCollectionView(){
         collectionView.showsVerticalScrollIndicator = false
         
@@ -51,7 +55,8 @@ class MatchStatsViewController: UICollectionViewController{
         collectionView.backgroundColor = .backgroudColor
     }
     
-    // MARK: - set up navigationbar items
+    
+    /// set up navigation controller
     fileprivate func setUpNavigation(){
         navigationController?.navigationBar.prefersLargeTitles = true
 

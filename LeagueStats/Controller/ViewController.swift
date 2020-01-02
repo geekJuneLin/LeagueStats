@@ -22,18 +22,16 @@ class ViewController: UIViewController{
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
     
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // API Test
-        ClientAPI.shard.setApiKey("RGAPI-ee0514d1-4b3f-4ea0-9306-4975bfb15de9")
+        ClientAPI.shard.setApiKey("RGAPI-c235b021-e820-456e-bc6c-390c5be2b0ac")
         ClientAPI.shard.getSummonerByName(value: "0x73002")
         setUpViews()
     }
-    
     
     /// set up all the views
     fileprivate func setUpViews(){
@@ -67,14 +65,14 @@ class ViewController: UIViewController{
     }
 }
 
-/// using cutomized transition animation
+// MARK: - using cutomized transition animation
 extension ViewController: UIViewControllerTransitioningDelegate{
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return EnlargeTransitioning()
     }
 }
 
-/// set cardViewDelegate
+// MARK: - set cardViewDelegate
 extension ViewController: cardViewDelegate{
     func recoverCardView() {
         print("recovering")

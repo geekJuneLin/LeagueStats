@@ -86,8 +86,13 @@ class StatsMainViewController: UICollectionViewController{
         setUpViews()
         setUpProgressIndicator()
     }
+}
+
+// MARK: - other functions
+extension StatsMainViewController{
     
-    // MARK: - set up progress indicator
+    
+    /// set up progress indicator
     fileprivate func setUpProgressIndicator(){
         self.view.addSubview(loadingView)
         self.view.addSubview(indicator)
@@ -96,7 +101,8 @@ class StatsMainViewController: UICollectionViewController{
         indicator.startAnimating()
     }
     
-    // MARK: - set up navigation bar
+    
+    /// set up navigation controller
     fileprivate func setUpNavigationBar(){
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -108,12 +114,10 @@ class StatsMainViewController: UICollectionViewController{
         avatorImg.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
         navigationController?.navigationBar.topItem?.titleView = imageView
         navigationController?.navigationBar.barTintColor = .white
-        //UIColor(red: 44/255, green: 128/255, blue: 255/255, alpha: 0.9)
         avatorImg.isHidden = true
     }
     
-    
-    // MARK: - set up views
+    /// set up views
     fileprivate func setUpViews(){
         collectionView.backgroundColor = .backgroudColor
         collectionView.register(StatsViewCell.self, forCellWithReuseIdentifier: "cell")
@@ -122,7 +126,9 @@ class StatsMainViewController: UICollectionViewController{
         collectionView.register(BottomRefresh.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footerId")
     }
     
-    // MARK: - fetch data func
+    
+    /// fetch match list data
+    /// - Parameter completion: the code will be executed after done fetching
     fileprivate func fetchData(completion: @escaping ()->Void){
         let name = ClientAPI.shard.getSummonerName()
         var teamId = 0
@@ -157,7 +163,7 @@ class StatsMainViewController: UICollectionViewController{
                         }
                     })
                     if let stat = st {
-                        self.status.append(StatusModel(stats: stat, time: "\(hour):\(mins)", totalKill: totalKill, spell1Id: parti!.spell1Id, spell2Id: parti!.spell2Id, championId: parti!.championId))
+                        self.status.append(StatusModel(stats: stat, time: "\(hour):\(mins)", totalKill: totalKill, spell1Id: parti!.spell1Id, spell2Id: parti!.spell2Id, championName: ClientAPI.shard.getChampNameById(parti!.championId)))
                     }
                 }
             }

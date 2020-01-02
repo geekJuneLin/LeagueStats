@@ -8,10 +8,21 @@
 
 import UIKit
 
+var cachedImage = NSCache<NSString, UIImage>()
+
 extension UIImageView{
+//    func loadImgWithUrl(_ url: String){
+//
+//    }
+    
     func loadImgWithUrl(_ url: String){
-        guard let url = URL(string: url) else{ return }
-        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+        if let image = cachedImage.object(forKey: url as NSString){
+            self.image = image
+            return
+        }
+        
+        guard let cUrl = URL(string: url) else{ return }
+        URLSession.shared.dataTask(with: cUrl, completionHandler: { (data, response, error) in
             guard error == nil else{
                 print("Executing url with error \(error)")
                 return
@@ -21,7 +32,9 @@ extension UIImageView{
                 return
             }
             DispatchQueue.main.async {
-                self.image = UIImage(data: data)
+                guard let image = UIImage(data: data) else { return }
+                self.image = image
+                cachedImage.setObject(image, forKey: url as NSString)
             }
         }).resume()
     }
