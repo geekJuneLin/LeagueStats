@@ -22,6 +22,7 @@ class CardView: UIView{
     let nameLabel: UILabel = {
        let label = UILabel()
         label.text = "0x73002"
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -42,6 +43,7 @@ class CardView: UIView{
        let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.text = "Silver 1 (38LP)"
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

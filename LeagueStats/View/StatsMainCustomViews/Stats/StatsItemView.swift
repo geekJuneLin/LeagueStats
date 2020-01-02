@@ -8,7 +8,28 @@
 
 import UIKit
 
+struct ItemImages{
+    var id: Int
+}
+
 class StatsItemView: UIView{
+    
+    let url_origin = "https://ddragon.leagueoflegends.com/cdn/9.24.2/img/item/"
+    
+    var images: [ItemImages]?{
+        didSet{
+            if let images = images {
+                firstItem.loadImgWithUrl(url_origin + "\(images[0].id)" + ".png")
+                secondItem.loadImgWithUrl(url_origin + "\(images[1].id)" + ".png")
+                thirdItem.loadImgWithUrl(url_origin + "\(images[2].id)" + ".png")
+                fourthItem.loadImgWithUrl(url_origin + "\(images[3].id)" + ".png")
+                fifthItem.loadImgWithUrl(url_origin + "\(images[4].id)" + ".png")
+                sixthItem.loadImgWithUrl(url_origin + "\(images[5].id)" + ".png")
+                seventhItem.loadImgWithUrl(url_origin + "\(images[6].id)" + ".png")
+            }
+        }
+    }
+    
     let firstItem: UIImageView = {
        let view = UIImageView()
         view.layer.masksToBounds = true

@@ -23,11 +23,17 @@ class StatsViewCell: UICollectionViewCell{
             if let time = status?.time {
                 statusView.timeLabel.text = time
             }
-            print("champ id: \(status!.championName)")
             champImg.loadImgWithUrl(uri_origin + "champion/\(status!.championName).png")
             firstSpell.loadImgWithUrl(uri_origin + "spell/\(getSpellName(status!.spell1Id)).png")
-            
             secondSpell.loadImgWithUrl(uri_origin + "spell/\(getSpellName(status!.spell2Id)).png")
+            let images = [ItemImages](arrayLiteral: ItemImages(id: status!.stats.item0),
+                                      ItemImages(id: status!.stats.item1),
+                                      ItemImages(id: status!.stats.item2),
+                                      ItemImages(id: status!.stats.item3),
+                                      ItemImages(id: status!.stats.item4),
+                                      ItemImages(id: status!.stats.item5),
+                                      ItemImages(id: status!.stats.item6))
+            itemView.images = images
         }
     }
     
@@ -85,7 +91,7 @@ class StatsViewCell: UICollectionViewCell{
     let KDALabel: UILabel = {
        let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textColor = .lightGray
+        label.textColor = .black
         label.attributedText = "12 / 0 / 0".setColor(["0"], .lossColor)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -94,6 +100,7 @@ class StatsViewCell: UICollectionViewCell{
     let KPLabel: UILabel = {
        let label = UILabel()
         label.text = "K/P 100%"
+        label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -103,6 +110,7 @@ class StatsViewCell: UICollectionViewCell{
        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
         label.text = "Ranked Solo"
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -111,6 +119,7 @@ class StatsViewCell: UICollectionViewCell{
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
         label.text = "2019. 11. 27"
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
