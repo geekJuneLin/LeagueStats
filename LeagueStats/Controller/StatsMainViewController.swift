@@ -8,8 +8,7 @@
 
 import UIKit
 
-class StatsMainViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout,cellDelegate{
-    
+class StatsMainViewController: UICollectionViewController{
     
     // MARK: - variables
     let headerId = "headerId"
@@ -86,111 +85,6 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
         setUpNavigationBar()
         setUpViews()
         setUpProgressIndicator()
-    }
-    
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
-    }
-    
-    // MARK： - data source delegate
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0{
-            return 0
-        }else if section == 1 && refreshFlag{
-            return (status.count) + 2
-        }
-        return status.count + 1
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.item == 0{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tierCell", for: indexPath)
-            return cell
-        }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! StatsViewCell
-        cell.backgroundColor = .white
-        if indexPath.item < status.count{
-            cell.status = status[indexPath.item]
-        }
-        return cell
-    }
-    
-    
-    // MARK: - collectionView delegate flow layout
-    
-    // Header
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionHeader{
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId, for: indexPath) as! StatsTopView
-            let summonerInfo: SummonerInfoModel = SummonerInfoModel(name: "0x73002", level: 48, tier: "Silver 1", points: 38)
-            header.summonerInfo = summonerInfo
-            return header
-        }
-        let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footerId", for: indexPath) as! BottomRefresh
-        footer.indicator.startAnimating()
-        return footer
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        if section == 1{
-            return .zero
-        }
-        return CGSize(width: self.collectionView.frame.width * 0.8, height: self.collectionView.frame.height * 0.25)
-    }
-    
-    // Footer
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        if section == 0{
-            return .zero
-        }
-        return CGSize(width: self.collectionView.frame.width, height: 25)
-    }
-    
-    // size for cell items
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.item == 0{
-            return CGSize(width: self.collectionView.frame.width, height: 90)
-        }
-        return CGSize(width: self.collectionView.frame.width, height: self.collectionView.frame.height * 0.15)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("clicked the \(indexPath.item) cell")
-        self.presentMatchView(status[indexPath.item].stats.win)
-    }
-    
-    // scroll method for scrollView
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        let height = scrollView.contentSize.height
-        
-        // check if the summoner's info card view has been scrolled off the screen
-        if offsetY > (UIScreen.main.bounds.height * 0.15) && !showImg{
-            showImg = true
-            UIView.animate(withDuration: 0.5) {
-                self.avatorImg.isHidden = false
-            }
-            
-            print("display it on the nav bar")
-        }
-        if  offsetY < (UIScreen.main.bounds.height * 0.15) && showImg{
-            showImg = false
-            UIView.animate(withDuration: 0.5) {
-                self.avatorImg.isHidden = true
-            }
-            print("hide the img on the nav bar")
-        }
-        if height > 0 && offsetY > height - scrollView.frame.height{
-            refreshFlag = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.collectionView.reloadData()
-            }
-            refreshFlag = false
-        }
     }
     
     // MARK: - set up progress indicator
@@ -273,6 +167,123 @@ class StatsMainViewController: UICollectionViewController, UICollectionViewDeleg
         }
         
     }
+}
+
+// MARK： - data source delegate
+extension StatsMainViewController{
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
+    // number of items for each section
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if section == 0{
+            return 0
+        }else if section == 1 && refreshFlag{
+            return (status.count) + 2
+        }
+        return status.count + 1
+    }
+    
+    // cell at each row
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.item == 0{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tierCell", for: indexPath)
+            return cell
+        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! StatsViewCell
+        cell.backgroundColor = .white
+        if indexPath.item < status.count{
+            cell.status = status[indexPath.item]
+        }
+        return cell
+    }
+    
+    // Header, footer
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader{
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId, for: indexPath) as! StatsTopView
+            let summonerInfo: SummonerInfoModel = SummonerInfoModel(name: "0x73002", level: 48, tier: "Silver 1", points: 38)
+            header.summonerInfo = summonerInfo
+            return header
+        }
+        let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footerId", for: indexPath) as! BottomRefresh
+        footer.indicator.startAnimating()
+        return footer
+    }
+    
+    // scroll method for scrollView
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let height = scrollView.contentSize.height
+        
+        // check if the summoner's info card view has been scrolled off the screen
+        if offsetY > (UIScreen.main.bounds.height * 0.15) && !showImg{
+            showImg = true
+            UIView.animate(withDuration: 0.5) {
+                self.avatorImg.isHidden = false
+            }
+            
+            print("display it on the nav bar")
+        }
+        if  offsetY < (UIScreen.main.bounds.height * 0.15) && showImg{
+            showImg = false
+            UIView.animate(withDuration: 0.5) {
+                self.avatorImg.isHidden = true
+            }
+            print("hide the img on the nav bar")
+        }
+        if height > 0 && offsetY > height - scrollView.frame.height{
+            refreshFlag = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.collectionView.reloadData()
+            }
+            refreshFlag = false
+        }
+    }
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+extension StatsMainViewController: UICollectionViewDelegateFlowLayout{
+    
+    // header size
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if section == 1{
+            return .zero
+        }
+        return CGSize(width: self.collectionView.frame.width * 0.8, height: self.collectionView.frame.height * 0.25)
+    }
+    
+    // Footer size
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        if section == 0{
+            return .zero
+        }
+        return CGSize(width: self.collectionView.frame.width, height: 25)
+    }
+    
+    // size for cell items
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if indexPath.item == 0{
+            return CGSize(width: self.collectionView.frame.width, height: 90)
+        }
+        return CGSize(width: self.collectionView.frame.width, height: self.collectionView.frame.height * 0.15)
+    }
+    
+    // minimum spacing for cell
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
+    }
+    
+    // collectionView didSelectItem method
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("clicked the \(indexPath.item) cell")
+        self.presentMatchView(status[indexPath.item].stats.win)
+    }
+}
+
+// MARK: - cell clicked Delegate
+extension StatsMainViewController: cellDelegate{
     
     /// present the match details of each game in a collectionViewController
     /// - Parameter win: the win state of each match to be displayed in the collectionViewController

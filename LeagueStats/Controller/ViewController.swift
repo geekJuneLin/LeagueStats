@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, cardViewDelegate {
+class ViewController: UIViewController{
     
     // MARK: - Variables
     let mainView: GUI = {
@@ -65,16 +65,19 @@ class ViewController: UIViewController, cardViewDelegate {
         viewController.transitioningDelegate = self
         self.present(viewController, animated: true, completion: nil)
     }
-    
-    func recoverCardView() {
-        print("recovering")
-    }
 }
 
 /// using cutomized transition animation
 extension ViewController: UIViewControllerTransitioningDelegate{
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return EnlargeTransitioning()
+    }
+}
+
+/// set cardViewDelegate
+extension ViewController: cardViewDelegate{
+    func recoverCardView() {
+        print("recovering")
     }
 }
 

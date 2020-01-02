@@ -12,12 +12,6 @@ class StatsViewNaviController: UINavigationController{
     
     // MARK: - variables
     var cardDelegate: cardViewDelegate?
-//    var matchList: MatchList?{
-//        didSet{
-//            if let matches = matchList {
-//            }
-//        }
-//    }
     
     let vc: StatsMainViewController = {
        let view = StatsMainViewController(collectionViewLayout: UICollectionViewFlowLayout())
