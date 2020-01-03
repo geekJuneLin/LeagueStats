@@ -136,42 +136,46 @@ extension StatsMainViewController{
         DispatchQueue.main.async {
             self.matchList?.match.forEach({ (match) in
                 ClientAPI.shard.getMatchInfoByID(gameId: match.gameId) { (matchSearched) in
-                if let data = matchSearched {
-                    let hour = data.duration / 60
-                    let mins = data.duration % 60
-                    
-                    // find the current summoner's participant id
-                    data.participandIds.forEach({ (participant) in
-                        if participant.player.name == name{
-                            participantId = participant.id
-                            return
+                    if let data = matchSearched {
+                        let hour = data.duration / 60
+                        let mins = data.duration % 60
+                        
+                        // find the current summoner's participant id
+                        data.participandIds.forEach({ (participant) in
+                            if participant.player.name == name{
+                                participantId = participant.id
+                                return
+                            }
+                        })
+                        
+                        teamId = participantId > 5 ? 200 : 100
+                        var st: Stats?
+                        var totalKill: Int = 0
+                        var parti: Participant?
+                        
+                        // pack all the summoners' info here
+                        data.participants.forEach({ (participant) in
+                            if participant.participantId == participantId{
+                                st = participant.stats
+                                parti = participant
+                            }
+                            if teamId == participant.teamId{
+                                totalKill += participant.stats.kills
+                            }
+                        })
+                        if let stat = st {
+                            self.statsViewCellModel.append(StatsViewCellModel(StatusModel(stats: stat, time: "\(hour):\(mins)",
+                                totalKill: totalKill,
+                                spell1Id: parti!.spell1Id,
+                                spell2Id: parti!.spell2Id,
+                                championName: ClientAPI.shard.getChampNameById(parti!.championId),
+                                queueId: data.queueId,
+                                date: self.getDateFromTimestamp(match.timestamp))))
+                            self.statsViewCellModel = self.statsViewCellModel.sorted(by: {
+                                $0.gameDate > $1.gameDate
+                            })
                         }
-                    })
-                    
-                    teamId = participantId > 5 ? 200 : 100
-                    var st: Stats?
-                    var totalKill: Int = 0
-                    var parti: Participant?
-                    
-                    data.participants.forEach({ (participant) in
-                        if participant.participantId == participantId{
-                            st = participant.stats
-                            parti = participant
-                        }
-                        if teamId == participant.teamId{
-                            totalKill += participant.stats.kills
-                        }
-                    })
-                    if let stat = st {
-                        self.statsViewCellModel.append(StatsViewCellModel(StatusModel(stats: stat, time: "\(hour):\(mins)",
-                            totalKill: totalKill,
-                            spell1Id: parti!.spell1Id,
-                            spell2Id: parti!.spell2Id,
-                            championName: ClientAPI.shard.getChampNameById(parti!.championId),
-                            queueId: data.queueId,
-                            date: self.getDateFromTimestamp(match.timestamp))))
                     }
-                }
             }
           })
             print("status count: \(self.statsViewCellModel.count)")

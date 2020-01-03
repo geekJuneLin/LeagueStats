@@ -105,7 +105,6 @@ class ClientAPI{
      gameId: game id used to find the detail of the specific match
      completion: this block of code will be called after finishing getting data and successfully convert the data into MatchDetail
      */
-    
     func getMatchInfoByID(gameId id: Float64, completion: @escaping (MatchDetail?) -> Void){
         let decoder = JSONDecoder()
         let endPoint = "/lol/match/v4/matches/"
