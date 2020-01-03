@@ -55,6 +55,7 @@ class TierViewCell: UICollectionViewCell{
     
     let typeLabel: UILabel = {
        let label = UILabel()
+        label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -70,6 +71,7 @@ class TierViewCell: UICollectionViewCell{
     
     let pointLabel: UILabel = {
        let label = UILabel()
+        label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -77,6 +79,7 @@ class TierViewCell: UICollectionViewCell{
     
     let winRateLabel: UILabel = {
        let label = UILabel()
+        label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

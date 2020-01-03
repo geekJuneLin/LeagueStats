@@ -26,12 +26,14 @@ struct Match: Codable{
     var gameId: Float64
     var champion: Int
     var role: String
+    var timestamp: Float64
     
     enum MatchCodingKey: String, CodingKey {
         case lane
         case gameId
         case champion
         case role
+        case timestamp
     }
     
     init(from decoder: Decoder) throws{
@@ -40,5 +42,6 @@ struct Match: Codable{
         self.gameId = try container.decode(Float64.self, forKey: MatchCodingKey.gameId)
         self.champion = try container.decode(Int.self, forKey: MatchCodingKey.champion)
         self.role = try container.decode(String.self, forKey: MatchCodingKey.role)
+        self.timestamp = try container.decode(Float64.self, forKey: MatchCodingKey.timestamp)
     }
 }

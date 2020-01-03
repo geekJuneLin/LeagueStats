@@ -11,29 +11,20 @@ import UIKit
 class StatsViewCell: UICollectionViewCell{
     
     let uri_origin = "https://ddragon.leagueoflegends.com/cdn/9.24.2/img/"
-    var status: StatusModel? {
+    
+    var statsViewCellModel: StatsViewCellModel!{
         didSet{
-            if let result = status?.stats{
-                statusView.statusLabel.text = result.win ? "W" : "L"
-                statusView.backgroundColor = result.win ? .winColor : .lossColor
-                KDALabel.attributedText = "\(result.kills) / \(result.deaths) / \(result.assists)".setColor(["\(result.deaths)"], .lossColor)
-                KPLabel.text = "K/P \(self.calculateKP(result.kills, result.assists, status!.totalKill))%"
-            }
-
-            if let time = status?.time {
-                statusView.timeLabel.text = time
-            }
-            champImg.loadImgWithUrl(uri_origin + "champion/\(status!.championName).png")
-            firstSpell.loadImgWithUrl(uri_origin + "spell/\(getSpellName(status!.spell1Id)).png")
-            secondSpell.loadImgWithUrl(uri_origin + "spell/\(getSpellName(status!.spell2Id)).png")
-            let images = [ItemImages](arrayLiteral: ItemImages(id: status!.stats.item0),
-                                      ItemImages(id: status!.stats.item1),
-                                      ItemImages(id: status!.stats.item2),
-                                      ItemImages(id: status!.stats.item3),
-                                      ItemImages(id: status!.stats.item4),
-                                      ItemImages(id: status!.stats.item5),
-                                      ItemImages(id: status!.stats.item6))
-            itemView.images = images
+            statusView.statusLabel.text = statsViewCellModel.win
+            statusView.backgroundColor = statsViewCellModel.statusBackgroundColor
+            statusView.timeLabel.text = statsViewCellModel.time
+            KDALabel.attributedText = statsViewCellModel.kda
+            KPLabel.text = statsViewCellModel.kp
+            champImg.loadImgWithUrl(uri_origin + "champion/\(statsViewCellModel.champName).png")
+            firstSpell.loadImgWithUrl(uri_origin + "spell/\(statsViewCellModel.spell1).png")
+            secondSpell.loadImgWithUrl(uri_origin + "spell/\(statsViewCellModel.spell2).png")
+            itemView.images = statsViewCellModel.images
+            gameTypeLabel.text = statsViewCellModel.gameType
+            dateLabel.text = statsViewCellModel.gameDate
         }
     }
     
@@ -108,6 +99,7 @@ class StatsViewCell: UICollectionViewCell{
     
     let gameTypeLabel: UILabel = {
        let label = UILabel()
+        label.textAlignment = .right
         label.font = UIFont.systemFont(ofSize: 12)
         label.text = "Ranked Solo"
         label.textColor = .black
@@ -185,10 +177,11 @@ class StatsViewCell: UICollectionViewCell{
         KPLabel.centerXAnchor.constraint(equalTo: KDALabel.centerXAnchor).isActive = true
         
         gameTypeLabel.topAnchor.constraint(equalTo: KDALabel.topAnchor).isActive = true
+        gameTypeLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25).isActive = true
         gameTypeLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
         
         dateLabel.topAnchor.constraint(equalTo: gameTypeLabel.bottomAnchor, constant: 5).isActive = true
-        dateLabel.centerXAnchor.constraint(equalTo: gameTypeLabel.centerXAnchor).isActive = true
+        dateLabel.rightAnchor.constraint(equalTo: gameTypeLabel.rightAnchor).isActive = true
         
         itemView.topAnchor.constraint(equalTo: champImg.bottomAnchor, constant: 5).isActive = true
         itemView.leftAnchor.constraint(equalTo: champImg.leftAnchor).isActive = true
@@ -199,32 +192,4 @@ class StatsViewCell: UICollectionViewCell{
         fatalError("init(coder:) has not been implemented")
     }
     
-}
-
-// MARK: - functions
-extension StatsViewCell{
-    
-    /// calculate the KP value of the summoner
-    /// - Parameters:
-    ///   - kill: kills got
-    ///   - assist: assist had
-    ///   - totalKill: total kills of the team
-    fileprivate func calculateKP(_ kill: Int, _ assist: Int, _ totalKill: Int) -> String{
-        let value = (Double(kill + assist) / Double(totalKill)) * 100
-        let str = String(format: "%.0f", value)
-        return str
-    }
-    
-    /// get the spell name in terms of the spell id got from API
-    /// - Parameter id: id of the spell
-    fileprivate func getSpellName(_ id: Int) -> String{
-        var str = ""
-        SummonerSpell.spellMap.forEach { (spell) in
-            if spell.id == id{
-                str = spell.name
-                return
-            }
-        }
-        return str
-    }
 }

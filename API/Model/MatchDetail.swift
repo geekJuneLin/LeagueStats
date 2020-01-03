@@ -158,6 +158,7 @@ struct Team: Codable{
 
 struct MatchDetail: Codable{
     var duration: Int
+    var queueId: Int
     var participandIds: [ParticipantId]
     var participants: [Participant]
     var teams: [Team]
@@ -167,6 +168,7 @@ struct MatchDetail: Codable{
         case duration = "gameDuration"
         case participants
         case teams
+        case queueId
     }
     
     init(from decoder: Decoder) throws{
@@ -175,5 +177,6 @@ struct MatchDetail: Codable{
         self.duration = try container.decode(Int.self, forKey: MatchDetailCodingKeys.duration)
         self.participants = try container.decode([Participant].self, forKey: MatchDetailCodingKeys.participants)
         self.teams = try container.decode([Team].self, forKey: MatchDetailCodingKeys.teams)
+        self.queueId = try container.decode(Int.self, forKey: .queueId)
     }
 }

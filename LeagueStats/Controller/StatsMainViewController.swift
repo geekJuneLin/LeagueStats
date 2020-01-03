@@ -17,7 +17,7 @@ class StatsMainViewController: UICollectionViewController{
     
     var showImg = false
     
-    var status: [StatusModel] = [StatusModel]()
+    var statsViewCellModel: [StatsViewCellModel] = [StatsViewCellModel]()
     
     var matchList: MatchList?
     
@@ -135,8 +135,8 @@ extension StatsMainViewController{
         var participantId = 0
         DispatchQueue.main.async {
             self.matchList?.match.forEach({ (match) in
-                ClientAPI.shard.getMatchInfoByID(gameId: match.gameId) { (match) in
-                if let data = match {
+                ClientAPI.shard.getMatchInfoByID(gameId: match.gameId) { (matchSearched) in
+                if let data = matchSearched {
                     let hour = data.duration / 60
                     let mins = data.duration % 60
                     
@@ -163,15 +163,30 @@ extension StatsMainViewController{
                         }
                     })
                     if let stat = st {
-                        self.status.append(StatusModel(stats: stat, time: "\(hour):\(mins)", totalKill: totalKill, spell1Id: parti!.spell1Id, spell2Id: parti!.spell2Id, championName: ClientAPI.shard.getChampNameById(parti!.championId)))
+                        self.statsViewCellModel.append(StatsViewCellModel(StatusModel(stats: stat, time: "\(hour):\(mins)",
+                            totalKill: totalKill,
+                            spell1Id: parti!.spell1Id,
+                            spell2Id: parti!.spell2Id,
+                            championName: ClientAPI.shard.getChampNameById(parti!.championId),
+                            queueId: data.queueId,
+                            date: self.getDateFromTimestamp(match.timestamp))))
                     }
                 }
             }
           })
-            print("status count: \(self.status.count)")
+            print("status count: \(self.statsViewCellModel.count)")
             completion()
         }
         
+    }
+    
+    func getDateFromTimestamp(_ stamp: Float64) -> String{
+        let date = Date(timeIntervalSince1970: stamp / 1000)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT") //Set timezone that you want
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.dateFormat = "yyyy-MM-dd" //Specify your format that you want
+        return dateFormatter.string(from: date)
     }
 }
 
@@ -186,9 +201,9 @@ extension StatsMainViewController{
         if section == 0{
             return 0
         }else if section == 1 && refreshFlag{
-            return (status.count) + 2
+            return (statsViewCellModel.count) + 2
         }
-        return status.count + 1
+        return statsViewCellModel.count + 1
     }
     
     // cell at each row
@@ -199,8 +214,8 @@ extension StatsMainViewController{
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! StatsViewCell
         cell.backgroundColor = .white
-        if indexPath.item < status.count{
-            cell.status = status[indexPath.item]
+        if indexPath.item < statsViewCellModel.count{
+            cell.statsViewCellModel = statsViewCellModel[indexPath.item]
         }
         return cell
     }
@@ -284,7 +299,7 @@ extension StatsMainViewController: UICollectionViewDelegateFlowLayout{
     // collectionView didSelectItem method
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("clicked the \(indexPath.item) cell")
-        self.presentMatchView(status[indexPath.item].stats.win)
+        self.presentMatchView(statsViewCellModel[indexPath.item].win)
     }
 }
 
@@ -293,10 +308,14 @@ extension StatsMainViewController: cellDelegate{
     
     /// present the match details of each game in a collectionViewController
     /// - Parameter win: the win state of each match to be displayed in the collectionViewController
-    func presentMatchView(_ win: Bool) {
+    func presentMatchView(_ win: String) {
         let matchViewController = MatchStatsViewController(collectionViewLayout: UICollectionViewFlowLayout())
         let naviController = UINavigationController(rootViewController: matchViewController)
         matchViewController.win = win
         present(naviController, animated: true, completion: nil)
     }
+}
+
+protocol cellDelegate {
+    func presentMatchView(_ win: String)
 }

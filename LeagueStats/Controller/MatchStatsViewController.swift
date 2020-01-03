@@ -17,10 +17,10 @@ class MatchStatsViewController: UICollectionViewController{
     
     var showWinTitle = false
     
-    var win: Bool?{
+    var win: String?{
         didSet{
             if let win = win {
-                navigationController?.navigationBar.topItem?.title = win ? "Win" : "Lose"
+                navigationController?.navigationBar.topItem?.title = win == "W" ? "Win" : "Lose"
             }
         }
     }
@@ -64,7 +64,7 @@ extension MatchStatsViewController{
             let app = UINavigationBarAppearance()
             app.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white, NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 26)]
             app.titleTextAttributes = [.foregroundColor : UIColor.white]
-            app.backgroundColor = win! ? .winColor : .lossColor
+            app.backgroundColor = win! == "W" ? .winColor : .lossColor
             navigationController?.navigationBar.scrollEdgeAppearance = app
             navigationController?.navigationBar.standardAppearance = app
         } else {
@@ -110,7 +110,7 @@ extension MatchStatsViewController: UICollectionViewDelegateFlowLayout{
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.item == 0{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: titleCellId, for: indexPath) as! MatchTitleCell
-            cell.winState = indexPath.section == 0 ? win! ? "Win" : "Lose" : win! ? "Lose" : "Win"
+            cell.winState = indexPath.section == 0 ? win! : win! == "W" ? "L" : "W"
             return cell
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)

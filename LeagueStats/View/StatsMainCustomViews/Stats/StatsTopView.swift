@@ -50,7 +50,6 @@ class StatsTopView: UICollectionReusableView{
     
     let levelLabel: UILabel = {
        let label = UILabel()
-        //label.text = " 48 "
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 14)
         label.layer.masksToBounds = true
@@ -62,14 +61,14 @@ class StatsTopView: UICollectionReusableView{
     
     let nameLabel: UILabel = {
        let label = UILabel()
-        //label.text = "0x73002"
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let tierLabel: UILabel = {
        let label = UILabel()
-        //label.text = "Silver 1 (38LP)"
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

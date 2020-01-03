@@ -28,7 +28,7 @@ class ViewController: UIViewController{
         super.viewDidLoad()
         
         // API Test
-        ClientAPI.shard.setApiKey("RGAPI-c235b021-e820-456e-bc6c-390c5be2b0ac")
+        ClientAPI.shard.setApiKey("RGAPI-ff0cb84b-a76b-4a11-b03b-17f253bb7277")
         ClientAPI.shard.getSummonerByName(value: "0x73002")
         setUpViews()
     }
