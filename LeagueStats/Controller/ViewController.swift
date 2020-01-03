@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 class ViewController: UIViewController{
     
@@ -19,6 +20,7 @@ class ViewController: UIViewController{
     
     let cardView: CardView = {
        let view = CardView()
+        view.isSkeletonable = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -26,6 +28,8 @@ class ViewController: UIViewController{
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        cardView.showAnimatedGradientSkeleton()
         
         // API Test
         ClientAPI.shard.setApiKey("RGAPI-ff0cb84b-a76b-4a11-b03b-17f253bb7277")
@@ -49,8 +53,7 @@ class ViewController: UIViewController{
         cardView.topAnchor.constraint(equalTo: mainView.nameText.bottomAnchor, constant: 60).isActive = true
         cardView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9).isActive = true
         cardView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2).isActive = true
-        cardView.avator.loadImgWithUrl("https://avatar.leagueoflegends.com/oce/0x73002.png")
-        
+        self.loadImg()
     }
     
     /// handle the click event of the card view
@@ -62,6 +65,13 @@ class ViewController: UIViewController{
         viewController.modalPresentationStyle = .custom
         viewController.transitioningDelegate = self
         self.present(viewController, animated: true, completion: nil)
+    }
+    
+    fileprivate func loadImg(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.cardView.avator.loadImgWithUrl("https://avatar.leagueoflegends.com/oce/0x73002.png")
+            self.cardView.hideSkeleton(reloadDataAfter: false, transition: .crossDissolve(1))
+        }
     }
 }
 

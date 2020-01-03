@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import SkeletonView
 
 class CardView: UIView{
     let avator: UIImageView = {
        let view = UIImageView()
+        view.isSkeletonable = true
         view.image = UIImage(named: "dinosaur")
         view.layer.masksToBounds = true
         view.layer.cornerRadius = 35
@@ -21,6 +23,7 @@ class CardView: UIView{
     
     let nameLabel: UILabel = {
        let label = UILabel()
+        label.isSkeletonable = true
         label.text = "0x73002"
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -29,6 +32,7 @@ class CardView: UIView{
     
     let levelLabel: UILabel = {
        let label = UILabel()
+        label.isSkeletonable = true
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 8
         label.textColor = .white
@@ -41,6 +45,7 @@ class CardView: UIView{
     
     let tierLabel: UILabel = {
        let label = UILabel()
+        label.isSkeletonable = true
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.text = "Silver 1 (38LP)"
         label.textColor = .black
