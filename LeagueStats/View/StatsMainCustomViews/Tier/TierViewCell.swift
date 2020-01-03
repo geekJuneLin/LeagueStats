@@ -9,41 +9,51 @@
 import UIKit
 
 class TierViewCell: UICollectionViewCell{
-    var tier: TierModel? {
+    var tierViewCellModel: TierViewCellModel!{
         didSet{
-            // load accroding tier image
-            if let img = tier?.tier.tierImg {
-                tierImg.image = img
-            }
-            
-            // load accroding game type
-            if let type = tier?.type {
-                typeLabel.text = type
-            }
-            
-            // load tier
-            if let tier = tier?.tier.tier {
-                tierLabel.text = tier
-            }
-            
-            // load current points
-            if let points = tier?.tier.point{
-                pointLabel.text = "\(points) LP"
-            }
-            
-            // load the win, lose and win rate
-            if let win = tier?.tier.win, let loss = tier?.tier.loss {
-                if loss == 0 && win == 0{
-                    winRateLabel.text = "\(win)W \(loss)L (-)"
-                }else if loss == 0 && win != 0{
-                    winRateLabel.text = "\(win)W \(loss)L (100%)"
-                }else{
-                    let rate = Double(win) / (Double(win) + Double(loss)) * 100
-                    winRateLabel.text = "\(win)W \(loss)L (\(String(format: "%.2f", rate))%)"
-                }
-            }
+            tierImg.image = tierViewCellModel.image
+            typeLabel.text = tierViewCellModel.type
+            tierLabel.text = tierViewCellModel.tier
+            pointLabel.text = tierViewCellModel.point
+            winRateLabel.text = tierViewCellModel.winRate
         }
     }
+    
+//    var tier: TierModel? {
+//        didSet{
+//            // load accroding tier image
+//            if let img = tier?.tier.tierImg {
+//                tierImg.image = img
+//            }
+//
+//            // load accroding game type
+//            if let type = tier?.type {
+//                typeLabel.text = type
+//            }
+//
+//            // load tier
+//            if let tier = tier?.tier.tier {
+//                tierLabel.text = tier
+//            }
+//
+//            // load current points
+//            if let points = tier?.tier.point{
+//                pointLabel.text = "\(points) LP"
+//            }
+//
+//            // load the win, lose and win rate
+//            if let win = tier?.tier.win, let loss = tier?.tier.loss {
+//                if loss == 0 && win == 0{
+//                    winRateLabel.text = "\(win)W \(loss)L (-)"
+//                }else if loss == 0 && win != 0{
+//                    winRateLabel.text = "\(win)W \(loss)L (100%)"
+//                }else{
+//                    let rate = Double(win) / (Double(win) + Double(loss)) * 100
+//                    winRateLabel.text = "\(win)W \(loss)L (\(String(format: "%.2f", rate))%)"
+//                }
+//            }
+//        }
+//    }
     
     let tierImg: UIImageView = {
        let view = UIImageView()

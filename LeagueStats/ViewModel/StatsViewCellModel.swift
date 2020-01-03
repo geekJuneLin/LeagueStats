@@ -37,12 +37,13 @@ struct StatsViewCellModel{
                                               ItemImages(id: statusModel.stats.item4),
                                               ItemImages(id: statusModel.stats.item5),
                                               ItemImages(id: statusModel.stats.item6))
-        self.gameType = QueueID().getGameType(statusModel.queueId)
+        self.gameType = QueueID.getGameType(statusModel.queueId)
         self.gameDate = statusModel.date
     }
-    
-    
-    
+}
+
+// MARK: - functions
+extension StatsViewCellModel{
     /// calculate the KP value of the summoner
     /// - Parameters:
     ///   - kill: kills got

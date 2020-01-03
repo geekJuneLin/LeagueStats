@@ -9,7 +9,7 @@
 import Foundation
 
 struct QueueID{
-    func getGameType(_ id: Int) -> String{
+    static func getGameType(_ id: Int) -> String{
         switch(id){
         case 0 : return "Custom"
         case 2 : return "Blind Pick"

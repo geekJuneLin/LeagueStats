@@ -11,9 +11,9 @@ import UIKit
 class TierCollectionView: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     let cellId = "cellId"
     
-    let tierInfo: [TierModel] = [TierModel(type: "Flex Solo", tier: TierInfo(tier: "Silver 1", tierImg: UIImage(named: "dinosaur")!, point: 38, win: 46, loss: 25)),
-                                 TierModel(type: "Flex 5:5 Rank", tier: TierInfo(tier: "Unranked", tierImg: UIImage(named: "dinosaur")!, point: 43, win: 44, loss: 43)),
-                                 TierModel(type: "Flex 3:3 Rank", tier: TierInfo(tier: "Unranked", tierImg: UIImage(named: "dinosaur")!, point: 0, win: 0, loss: 0))]
+    let tierInfo: [TierViewCellModel] = [TierViewCellModel(TierModel(type: "Flex Solo", tier: TierInfo(tier: "Silver 1", tierImg: UIImage(named: "dinosaur")!, point: 38, win: 46, loss: 25))),
+                                         TierViewCellModel(TierModel(type: "Flex 5:5 Rank", tier: TierInfo(tier: "Unranked", tierImg: UIImage(named: "dinosaur")!, point: 43, win: 44, loss: 43))),
+                                         TierViewCellModel(TierModel(type: "Flex 3:3 Rank", tier: TierInfo(tier: "Unranked", tierImg: UIImage(named: "dinosaur")!, point: 0, win: 0, loss: 0)))]
     
     let menuCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -47,7 +47,7 @@ class TierCollectionView: UICollectionViewCell, UICollectionViewDataSource, UICo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! TierViewCell
         cell.backgroundColor = .white
-        cell.tier = tierInfo[indexPath.item]
+        cell.tierViewCellModel = tierInfo[indexPath.item]
         return cell
     }
     

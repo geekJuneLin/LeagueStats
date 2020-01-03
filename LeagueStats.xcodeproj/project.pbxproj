@@ -43,6 +43,7 @@
 		8EE2C799238FB83E00CE710B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EE2C797238FB83E00CE710B /* LaunchScreen.storyboard */; };
 		8EE7838D23B4B1C6006E99FC /* BottomRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE7838C23B4B1C6006E99FC /* BottomRefresh.swift */; };
 		8EF159AF23BEE23800632CA3 /* StatsViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF159AE23BEE23800632CA3 /* StatsViewCellModel.swift */; };
+		8EF159B123BEED5A00632CA3 /* TierViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF159B023BEED5A00632CA3 /* TierViewCellModel.swift */; };
 		8EFC0CB223BD9FC3000AEACC /* QueueID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFC0CB123BD9FC3000AEACC /* QueueID.swift */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +86,7 @@
 		8EE2C79A238FB83E00CE710B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8EE7838C23B4B1C6006E99FC /* BottomRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomRefresh.swift; sourceTree = "<group>"; };
 		8EF159AE23BEE23800632CA3 /* StatsViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewCellModel.swift; sourceTree = "<group>"; };
+		8EF159B023BEED5A00632CA3 /* TierViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierViewCellModel.swift; sourceTree = "<group>"; };
 		8EFC0CB123BD9FC3000AEACC /* QueueID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueID.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -198,7 +200,6 @@
 				8E52CD682396030700F8178B /* TierModel.swift */,
 				8ED27255239746CA00125B66 /* StatusModel.swift */,
 				8E2FE60B23989460000117A7 /* SummonerInfoModel.swift */,
-				8ED3ECB223BC88C20002F20E /* SummonerSpell.swift */,
 				8E9C505B23B99B47005473F3 /* MatchStats.swift */,
 			);
 			path = Model;
@@ -252,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				8EF159AE23BEE23800632CA3 /* StatsViewCellModel.swift */,
+				8EF159B023BEED5A00632CA3 /* TierViewCellModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -259,6 +261,7 @@
 		8EFC0CB023BD9F93000AEACC /* Static Data */ = {
 			isa = PBXGroup;
 			children = (
+				8ED3ECB223BC88C20002F20E /* SummonerSpell.swift */,
 				8EFC0CB123BD9FC3000AEACC /* QueueID.swift */,
 			);
 			path = "Static Data";
@@ -364,6 +367,7 @@
 				8E9C505823B965D4005473F3 /* MatchTitleCell.swift in Sources */,
 				8ED2C734239C939700E132C8 /* MatchStatsViewController.swift in Sources */,
 				8E70F4D92391ECB3005847E3 /* CardView.swift in Sources */,
+				8EF159B123BEED5A00632CA3 /* TierViewCellModel.swift in Sources */,
 				8E33B27323B8A29B00D7BA08 /* UIColor+CustomizedColor.swift in Sources */,
 				8E9C505623B965C7005473F3 /* MatchStatsCell.swift in Sources */,
 				8EE2B35923BAFD3F00E5E038 /* String+setColor.swift in Sources */,
