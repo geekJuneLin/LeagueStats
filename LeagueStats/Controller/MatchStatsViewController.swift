@@ -117,7 +117,7 @@ extension MatchStatsViewController: UICollectionViewDelegateFlowLayout{
     
     // minimum spacing for section
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
+        return 0
     }
     
     // cell at each index

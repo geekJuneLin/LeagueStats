@@ -16,6 +16,11 @@ class MatchStatsCell: UICollectionViewCell{
         didSet{
             print("Name: \(matchStatsCellModel.participantIds.player.name) \n Team ID: \(matchStatsCellModel.participants.teamId) \n Stats: \(matchStatsCellModel.participants.stats)")
             
+            if matchStatsCellModel.participantIds.player.name == "0x73002"{
+                searchedInicator.backgroundColor = .searchedColor
+                backgroundColor = .searchedBackground
+            }
+            
             champImg.loadImgWithUrl(uri_origin + "champion/\(ClientAPI.shard.getChampNameById(matchStatsCellModel.participants.championId)).png")
             
             levelLabel.text = "\(matchStatsCellModel.participants.stats.champLevel)"
@@ -42,6 +47,12 @@ class MatchStatsCell: UICollectionViewCell{
             damageBar.dmgLabel.text = "\(matchStatsCellModel.participants.stats.totalDamageDealtToChampions)"
         }
     }
+    
+    let searchedInicator: UIView = {
+       let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     let champImg: UIImageView = {
        let view = UIImageView()
@@ -231,6 +242,11 @@ class MatchStatsCell: UICollectionViewCell{
     }
     
     fileprivate func setUpViews(){
+        addSubview(searchedInicator)
+        searchedInicator.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.01).isActive = true
+        searchedInicator.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+        searchedInicator.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        
         addSubview(champImg)
         champImg.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
         champImg.widthAnchor.constraint(equalToConstant: 38).isActive = true
