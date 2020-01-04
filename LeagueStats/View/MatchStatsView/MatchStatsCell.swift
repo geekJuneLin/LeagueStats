@@ -78,7 +78,7 @@ class MatchStatsCell: UICollectionViewCell{
     let spellOne: UIImageView = {
        let view = UIImageView()
         view.clipsToBounds = true
-        view.layer.cornerRadius = 5
+        view.layer.cornerRadius = 2
         view.image = UIImage(named: "dinosaur")
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -87,7 +87,7 @@ class MatchStatsCell: UICollectionViewCell{
     let spellTwo: UIImageView = {
        let view = UIImageView()
         view.clipsToBounds = true
-        view.layer.cornerRadius = 5
+        view.layer.cornerRadius = 2
         view.image = UIImage(named: "dinosaur")
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -117,7 +117,7 @@ class MatchStatsCell: UICollectionViewCell{
         label.textColor = .white
         label.backgroundColor = .gray
         label.layer.masksToBounds = true
-        label.layer.cornerRadius = 5
+        label.layer.cornerRadius = 2
         label.text = " S1 "
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -154,7 +154,7 @@ class MatchStatsCell: UICollectionViewCell{
        let view = UIImageView()
         view.image = UIImage(named: "dinosaur")
         view.layer.masksToBounds = true
-        view.layer.cornerRadius = 5
+        view.layer.cornerRadius = 2
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -163,7 +163,7 @@ class MatchStatsCell: UICollectionViewCell{
        let view = UIImageView()
         view.image = UIImage(named: "dinosaur")
         view.layer.masksToBounds = true
-        view.layer.cornerRadius = 5
+        view.layer.cornerRadius = 2
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -172,7 +172,7 @@ class MatchStatsCell: UICollectionViewCell{
        let view = UIImageView()
         view.image = UIImage(named: "dinosaur")
         view.layer.masksToBounds = true
-        view.layer.cornerRadius = 5
+        view.layer.cornerRadius = 2
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -181,7 +181,7 @@ class MatchStatsCell: UICollectionViewCell{
        let view = UIImageView()
         view.image = UIImage(named: "dinosaur")
         view.layer.masksToBounds = true
-        view.layer.cornerRadius = 5
+        view.layer.cornerRadius = 2
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -190,7 +190,7 @@ class MatchStatsCell: UICollectionViewCell{
        let view = UIImageView()
         view.image = UIImage(named: "dinosaur")
         view.layer.masksToBounds = true
-        view.layer.cornerRadius = 5
+        view.layer.cornerRadius = 2
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -199,7 +199,7 @@ class MatchStatsCell: UICollectionViewCell{
        let view = UIImageView()
         view.image = UIImage(named: "dinosaur")
         view.layer.masksToBounds = true
-        view.layer.cornerRadius = 5
+        view.layer.cornerRadius = 2
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

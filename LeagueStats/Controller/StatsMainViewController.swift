@@ -165,7 +165,8 @@ extension StatsMainViewController{
                         self.matchStats.append(MatchStats(participantIDs: self.participantIds,
                                                           participants: self.participants,
                                                           date: self.getDateFromTimestamp(match.timestamp),
-                                                          time: hour))
+                                                          time: hour,
+                                                          teams: data.teams))
                         self.matchStats = self.matchStats.sorted(by: {
                             $0.date > $1.date
                         })

@@ -146,16 +146,25 @@ struct Participant: Codable{
 struct Team: Codable{
     var teamId: Int
     var win: String
+    var baronKills: Int
+    var dragonKills: Int
+    var towerKills: Int
     
     enum TeamCodingKeys: String, CodingKey{
         case teamId
         case win
+        case baronKills
+        case dragonKills
+        case towerKills
     }
     
     init(from decoder: Decoder) throws{
         let container = try decoder.container(keyedBy: TeamCodingKeys.self)
         self.teamId = try container.decode(Int.self, forKey: TeamCodingKeys.teamId)
         self.win = try container.decode(String.self, forKey: TeamCodingKeys.win)
+        self.baronKills = try container.decode(Int.self, forKey: TeamCodingKeys.baronKills)
+        self.dragonKills = try container.decode(Int.self, forKey: TeamCodingKeys.dragonKills)
+        self.towerKills = try container.decode(Int.self, forKey: TeamCodingKeys.towerKills)
     }
 }
 

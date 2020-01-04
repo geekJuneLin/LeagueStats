@@ -125,6 +125,9 @@ extension MatchStatsViewController: UICollectionViewDelegateFlowLayout{
         if indexPath.item == 0{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: titleCellId, for: indexPath) as! MatchTitleCell
             cell.winState = indexPath.section == 0 ? win! : win! == "W" ? "L" : "W"
+            
+            cell.matchTitleCellModel = MatchTitleCellModel(teams: matchStats!.teams, participants: matchStats!.participants)
+            
             return cell
         }
         
@@ -133,7 +136,6 @@ extension MatchStatsViewController: UICollectionViewDelegateFlowLayout{
         cell.backgroundColor = .white
 
         if indexPath.section == 0 && indexPath.item > 0 && indexPath.item < 6{
-            print("WIN STATUS: \(win!)")
             if win! == "W"{
                 if matchStats.participants[0].stats.win{
                     cell.matchStatsCellModel = getMatchStatsCellModel(indexPath.item - 1)

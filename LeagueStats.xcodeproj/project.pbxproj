@@ -22,6 +22,7 @@
 		8E40CA7823933F8700848F42 /* StatsTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40CA7723933F8700848F42 /* StatsTopView.swift */; };
 		8E52CD692396030700F8178B /* TierModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E52CD682396030700F8178B /* TierModel.swift */; };
 		8E55AB3A23AF34A4007632F6 /* MatchDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E55AB3923AF34A4007632F6 /* MatchDetail.swift */; };
+		8E626C5523C147C200CC3F29 /* MatchTitleCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E626C5423C147C200CC3F29 /* MatchTitleCellModel.swift */; };
 		8E6FAD4723ADC8C10031EE0B /* MatchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6FAD4623ADC8C10031EE0B /* MatchList.swift */; };
 		8E70F4D92391ECB3005847E3 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E70F4D82391ECB3005847E3 /* CardView.swift */; };
 		8E70F4DB23920AA0005847E3 /* StatsViewNaviController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E70F4DA23920AA0005847E3 /* StatsViewNaviController.swift */; };
@@ -78,6 +79,7 @@
 		8E40CA7723933F8700848F42 /* StatsTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTopView.swift; sourceTree = "<group>"; };
 		8E52CD682396030700F8178B /* TierModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierModel.swift; sourceTree = "<group>"; };
 		8E55AB3923AF34A4007632F6 /* MatchDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetail.swift; sourceTree = "<group>"; };
+		8E626C5423C147C200CC3F29 /* MatchTitleCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTitleCellModel.swift; sourceTree = "<group>"; };
 		8E6FAD4623ADC8C10031EE0B /* MatchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchList.swift; sourceTree = "<group>"; };
 		8E70F4D82391ECB3005847E3 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		8E70F4DA23920AA0005847E3 /* StatsViewNaviController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewNaviController.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				8E2FE60B23989460000117A7 /* SummonerInfoModel.swift */,
 				8E9C505B23B99B47005473F3 /* MatchStats.swift */,
 				8E35F91C23C0042B006143B0 /* MatchStatsCellModel.swift */,
+				8E626C5423C147C200CC3F29 /* MatchTitleCellModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 				8E52CD692396030700F8178B /* TierModel.swift in Sources */,
 				8EAE89D62395360A003D32B3 /* StatusView.swift in Sources */,
 				8E2FE6132398E23B000117A7 /* EnlargeTransitioning.swift in Sources */,
+				8E626C5523C147C200CC3F29 /* MatchTitleCellModel.swift in Sources */,
 				8EB3D1382390A75D00B6755B /* ClientAPI.swift in Sources */,
 				8E2FE60C23989460000117A7 /* SummonerInfoModel.swift in Sources */,
 				8EB3D13D2390C1FB00B6755B /* GUI.swift in Sources */,

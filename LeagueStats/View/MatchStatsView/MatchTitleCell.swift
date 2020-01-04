@@ -9,6 +9,71 @@
 import UIKit
 
 class MatchTitleCell: UICollectionViewCell{
+    
+    var matchTitleCellModel: MatchTitleCellModel!{
+        didSet{
+            
+            if let win = winState{
+                if win == "W"{
+                    if matchTitleCellModel.teams[0].win == "Fail"{
+                        dragonCount.text = "\(matchTitleCellModel.teams[1].baronKills)"
+                        baronCount.text = "\(matchTitleCellModel.teams[1].dragonKills)"
+                        towerCount.text = "\(matchTitleCellModel.teams[1].towerKills)"
+                    }else{
+                        dragonCount.text = "\(matchTitleCellModel.teams[0].baronKills)"
+                        baronCount.text = "\(matchTitleCellModel.teams[0].dragonKills)"
+                        towerCount.text = "\(matchTitleCellModel.teams[0].towerKills)"
+                    }
+                }else{
+                    if matchTitleCellModel.teams[0].win == "Fail"{
+                        dragonCount.text = "\(matchTitleCellModel.teams[0].baronKills)"
+                        baronCount.text = "\(matchTitleCellModel.teams[0].dragonKills)"
+                        towerCount.text = "\(matchTitleCellModel.teams[0].towerKills)"
+                    }else{
+                        dragonCount.text = "\(matchTitleCellModel.teams[1].baronKills)"
+                        baronCount.text = "\(matchTitleCellModel.teams[1].dragonKills)"
+                        towerCount.text = "\(matchTitleCellModel.teams[1].towerKills)"
+                    }
+                }
+            }
+            
+            if let win = winState{
+                var kills: Int = 0, deaths: Int = 0, assists: Int = 0
+                if win == "W"{
+                    if matchTitleCellModel.participants[0].stats.win{
+                        for i in 0..<5{
+                            kills += matchTitleCellModel.participants[i].stats.kills
+                            deaths += matchTitleCellModel.participants[i].stats.deaths
+                            assists += matchTitleCellModel.participants[i].stats.assists
+                        }
+                    }else{
+                        for i in 5..<10{
+                            kills += matchTitleCellModel.participants[i].stats.kills
+                            deaths += matchTitleCellModel.participants[i].stats.deaths
+                            assists += matchTitleCellModel.participants[i].stats.assists
+                        }
+                    }
+                    statsLabel.attributedText = "\(kills) / \(deaths) / \(assists)".setColor(["\(deaths)"], .lossColor)
+                }else{
+                    if matchTitleCellModel.participants[0].stats.win{
+                        for i in 5..<10{
+                            kills += matchTitleCellModel.participants[i].stats.kills
+                            deaths += matchTitleCellModel.participants[i].stats.deaths
+                            assists += matchTitleCellModel.participants[i].stats.assists
+                        }
+                    }else{
+                        for i in 0..<5{
+                            kills += matchTitleCellModel.participants[i].stats.kills
+                            deaths += matchTitleCellModel.participants[i].stats.deaths
+                            assists += matchTitleCellModel.participants[i].stats.assists
+                        }
+                    }
+                    statsLabel.attributedText = "\(kills) / \(deaths) / \(assists)".setColor(["\(deaths)"], .lossColor)
+                }
+            }
+        }
+    }
+    
     var winState: String?{
         didSet{
             if let state = winState {
@@ -25,7 +90,6 @@ class MatchTitleCell: UICollectionViewCell{
                     baronImg.image = UIImage(named: "baron-blue")
                     towerImg.image = UIImage(named: "tower-blue")
                 }
-                statsLabel.attributedText = "24 / 38 / 27".setColor(["38"], .lossColor)
             }
         }
     }
