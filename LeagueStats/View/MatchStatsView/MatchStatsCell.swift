@@ -36,7 +36,7 @@ class MatchStatsCell: UICollectionViewCell{
             itemSix.loadImgWithUrl(uri_origin + "item/\(matchStatsCellModel.participants.stats.item5)" + ".png")
             itemSeven.loadImgWithUrl(uri_origin + "item/\(matchStatsCellModel.participants.stats.item6)" + ".png")
             
-            minionsGoldLabel.text = "\(matchStatsCellModel.participants.stats.totalMinionsKilled + matchStatsCellModel.participants.stats.neutralMinionsKilled)(4.4) / 8.3k"
+            minionsGoldLabel.text = "\(matchStatsCellModel.participants.stats.totalMinionsKilled + matchStatsCellModel.participants.stats.neutralMinionsKilled)(\(String(format: "%.1f", Double((matchStatsCellModel.participants.stats.totalMinionsKilled + matchStatsCellModel.participants.stats.neutralMinionsKilled) / matchStatsCellModel.time)))) /  \(String(format: "%.1f", Double(matchStatsCellModel.participants.stats.goldEarned / 1000)))k"
             
             damageBar.dmgLabel.text = "\(matchStatsCellModel.participants.stats.totalDamageDealtToChampions)"
         }

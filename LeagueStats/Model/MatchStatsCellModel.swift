@@ -11,4 +11,5 @@ import Foundation
 struct MatchStatsCellModel{
     var participantIds: ParticipantId
     var participants: Participant
+    var time: Int
 }

@@ -79,7 +79,7 @@ extension MatchStatsViewController{
     }
     
     fileprivate func getMatchStatsCellModel(_ index: Int) -> MatchStatsCellModel{
-        return MatchStatsCellModel(participantIds: matchStats!.participantIDs[index], participants: matchStats!.participants[index])
+        return MatchStatsCellModel(participantIds: matchStats!.participantIDs[index], participants: matchStats!.participants[index], time: matchStats!.time)
     }
 }
 

@@ -14,9 +14,6 @@ class StatsViewCell: UICollectionViewCell{
     
     var matchStats: MatchStats! {
         didSet{
-            for i in 0..<matchStats.participantIDs.count{
-//                print("Participants name: \(matchStats.participantIDs[i].player.name) \n ID: \(matchStats.participants[i].participantId) \n Stats: \(matchStats.participants[i].stats)")
-            }
         }
     }
     

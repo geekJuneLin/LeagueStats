@@ -162,7 +162,10 @@ extension StatsMainViewController{
                             self.participantIds.append(data.participandIds[i])
                             self.participants.append(data.participants[i])
                         }
-                        self.matchStats.append(MatchStats(participantIDs: self.participantIds, participants: self.participants, date: self.getDateFromTimestamp(match.timestamp)))
+                        self.matchStats.append(MatchStats(participantIDs: self.participantIds,
+                                                          participants: self.participants,
+                                                          date: self.getDateFromTimestamp(match.timestamp),
+                                                          time: hour))
                         self.matchStats = self.matchStats.sorted(by: {
                             $0.date > $1.date
                         })
@@ -180,7 +183,8 @@ extension StatsMainViewController{
                             }
                         })
                         if let stat = st {
-                            self.statsViewCellModel.append(StatsViewCellModel(StatusModel(stats: stat, time: "\(hour):\(mins)",
+                            self.statsViewCellModel.append(StatsViewCellModel(StatusModel(stats: stat,
+                                                                                          time: "\(hour):\(mins)",
                                 totalKill: totalKill,
                                 spell1Id: parti!.spell1Id,
                                 spell2Id: parti!.spell2Id,

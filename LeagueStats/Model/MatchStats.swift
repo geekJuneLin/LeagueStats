@@ -12,4 +12,5 @@ struct MatchStats{
     var participantIDs: [ParticipantId]
     var participants: [Participant]
     var date: String
+    var time: Int
 }

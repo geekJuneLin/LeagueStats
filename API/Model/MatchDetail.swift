@@ -60,6 +60,7 @@ struct Stats: Codable{
     var perkPrimaryStyle: Int
     var perkSubStyle: Int
     var champLevel: Int
+    var goldEarned: Int
     
     enum StatsCodingKeys: String, CodingKey{
         case win
@@ -84,6 +85,7 @@ struct Stats: Codable{
         case perkPrimaryStyle
         case perkSubStyle
         case champLevel
+        case goldEarned
     }
     
     init(from decoder: Decoder) throws {
@@ -110,6 +112,7 @@ struct Stats: Codable{
         self.perkPrimaryStyle =  try container.decode(Int.self, forKey: StatsCodingKeys.perkPrimaryStyle)
         self.perkSubStyle =  try container.decode(Int.self, forKey: StatsCodingKeys.perkSubStyle)
         self.champLevel =  try container.decode(Int.self, forKey: StatsCodingKeys.champLevel)
+        self.goldEarned = try container.decode(Int.self, forKey: StatsCodingKeys.goldEarned)
     }
 }
 
