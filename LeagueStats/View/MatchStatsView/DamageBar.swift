@@ -8,7 +8,19 @@
 
 import UIKit
 
+struct Damages{
+    var dmageDealt: Int
+    var maxDamage: Int
+}
+
 class DamageBar: UIView{
+    
+    var damages: Damages?{
+        didSet{
+            dmgView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: CGFloat(Double(damages!.dmageDealt) / Double(damages!.maxDamage))).isActive = true
+            dmgView.updateConstraints()
+        }
+    }
     
     let dmgView: UIView = {
        let view = UIView()
@@ -40,7 +52,7 @@ class DamageBar: UIView{
     
     fileprivate func setUpViews(){
         addSubview(dmgView)
-        dmgView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        dmgView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         dmgView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
         
         addSubview(dmgLabel)

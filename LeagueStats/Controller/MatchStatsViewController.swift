@@ -17,6 +17,8 @@ class MatchStatsViewController: UICollectionViewController{
     
     var showWinTitle = false
     
+    fileprivate var maxDamage: Int = 0
+    
     var matchStats: MatchStats!{
         didSet{
             print("Got the match stats in MatchStatsViewController \(matchStats.participantIDs.count)")
@@ -79,7 +81,9 @@ extension MatchStatsViewController{
     }
     
     fileprivate func getMatchStatsCellModel(_ index: Int) -> MatchStatsCellModel{
-        return MatchStatsCellModel(participantIds: matchStats!.participantIDs[index], participants: matchStats!.participants[index], time: matchStats!.time)
+        maxDamage = matchStats!.participants.map{ $0.stats.totalDamageDealtToChampions }.max()!
+        
+        return MatchStatsCellModel(participantIds: matchStats!.participantIDs[index], participants: matchStats!.participants[index], time: matchStats!.time, maxDamage: maxDamage)
     }
 }
 

@@ -49,7 +49,7 @@ struct Stats: Codable{
     var assists: Int
     var neutralMinionsKilled: Int
     var totalMinionsKilled:  Int
-    var totalDamageDealtToChampions: Int32
+    var totalDamageDealtToChampions: Int
     var item0: Int
     var item1: Int
     var item2: Int
@@ -101,7 +101,7 @@ struct Stats: Codable{
         self.assists =  try container.decode(Int.self, forKey: StatsCodingKeys.assists)
         self.neutralMinionsKilled =  try container.decode(Int.self, forKey: StatsCodingKeys.neutralMinionsKilled)
         self.totalMinionsKilled =  try container.decode(Int.self, forKey: StatsCodingKeys.totalMinionsKilled)
-        self.totalDamageDealtToChampions =  try container.decode(Int32.self, forKey: StatsCodingKeys.totalDamageDealtToChampions)
+        self.totalDamageDealtToChampions =  try container.decode(Int.self, forKey: StatsCodingKeys.totalDamageDealtToChampions)
         self.item0 =  try container.decode(Int.self, forKey: StatsCodingKeys.item0)
         self.item1 =  try container.decode(Int.self, forKey: StatsCodingKeys.item1)
         self.item2 =  try container.decode(Int.self, forKey: StatsCodingKeys.item2)

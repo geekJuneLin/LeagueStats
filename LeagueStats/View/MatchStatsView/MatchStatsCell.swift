@@ -38,6 +38,7 @@ class MatchStatsCell: UICollectionViewCell{
             
             minionsGoldLabel.text = "\(matchStatsCellModel.participants.stats.totalMinionsKilled + matchStatsCellModel.participants.stats.neutralMinionsKilled)(\(String(format: "%.1f", Double((matchStatsCellModel.participants.stats.totalMinionsKilled + matchStatsCellModel.participants.stats.neutralMinionsKilled) / matchStatsCellModel.time)))) /  \(String(format: "%.1f", Double(matchStatsCellModel.participants.stats.goldEarned / 1000)))k"
             
+            damageBar.damages = Damages(dmageDealt: matchStatsCellModel.participants.stats.totalDamageDealtToChampions, maxDamage: matchStatsCellModel.maxDamage)
             damageBar.dmgLabel.text = "\(matchStatsCellModel.participants.stats.totalDamageDealtToChampions)"
         }
     }
