@@ -29,10 +29,10 @@ class ViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        cardView.showAnimatedGradientSkeleton()
+        cardView.showAnimatedSkeleton()
         
         // API Test
-        ClientAPI.shard.setApiKey("RGAPI-ff0cb84b-a76b-4a11-b03b-17f253bb7277")
+        ClientAPI.shard.setApiKey("RGAPI-6cb250d5-5460-418b-a43c-e600c6c10e87")
         ClientAPI.shard.getSummonerByName(value: "0x73002")
         setUpViews()
     }
@@ -68,9 +68,9 @@ class ViewController: UIViewController{
     }
     
     fileprivate func loadImg(){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.cardView.avator.loadImgWithUrl("https://avatar.leagueoflegends.com/oce/0x73002.png")
-            self.cardView.hideSkeleton(reloadDataAfter: false, transition: .crossDissolve(1))
+            self.cardView.hideSkeleton()
         }
     }
 }

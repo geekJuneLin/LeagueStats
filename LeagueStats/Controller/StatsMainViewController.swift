@@ -21,6 +21,10 @@ class StatsMainViewController: UICollectionViewController{
     
     var matchList: MatchList?
     
+    var participantIds: [ParticipantId] = [ParticipantId]()
+    var participants: [Participant] = [Participant]()
+    var matchStats: [MatchStats] = [MatchStats]()
+    
     let imageView: UIView = {
         let view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: 10, height: 10)
@@ -153,7 +157,19 @@ extension StatsMainViewController{
                         var totalKill: Int = 0
                         var parti: Participant?
                         
-                        // pack all the summoners' info here
+                        // pack all summoners'info here
+                        for i in 0..<data.participandIds.count{
+                            self.participantIds.append(data.participandIds[i])
+                            self.participants.append(data.participants[i])
+                        }
+                        self.matchStats.append(MatchStats(participantIDs: self.participantIds, participants: self.participants, date: self.getDateFromTimestamp(match.timestamp)))
+                        self.matchStats = self.matchStats.sorted(by: {
+                            $0.date > $1.date
+                        })
+                        self.participantIds.removeAll()
+                        self.participants.removeAll()
+                        
+                    
                         data.participants.forEach({ (participant) in
                             if participant.participantId == participantId{
                                 st = participant.stats
@@ -220,6 +236,7 @@ extension StatsMainViewController{
         cell.backgroundColor = .white
         if indexPath.item < statsViewCellModel.count{
             cell.statsViewCellModel = statsViewCellModel[indexPath.item]
+            cell.matchStats = matchStats[indexPath.item]
         }
         return cell
     }
@@ -303,7 +320,7 @@ extension StatsMainViewController: UICollectionViewDelegateFlowLayout{
     // collectionView didSelectItem method
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("clicked the \(indexPath.item) cell")
-        self.presentMatchView(statsViewCellModel[indexPath.item].win)
+        self.presentMatchView(statsViewCellModel[indexPath.item].win, matchStats[indexPath.item])
     }
 }
 
@@ -312,14 +329,15 @@ extension StatsMainViewController: cellDelegate{
     
     /// present the match details of each game in a collectionViewController
     /// - Parameter win: the win state of each match to be displayed in the collectionViewController
-    func presentMatchView(_ win: String) {
+    func presentMatchView(_ win: String, _ matchStats: MatchStats) {
         let matchViewController = MatchStatsViewController(collectionViewLayout: UICollectionViewFlowLayout())
         let naviController = UINavigationController(rootViewController: matchViewController)
         matchViewController.win = win
+        matchViewController.matchStats = matchStats
         present(naviController, animated: true, completion: nil)
     }
 }
 
 protocol cellDelegate {
-    func presentMatchView(_ win: String)
+    func presentMatchView(_ win: String, _ matchStats: MatchStats)
 }

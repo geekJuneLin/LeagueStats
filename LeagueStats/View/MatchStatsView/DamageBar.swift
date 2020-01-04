@@ -20,6 +20,7 @@ class DamageBar: UIView{
     let dmgLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 10)
+        label.textColor = .black
         label.text = "7,470"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

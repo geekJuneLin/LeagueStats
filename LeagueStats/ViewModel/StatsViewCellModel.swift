@@ -57,7 +57,7 @@ extension StatsViewCellModel{
     
     /// get the spell name in terms of the spell id got from API
     /// - Parameter id: id of the spell
-    fileprivate static func getSpellName(_ id: Int) -> String{
+    public static func getSpellName(_ id: Int) -> String{
         var str = ""
         SummonerSpell.spellMap.forEach { (spell) in
             if spell.id == id{

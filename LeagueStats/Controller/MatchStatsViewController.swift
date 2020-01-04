@@ -17,6 +17,12 @@ class MatchStatsViewController: UICollectionViewController{
     
     var showWinTitle = false
     
+    var matchStats: MatchStats!{
+        didSet{
+            print("Got the match stats in MatchStatsViewController \(matchStats.participantIDs.count)")
+        }
+    }
+    
     var win: String?{
         didSet{
             if let win = win {
@@ -71,6 +77,10 @@ extension MatchStatsViewController{
             // Fallback on earlier versions
         }
     }
+    
+    fileprivate func getMatchStatsCellModel(_ index: Int) -> MatchStatsCellModel{
+        return MatchStatsCellModel(participantIds: matchStats!.participantIDs[index], participants: matchStats!.participants[index])
+    }
 }
 
 // MARK: - data source delegte
@@ -113,8 +123,43 @@ extension MatchStatsViewController: UICollectionViewDelegateFlowLayout{
             cell.winState = indexPath.section == 0 ? win! : win! == "W" ? "L" : "W"
             return cell
         }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        
+        // cell for each participant
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MatchStatsCell
         cell.backgroundColor = .white
+
+        if indexPath.section == 0 && indexPath.item > 0 && indexPath.item < 6{
+            print("WIN STATUS: \(win!)")
+            if win! == "W"{
+                if matchStats.participants[0].stats.win{
+                    cell.matchStatsCellModel = getMatchStatsCellModel(indexPath.item - 1)
+                }else{
+                    cell.matchStatsCellModel = getMatchStatsCellModel(indexPath.item + 4)
+                }
+            }else{
+                if !matchStats.participants[0].stats.win{
+                    cell.matchStatsCellModel = getMatchStatsCellModel(indexPath.item - 1)
+                }else{
+                    cell.matchStatsCellModel = getMatchStatsCellModel(indexPath.item + 4)
+                }
+            }
+        }
+        if indexPath.section == 1{
+            if win! == "W"{
+                if matchStats.participants[0].stats.win{
+                    cell.matchStatsCellModel = getMatchStatsCellModel(indexPath.item + 4)
+                }else{
+                    cell.matchStatsCellModel = getMatchStatsCellModel(indexPath.item - 1)
+                }
+            }else{
+                if !matchStats.participants[0].stats.win{
+                    cell.matchStatsCellModel = getMatchStatsCellModel(indexPath.item + 4)
+                }else{
+                    cell.matchStatsCellModel = getMatchStatsCellModel(indexPath.item - 1)
+                }
+            }
+        }
+
         return cell
     }
     

@@ -12,6 +12,14 @@ class StatsViewCell: UICollectionViewCell{
     
     let uri_origin = "https://ddragon.leagueoflegends.com/cdn/9.24.2/img/"
     
+    var matchStats: MatchStats! {
+        didSet{
+            for i in 0..<matchStats.participantIDs.count{
+//                print("Participants name: \(matchStats.participantIDs[i].player.name) \n ID: \(matchStats.participants[i].participantId) \n Stats: \(matchStats.participants[i].stats)")
+            }
+        }
+    }
+    
     var statsViewCellModel: StatsViewCellModel!{
         didSet{
             statusView.statusLabel.text = statsViewCellModel.win
