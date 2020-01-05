@@ -139,30 +139,30 @@ extension MatchStatsViewController: UICollectionViewDelegateFlowLayout{
         if indexPath.section == 0 && indexPath.item > 0 && indexPath.item < 6{
             if win! == "W"{
                 if matchStats.participants[0].stats.win{
-                    cell.matchStatsCellModel = getMatchStatsCellModel(indexPath.item - 1)
+                    cell.matchStatsCellViewModel = MatchStatsCellViewModel(getMatchStatsCellModel(indexPath.item - 1))
                 }else{
-                    cell.matchStatsCellModel = getMatchStatsCellModel(indexPath.item + 4)
+                    cell.matchStatsCellViewModel = MatchStatsCellViewModel(getMatchStatsCellModel(indexPath.item + 4))
                 }
             }else{
                 if !matchStats.participants[0].stats.win{
-                    cell.matchStatsCellModel = getMatchStatsCellModel(indexPath.item - 1)
+                    cell.matchStatsCellViewModel = MatchStatsCellViewModel(getMatchStatsCellModel(indexPath.item - 1))
                 }else{
-                    cell.matchStatsCellModel = getMatchStatsCellModel(indexPath.item + 4)
+                    cell.matchStatsCellViewModel = MatchStatsCellViewModel(getMatchStatsCellModel(indexPath.item + 4))
                 }
             }
         }
         if indexPath.section == 1{
             if win! == "W"{
                 if matchStats.participants[0].stats.win{
-                    cell.matchStatsCellModel = getMatchStatsCellModel(indexPath.item + 4)
+                    cell.matchStatsCellViewModel = MatchStatsCellViewModel(getMatchStatsCellModel(indexPath.item + 4))
                 }else{
-                    cell.matchStatsCellModel = getMatchStatsCellModel(indexPath.item - 1)
+                    cell.matchStatsCellViewModel = MatchStatsCellViewModel(getMatchStatsCellModel(indexPath.item - 1))
                 }
             }else{
                 if !matchStats.participants[0].stats.win{
-                    cell.matchStatsCellModel = getMatchStatsCellModel(indexPath.item + 4)
+                    cell.matchStatsCellViewModel = MatchStatsCellViewModel(getMatchStatsCellModel(indexPath.item + 4))
                 }else{
-                    cell.matchStatsCellModel = getMatchStatsCellModel(indexPath.item - 1)
+                    cell.matchStatsCellViewModel = MatchStatsCellViewModel(getMatchStatsCellModel(indexPath.item - 1))
                 }
             }
         }
