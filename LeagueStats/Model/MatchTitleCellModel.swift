@@ -11,4 +11,5 @@ import Foundation
 struct MatchTitleCellModel{
     var teams: [Team]
     var participants: [Participant]
+    var win: String
 }

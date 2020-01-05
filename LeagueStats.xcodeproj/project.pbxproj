@@ -23,6 +23,7 @@
 		8E52CD692396030700F8178B /* TierModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E52CD682396030700F8178B /* TierModel.swift */; };
 		8E55AB3A23AF34A4007632F6 /* MatchDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E55AB3923AF34A4007632F6 /* MatchDetail.swift */; };
 		8E626C5523C147C200CC3F29 /* MatchTitleCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E626C5423C147C200CC3F29 /* MatchTitleCellModel.swift */; };
+		8E626C5723C1594800CC3F29 /* MatchTitleCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E626C5623C1594800CC3F29 /* MatchTitleCellViewModel.swift */; };
 		8E6FAD4723ADC8C10031EE0B /* MatchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6FAD4623ADC8C10031EE0B /* MatchList.swift */; };
 		8E70F4D92391ECB3005847E3 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E70F4D82391ECB3005847E3 /* CardView.swift */; };
 		8E70F4DB23920AA0005847E3 /* StatsViewNaviController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E70F4DA23920AA0005847E3 /* StatsViewNaviController.swift */; };
@@ -80,6 +81,7 @@
 		8E52CD682396030700F8178B /* TierModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierModel.swift; sourceTree = "<group>"; };
 		8E55AB3923AF34A4007632F6 /* MatchDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetail.swift; sourceTree = "<group>"; };
 		8E626C5423C147C200CC3F29 /* MatchTitleCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTitleCellModel.swift; sourceTree = "<group>"; };
+		8E626C5623C1594800CC3F29 /* MatchTitleCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTitleCellViewModel.swift; sourceTree = "<group>"; };
 		8E6FAD4623ADC8C10031EE0B /* MatchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchList.swift; sourceTree = "<group>"; };
 		8E70F4D82391ECB3005847E3 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		8E70F4DA23920AA0005847E3 /* StatsViewNaviController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewNaviController.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 			children = (
 				8EF159AE23BEE23800632CA3 /* StatsViewCellModel.swift */,
 				8EF159B023BEED5A00632CA3 /* TierViewCellModel.swift */,
+				8E626C5623C1594800CC3F29 /* MatchTitleCellViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 				8ED27256239746CA00125B66 /* StatusModel.swift in Sources */,
 				8E52CD692396030700F8178B /* TierModel.swift in Sources */,
 				8EAE89D62395360A003D32B3 /* StatusView.swift in Sources */,
+				8E626C5723C1594800CC3F29 /* MatchTitleCellViewModel.swift in Sources */,
 				8E2FE6132398E23B000117A7 /* EnlargeTransitioning.swift in Sources */,
 				8E626C5523C147C200CC3F29 /* MatchTitleCellModel.swift in Sources */,
 				8EB3D1382390A75D00B6755B /* ClientAPI.swift in Sources */,

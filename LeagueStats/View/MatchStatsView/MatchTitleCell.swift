@@ -10,87 +10,17 @@ import UIKit
 
 class MatchTitleCell: UICollectionViewCell{
     
-    var matchTitleCellModel: MatchTitleCellModel!{
+    var matchTitleCellViewModel: MatchTitleCellViewModel!{
         didSet{
-            
-            if let win = winState{
-                if win == "W"{
-                    if matchTitleCellModel.teams[0].win == "Fail"{
-                        dragonCount.text = "\(matchTitleCellModel.teams[1].baronKills)"
-                        baronCount.text = "\(matchTitleCellModel.teams[1].dragonKills)"
-                        towerCount.text = "\(matchTitleCellModel.teams[1].towerKills)"
-                    }else{
-                        dragonCount.text = "\(matchTitleCellModel.teams[0].baronKills)"
-                        baronCount.text = "\(matchTitleCellModel.teams[0].dragonKills)"
-                        towerCount.text = "\(matchTitleCellModel.teams[0].towerKills)"
-                    }
-                }else{
-                    if matchTitleCellModel.teams[0].win == "Fail"{
-                        dragonCount.text = "\(matchTitleCellModel.teams[0].baronKills)"
-                        baronCount.text = "\(matchTitleCellModel.teams[0].dragonKills)"
-                        towerCount.text = "\(matchTitleCellModel.teams[0].towerKills)"
-                    }else{
-                        dragonCount.text = "\(matchTitleCellModel.teams[1].baronKills)"
-                        baronCount.text = "\(matchTitleCellModel.teams[1].dragonKills)"
-                        towerCount.text = "\(matchTitleCellModel.teams[1].towerKills)"
-                    }
-                }
-            }
-            
-            if let win = winState{
-                var kills: Int = 0, deaths: Int = 0, assists: Int = 0
-                if win == "W"{
-                    if matchTitleCellModel.participants[0].stats.win{
-                        for i in 0..<5{
-                            kills += matchTitleCellModel.participants[i].stats.kills
-                            deaths += matchTitleCellModel.participants[i].stats.deaths
-                            assists += matchTitleCellModel.participants[i].stats.assists
-                        }
-                    }else{
-                        for i in 5..<10{
-                            kills += matchTitleCellModel.participants[i].stats.kills
-                            deaths += matchTitleCellModel.participants[i].stats.deaths
-                            assists += matchTitleCellModel.participants[i].stats.assists
-                        }
-                    }
-                    statsLabel.attributedText = "\(kills) / \(deaths) / \(assists)".setColor(["\(deaths)"], .lossColor)
-                }else{
-                    if matchTitleCellModel.participants[0].stats.win{
-                        for i in 5..<10{
-                            kills += matchTitleCellModel.participants[i].stats.kills
-                            deaths += matchTitleCellModel.participants[i].stats.deaths
-                            assists += matchTitleCellModel.participants[i].stats.assists
-                        }
-                    }else{
-                        for i in 0..<5{
-                            kills += matchTitleCellModel.participants[i].stats.kills
-                            deaths += matchTitleCellModel.participants[i].stats.deaths
-                            assists += matchTitleCellModel.participants[i].stats.assists
-                        }
-                    }
-                    statsLabel.attributedText = "\(kills) / \(deaths) / \(assists)".setColor(["\(deaths)"], .lossColor)
-                }
-            }
-        }
-    }
-    
-    var winState: String?{
-        didSet{
-            if let state = winState {
-                if state == "L"{
-                    backgroundColor = .lossTitleColor
-                    win.attributedText = "Loss (Red)".setColor(["(Red)"], .gray)
-                    dragonImg.image = UIImage(named: "dragon-red")
-                    baronImg.image = UIImage(named: "baron-red")
-                    towerImg.image = UIImage(named: "tower-red")
-                }else{
-                    backgroundColor = .winTitleColor
-                    win.attributedText = "Win (Blue)".setColor(["(Blue)"], .gray)
-                    dragonImg.image = UIImage(named: "dragon-blue")
-                    baronImg.image = UIImage(named: "baron-blue")
-                    towerImg.image = UIImage(named: "tower-blue")
-                }
-            }
+            backgroundColor = matchTitleCellViewModel.backgroundColor
+            win.attributedText = matchTitleCellViewModel.winState
+            dragonImg.image = matchTitleCellViewModel.dragonImg
+            baronImg.image = matchTitleCellViewModel.baronImg
+            towerImg.image = matchTitleCellViewModel.towerImg
+            baronCount.text = matchTitleCellViewModel.baronKills
+            dragonCount.text = matchTitleCellViewModel.dragonKills
+            towerCount.text = matchTitleCellViewModel.towerKills
+            statsLabel.attributedText = matchTitleCellViewModel.teamStats
         }
     }
     
