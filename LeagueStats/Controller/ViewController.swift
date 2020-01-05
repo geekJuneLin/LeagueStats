@@ -32,7 +32,7 @@ class ViewController: UIViewController{
         cardView.showAnimatedSkeleton()
         
         // API Test
-        ClientAPI.shard.setApiKey("RGAPI-6cb250d5-5460-418b-a43c-e600c6c10e87")
+        ClientAPI.shard.setApiKey("RGAPI-fbf64f7a-a3e8-47c0-b63d-b8f168cd1050")
         ClientAPI.shard.getSummonerByName(value: "0x73002")
         setUpViews()
     }
@@ -69,7 +69,7 @@ class ViewController: UIViewController{
     
     fileprivate func loadImg(){
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.cardView.avator.loadImgWithUrl("https://avatar.leagueoflegends.com/oce/0x73002.png")
+            self.cardView.avator.loadImgWithUrl("https://avatar.leagueoflegends.com/oce/0x73002.png", "0x73002.png")
             self.cardView.hideSkeleton()
         }
     }

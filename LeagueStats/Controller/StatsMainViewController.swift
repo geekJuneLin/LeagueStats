@@ -37,7 +37,7 @@ class StatsMainViewController: UICollectionViewController{
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.masksToBounds = true
         view.layer.cornerRadius = 20
-        view.loadImgWithUrl("https://avatar.leagueoflegends.com/oce/0x73002.png")
+        view.loadImgWithUrl("https://avatar.leagueoflegends.com/oce/0x73002.png", "0x73002.png")
         return view
     }()
 

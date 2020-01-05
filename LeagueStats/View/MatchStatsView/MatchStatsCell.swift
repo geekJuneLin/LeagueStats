@@ -14,59 +14,28 @@ class MatchStatsCell: UICollectionViewCell{
     
     var matchStatsCellViewModel: MatchStatsCellViewModel!{
         didSet{
+            // highlight the summoner being searched
             if matchStatsCellViewModel.summonerName == "0x73002"{
                 searchedInicator.backgroundColor = .searchedColor
                 backgroundColor = .searchedBackground
             }
             
-            champImg.loadImgWithUrl(uri_origin + "champion/\(matchStatsCellViewModel.champImg).png")
+            champImg.loadImgWithUrl(uri_origin + "champion/\(matchStatsCellViewModel.champImg).png", "\(matchStatsCellViewModel.champImg).png")
             levelLabel.text = matchStatsCellViewModel.champLevel
-            spellOne.loadImgWithUrl(uri_origin + "spell/\(matchStatsCellViewModel.spell1).png")
-            spellTwo.loadImgWithUrl(uri_origin + "spell/\(matchStatsCellViewModel.spell2).png")
+            spellOne.loadImgWithUrl(uri_origin + "spell/\(matchStatsCellViewModel.spell1).png", "\(matchStatsCellViewModel.spell1).png")
+            spellTwo.loadImgWithUrl(uri_origin + "spell/\(matchStatsCellViewModel.spell2).png", "\(matchStatsCellViewModel.spell2).png")
             summonerName.text = matchStatsCellViewModel.summonerName
             kdaLabel.attributedText = matchStatsCellViewModel.kdaLabel
-            itemOne.loadImgWithUrl(uri_origin + "item/\(matchStatsCellViewModel.item1).png")
-            itemTwo.loadImgWithUrl(uri_origin + "item/\(matchStatsCellViewModel.item2).png")
-            itemThree.loadImgWithUrl(uri_origin + "item/\(matchStatsCellViewModel.item3).png")
-            itemFour.loadImgWithUrl(uri_origin + "item/\(matchStatsCellViewModel.item4).png")
-            itemFive.loadImgWithUrl(uri_origin + "item/\(matchStatsCellViewModel.item5).png")
-            itemSix.loadImgWithUrl(uri_origin + "item/\(matchStatsCellViewModel.item6).png")
-            itemSeven.loadImgWithUrl(uri_origin + "item/\(matchStatsCellViewModel.item7).png")
+            itemOne.loadImgWithUrl(uri_origin + "item/\(matchStatsCellViewModel.item1).png", "\(matchStatsCellViewModel.item1).png")
+            itemTwo.loadImgWithUrl(uri_origin + "item/\(matchStatsCellViewModel.item2).png", "\(matchStatsCellViewModel.item2).png")
+            itemThree.loadImgWithUrl(uri_origin + "item/\(matchStatsCellViewModel.item3).png", "\(matchStatsCellViewModel.item3).png")
+            itemFour.loadImgWithUrl(uri_origin + "item/\(matchStatsCellViewModel.item4).png", "\(matchStatsCellViewModel.item4).png")
+            itemFive.loadImgWithUrl(uri_origin + "item/\(matchStatsCellViewModel.item5).png", "\(matchStatsCellViewModel.item5).png")
+            itemSix.loadImgWithUrl(uri_origin + "item/\(matchStatsCellViewModel.item6).png", "\(matchStatsCellViewModel.item6).png")
+            itemSeven.loadImgWithUrl(uri_origin + "item/\(matchStatsCellViewModel.item7).png", "\(matchStatsCellViewModel.item7).png")
             minionsGoldLabel.text = matchStatsCellViewModel.minionsGoldLabel
             damageBar.damages = matchStatsCellViewModel.dmage
             damageBar.dmgLabel.text = matchStatsCellViewModel.dmgLabel
-            
-//            print("Name: \(matchStatsCellModel.participantIds.player.name) \n Team ID: \(matchStatsCellModel.participants.teamId) \n Stats: \(matchStatsCellModel.participants.stats)")
-//
-//            if matchStatsCellModel.participantIds.player.name == "0x73002"{
-//                searchedInicator.backgroundColor = .searchedColor
-//                backgroundColor = .searchedBackground
-//            }
-//
-//            champImg.loadImgWithUrl(uri_origin + "champion/\(ClientAPI.shard.getChampNameById(matchStatsCellModel.participants.championId)).png")
-//
-//            levelLabel.text = "\(matchStatsCellModel.participants.stats.champLevel)"
-//
-//
-//            spellOne.loadImgWithUrl(uri_origin + "spell/\(StatsViewCellModel.getSpellName(matchStatsCellModel.participants.spell1Id)).png")
-//            spellTwo.loadImgWithUrl(uri_origin + "spell/\(StatsViewCellModel.getSpellName(matchStatsCellModel.participants.spell2Id)).png")
-//
-//            summonerName.text = matchStatsCellModel.participantIds.player.name
-//
-//            kdaLabel.attributedText = "\(matchStatsCellModel.participants.stats.kills) / \(matchStatsCellModel.participants.stats.deaths) / \(matchStatsCellModel.participants.stats.assists)".setColor(["\(matchStatsCellModel.participants.stats.deaths)"], .lossColor)
-//
-//            itemOne.loadImgWithUrl(uri_origin + "item/\(matchStatsCellModel.participants.stats.item0)" + ".png")
-//            itemTwo.loadImgWithUrl(uri_origin + "item/\(matchStatsCellModel.participants.stats.item1)" + ".png")
-//            itemThree.loadImgWithUrl(uri_origin + "item/\(matchStatsCellModel.participants.stats.item2)" + ".png")
-//            itemFour.loadImgWithUrl(uri_origin + "item/\(matchStatsCellModel.participants.stats.item3)" + ".png")
-//            itemFive.loadImgWithUrl(uri_origin + "item/\(matchStatsCellModel.participants.stats.item4)" + ".png")
-//            itemSix.loadImgWithUrl(uri_origin + "item/\(matchStatsCellModel.participants.stats.item5)" + ".png")
-//            itemSeven.loadImgWithUrl(uri_origin + "item/\(matchStatsCellModel.participants.stats.item6)" + ".png")
-//
-//            minionsGoldLabel.text = "\(matchStatsCellModel.participants.stats.totalMinionsKilled + matchStatsCellModel.participants.stats.neutralMinionsKilled)(\(String(format: "%.1f", Double((matchStatsCellModel.participants.stats.totalMinionsKilled + matchStatsCellModel.participants.stats.neutralMinionsKilled) / matchStatsCellModel.time)))) /  \(String(format: "%.1f", Double(matchStatsCellModel.participants.stats.goldEarned / 1000)))k"
-//
-//            damageBar.damages = Damages(dmageDealt: matchStatsCellModel.participants.stats.totalDamageDealtToChampions, maxDamage: matchStatsCellModel.maxDamage)
-//            damageBar.dmgLabel.text = "\(matchStatsCellModel.participants.stats.totalDamageDealtToChampions)"
         }
     }
     
@@ -283,7 +252,7 @@ class MatchStatsCell: UICollectionViewCell{
         spellOne.widthAnchor.constraint(equalToConstant: 18).isActive = true
         spellOne.heightAnchor.constraint(equalToConstant: 18).isActive = true
         spellOne.topAnchor.constraint(equalTo: champImg.topAnchor).isActive = true
-        spellOne.leftAnchor.constraint(equalTo: champImg.rightAnchor, constant: 2).isActive = true
+        spellOne.leftAnchor.constraint(equalTo: champImg.rightAnchor, constant: 4).isActive = true
         
         addSubview(spellTwo)
         spellTwo.widthAnchor.constraint(equalToConstant: 18).isActive = true

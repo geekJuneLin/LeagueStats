@@ -19,13 +19,13 @@ class StatsItemView: UIView{
     var images: [ItemImages]?{
         didSet{
             if let images = images {
-                firstItem.loadImgWithUrl(url_origin + "\(images[0].id)" + ".png")
-                secondItem.loadImgWithUrl(url_origin + "\(images[1].id)" + ".png")
-                thirdItem.loadImgWithUrl(url_origin + "\(images[2].id)" + ".png")
-                fourthItem.loadImgWithUrl(url_origin + "\(images[3].id)" + ".png")
-                fifthItem.loadImgWithUrl(url_origin + "\(images[4].id)" + ".png")
-                sixthItem.loadImgWithUrl(url_origin + "\(images[5].id)" + ".png")
-                seventhItem.loadImgWithUrl(url_origin + "\(images[6].id)" + ".png")
+                firstItem.loadImgWithUrl(url_origin + "\(images[0].id).png", "\(images[0].id).png")
+                secondItem.loadImgWithUrl(url_origin + "\(images[1].id).png", "\(images[1].id).png")
+                thirdItem.loadImgWithUrl(url_origin + "\(images[2].id).png", "\(images[2].id).png")
+                fourthItem.loadImgWithUrl(url_origin + "\(images[3].id).png", "\(images[3].id).png")
+                fifthItem.loadImgWithUrl(url_origin + "\(images[4].id).png", "\(images[4].id).png")
+                sixthItem.loadImgWithUrl(url_origin + "\(images[5].id).png", "\(images[5].id).png")
+                seventhItem.loadImgWithUrl(url_origin + "\(images[6].id).png", "\(images[6].id).png")
             }
         }
     }

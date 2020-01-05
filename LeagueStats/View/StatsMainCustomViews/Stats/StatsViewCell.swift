@@ -24,9 +24,9 @@ class StatsViewCell: UICollectionViewCell{
             statusView.timeLabel.text = statsViewCellModel.time
             KDALabel.attributedText = statsViewCellModel.kda
             KPLabel.text = statsViewCellModel.kp
-            champImg.loadImgWithUrl(uri_origin + "champion/\(statsViewCellModel.champName).png")
-            firstSpell.loadImgWithUrl(uri_origin + "spell/\(statsViewCellModel.spell1).png")
-            secondSpell.loadImgWithUrl(uri_origin + "spell/\(statsViewCellModel.spell2).png")
+            champImg.loadImgWithUrl(uri_origin + "champion/\(statsViewCellModel.champName).png", "\(statsViewCellModel.champName).png")
+            firstSpell.loadImgWithUrl(uri_origin + "spell/\(statsViewCellModel.spell1).png", "\(statsViewCellModel.spell1).png")
+            secondSpell.loadImgWithUrl(uri_origin + "spell/\(statsViewCellModel.spell2).png", "\(statsViewCellModel.spell2).png")
             itemView.images = statsViewCellModel.images
             gameTypeLabel.text = statsViewCellModel.gameType
             dateLabel.text = statsViewCellModel.gameDate
