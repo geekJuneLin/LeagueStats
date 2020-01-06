@@ -15,7 +15,7 @@ class MatchStatsCell: UICollectionViewCell{
     var matchStatsCellViewModel: MatchStatsCellViewModel!{
         didSet{
             // highlight the summoner being searched
-            if matchStatsCellViewModel.summonerName == "0x73002"{
+            if matchStatsCellViewModel.summonerName == ClientAPI.shard.getSummonerName(){
                 searchedInicator.backgroundColor = .searchedColor
                 backgroundColor = .searchedBackground
             }
@@ -26,6 +26,7 @@ class MatchStatsCell: UICollectionViewCell{
             spellTwo.loadImgWithUrl(uri_origin + "spell/\(matchStatsCellViewModel.spell2).png", "\(matchStatsCellViewModel.spell2).png")
             summonerName.text = matchStatsCellViewModel.summonerName
             kdaLabel.attributedText = matchStatsCellViewModel.kdaLabel
+            kdaRatio.text = matchStatsCellViewModel.kdaRatio
             itemOne.loadImgWithUrl(uri_origin + "item/\(matchStatsCellViewModel.item1).png", "\(matchStatsCellViewModel.item1).png")
             itemTwo.loadImgWithUrl(uri_origin + "item/\(matchStatsCellViewModel.item2).png", "\(matchStatsCellViewModel.item2).png")
             itemThree.loadImgWithUrl(uri_origin + "item/\(matchStatsCellViewModel.item3).png", "\(matchStatsCellViewModel.item3).png")
@@ -134,7 +135,7 @@ class MatchStatsCell: UICollectionViewCell{
     
     let kdaRatio: UILabel = {
        let label = UILabel()
-        label.text = "2.50:1"
+//        label.text = "2.50:1"
         label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 12)
         label.translatesAutoresizingMaskIntoConstraints = false

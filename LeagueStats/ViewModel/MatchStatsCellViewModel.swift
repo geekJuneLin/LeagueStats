@@ -14,6 +14,7 @@ struct MatchStatsCellViewModel{
     var spell1, spell2: String
     var summonerName: String
     var kdaLabel: NSAttributedString
+    var kdaRatio: String
     var item1, item2, item3, item4, item5, item6, item7: String
     var minionsGoldLabel: String
     var dmgLabel: String
@@ -36,5 +37,14 @@ struct MatchStatsCellViewModel{
         self.minionsGoldLabel = "\(model.participants.stats.totalMinionsKilled + model.participants.stats.neutralMinionsKilled)(\(String(format: "%.1f", Double((model.participants.stats.totalMinionsKilled + model.participants.stats.neutralMinionsKilled) / model.time)))) /  \(String(format: "%.1f", Double(model.participants.stats.goldEarned / 1000)))k"
         self.dmgLabel = "\(model.participants.stats.totalDamageDealtToChampions)"
         self.dmage = Damages(dmageDealt: model.participants.stats.totalDamageDealtToChampions, maxDamage: model.maxDamage)
+        
+        self.kdaRatio = MatchStatsCellViewModel.getKdaRatio(model)
+    }
+    
+    fileprivate static func getKdaRatio(_ model: MatchStatsCellModel) -> String{
+        let ka = Float(model.participants.stats.kills + model.participants.stats.assists)
+        let d = Float(model.participants.stats.deaths)
+        let kda = Float(ka / d == 0 ? 1 : d)
+        return "\(String(format: "%.2f", ceil(kda))):1"
     }
 }

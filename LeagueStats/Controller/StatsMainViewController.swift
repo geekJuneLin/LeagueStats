@@ -20,6 +20,7 @@ class StatsMainViewController: UICollectionViewController{
     var statsViewCellModel: [StatsViewCellModel] = [StatsViewCellModel]()
     
     var matchList: MatchList?
+    var summoner: SummonerInfo?
     
     var participantIds: [ParticipantId] = [ParticipantId]()
     var participants: [Participant] = [Participant]()
@@ -37,7 +38,7 @@ class StatsMainViewController: UICollectionViewController{
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.masksToBounds = true
         view.layer.cornerRadius = 20
-        view.loadImgWithUrl("https://avatar.leagueoflegends.com/oce/0x73002.png", "0x73002.png")
+        view.loadImgWithUrl("https://avatar.leagueoflegends.com/oce/\(ClientAPI.shard.getSummonerName()).png", "\(ClientAPI.shard.getSummonerName()).png")
         return view
     }()
 
@@ -65,6 +66,8 @@ class StatsMainViewController: UICollectionViewController{
                 self.matchList = matches
             }
         }
+        
+        self.summoner = ClientAPI.shard.getSummoner()
     }
     
     // MARK: - viewDidAppear
@@ -250,8 +253,12 @@ extension StatsMainViewController{
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader{
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId, for: indexPath) as! StatsTopView
-            let summonerInfo: SummonerInfoModel = SummonerInfoModel(name: "0x73002", level: 48, tier: "Silver 1", points: 38)
-            header.summonerInfo = summonerInfo
+            
+            if let summoner = summoner{
+                let summonerInfo: SummonerInfoModel = SummonerInfoModel(name: summoner.name, level: summoner.level, tier: "Silver 1", points: 38)
+                header.summonerInfo = summonerInfo
+            }
+            
             return header
         }
         let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footerId", for: indexPath) as! BottomRefresh

@@ -49,9 +49,6 @@ class ViewController: UIViewController{
         
         cardView.showAnimatedSkeleton()
         
-        // API Test
-        ClientAPI.shard.setApiKey("RGAPI-fbf64f7a-a3e8-47c0-b63d-b8f168cd1050")
-        ClientAPI.shard.getSummonerByName(value: "0x73002")
         setUpViews()
         
         // register UITapGestuer which can detect whether the users finish tapping in the UITextfield
@@ -98,9 +95,19 @@ extension ViewController{
         view.addGestureRecognizer(tapReconizer)
     }
     
+    fileprivate func getSummonerInfo(_ name: String){
+        ClientAPI.shard.getSummonerByName(value: name, completion: {
+            print("\(ClientAPI.shard.getSummoner())")
+        })
+    }
+    
     @objc
     fileprivate func handleDismissKeyBoard(){
         if isTapping{
+            if let name = nameText.text {
+                nameText.text = ""
+                getSummonerInfo(name)
+            }
             view.endEditing(true)
         }
     }
@@ -118,7 +125,7 @@ extension ViewController{
     
     fileprivate func loadImg(){
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.cardView.avator.loadImgWithUrl("https://avatar.leagueoflegends.com/oce/0x73002.png", "0x73002.png")
+            self.cardView.avator.loadImgWithUrl("https://avatar.leagueoflegends.com/oce/\(ClientAPI.shard.getSummonerName()).png", "\(ClientAPI.shard.getSummonerName()).png")
             self.cardView.hideSkeleton()
         }
     }

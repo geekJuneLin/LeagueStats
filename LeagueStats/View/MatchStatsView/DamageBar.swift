@@ -17,8 +17,8 @@ class DamageBar: UIView{
     
     var damages: Damages?{
         didSet{
-            dmgView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: CGFloat(Double(damages!.dmageDealt) / Double(damages!.maxDamage))).isActive = true
-            dmgView.updateConstraints()
+            self.dmgView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: CGFloat(Double(self.damages!.dmageDealt) / Double(self.damages!.maxDamage))).isActive = true
+            self.dmgView.updateConstraints()
         }
     }
     

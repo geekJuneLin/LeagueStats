@@ -26,7 +26,9 @@ class StatsTopView: UICollectionReusableView{
             if let point = summonerInfo?.points{
                 tierLabel.text?.append("(\(point)LP)")
             }
-            heroImg.loadImgWithUrl("https://avatar.leagueoflegends.com/oce/0x73002.png", "0x73002.png")
+            if let name = summonerInfo?.name{
+                heroImg.loadImgWithUrl("https://avatar.leagueoflegends.com/oce/\(name).png", "\(name).png")
+            }
         }
     }
     

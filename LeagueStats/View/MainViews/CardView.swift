@@ -10,6 +10,13 @@ import UIKit
 import SkeletonView
 
 class CardView: UIView{
+    
+    var summoner: SummonerInfo?{
+        didSet{
+            
+        }
+    }
+    
     let avator: UIImageView = {
        let view = UIImageView()
         view.isSkeletonable = true

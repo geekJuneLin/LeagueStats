@@ -124,9 +124,6 @@ extension MatchStatsViewController: UICollectionViewDelegateFlowLayout{
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.item == 0{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: titleCellId, for: indexPath) as! MatchTitleCell
-//            cell.winState = indexPath.section == 0 ? win! : win! == "W" ? "L" : "W"
-            
-//            cell.matchTitleCellModel = MatchTitleCellModel(teams: matchStats!.teams, participants: matchStats!.participants, win: indexPath.section == 0 ? win! : win! == "W" ? "L" : "W")
             cell.matchTitleCellViewModel = MatchTitleCellViewModel(MatchTitleCellModel(teams: matchStats!.teams, participants: matchStats!.participants, win: indexPath.section == 0 ? win! : win! == "W" ? "L" : "W"))
             
             return cell

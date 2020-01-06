@@ -14,6 +14,7 @@ class ClientAPI{
     private var name: String?
     private var accountId: String?
     private var API_KEY: String?
+    private var summoner: SummonerInfo?
     let uri_origin = "https://oc1.api.riotgames.com"
     
     private init(){
@@ -63,18 +64,29 @@ class ClientAPI{
      @Para:
      value: the summoner's name
      */
-    func getSummonerByName(value: String){
+    func getSummonerByName(value: String, completion: @escaping () -> Void){
         let decoder = JSONDecoder()
         let end: String = "/lol/summoner/v4/summoners/by-name/"
         
         executeQuery(endPoint: end, value: value) { (data) in
             if let data = data,
                 let sm = try? decoder.decode(SummonerInfo.self, from: data){
+                self.summoner = sm
                 print(sm.accountId)
                 self.accountId = sm.accountId
                 self.name = value
+                completion()
             }
         }
+    }
+    
+    func getSummoner() -> SummonerInfo?{
+        guard summoner != nil else{
+            print("No summoner has been got")
+            return nil
+        }
+        
+        return self.summoner
     }
     
     // - TODO: 1. Fix the bug that when call the getMatchList() the getSummonerByName() might be invoked before executing the getMatchList()
