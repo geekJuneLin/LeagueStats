@@ -13,7 +13,13 @@ class CardView: UIView{
     
     var summoner: SummonerInfo?{
         didSet{
-            
+            if let summoner = summoner{
+                DispatchQueue.main.async {
+                    self.avator.loadImgWithUrl("https://avatar.leagueoflegends.com/oce/\(summoner.name).png", "\(summoner.name).png")
+                    self.nameLabel.text = summoner.name
+                    self.levelLabel.text = " \(summoner.level) "
+                }
+            }
         }
     }
     

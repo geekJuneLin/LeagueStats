@@ -202,7 +202,6 @@ extension StatsMainViewController{
                     }
             }
           })
-            print("status count: \(self.statsViewCellModel.count)")
             completion()
         }
         

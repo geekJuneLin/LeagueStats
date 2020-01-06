@@ -42,9 +42,9 @@ struct MatchStatsCellViewModel{
     }
     
     fileprivate static func getKdaRatio(_ model: MatchStatsCellModel) -> String{
-        let ka = Float(model.participants.stats.kills + model.participants.stats.assists)
+        let ka = Float(model.participants.stats.kills) + Float(model.participants.stats.assists)
         let d = Float(model.participants.stats.deaths)
-        let kda = Float(ka / d == 0 ? 1 : d)
-        return "\(String(format: "%.2f", ceil(kda))):1"
+        let kda = ka / (d == 0 ? 1 : d)
+        return "\(String(format: "%.2f", kda)):1"
     }
 }

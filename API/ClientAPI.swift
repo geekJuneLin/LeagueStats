@@ -284,6 +284,7 @@ class ClientAPI{
         case 246: return "Qiyana"
         case 235: return "Senna"
         case 555: return "Pyke"
+        case 523: return "Aphelios"
         default:
             return ""
         }

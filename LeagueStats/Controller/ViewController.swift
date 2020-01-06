@@ -97,7 +97,7 @@ extension ViewController{
     
     fileprivate func getSummonerInfo(_ name: String){
         ClientAPI.shard.getSummonerByName(value: name, completion: {
-            print("\(ClientAPI.shard.getSummoner())")
+            self.cardView.summoner = ClientAPI.shard.getSummoner()
         })
     }
     
