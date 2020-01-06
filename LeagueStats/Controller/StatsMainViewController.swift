@@ -38,7 +38,6 @@ class StatsMainViewController: UICollectionViewController{
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.masksToBounds = true
         view.layer.cornerRadius = 20
-        view.loadImgWithUrl("https://avatar.leagueoflegends.com/oce/\(ClientAPI.shard.getSummonerName()).png", "\(ClientAPI.shard.getSummonerName()).png")
         return view
     }()
 
@@ -89,8 +88,8 @@ class StatsMainViewController: UICollectionViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpNavigationBar()
         setUpViews()
+        setUpNavigationBar()
         setUpProgressIndicator()
     }
 }
@@ -121,7 +120,11 @@ extension StatsMainViewController{
         avatorImg.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
         navigationController?.navigationBar.topItem?.titleView = imageView
         navigationController?.navigationBar.barTintColor = .white
-        avatorImg.isHidden = true
+        
+        DispatchQueue.main.async {
+            self.avatorImg.loadImgWithUrl("https://avatar.leagueoflegends.com/oce/\(self.summoner!.name).png", "\(self.summoner!.name).png")
+            self.avatorImg.isHidden = true
+        }
     }
     
     /// set up views
@@ -273,17 +276,13 @@ extension StatsMainViewController{
         // check if the summoner's info card view has been scrolled off the screen
         if offsetY > (UIScreen.main.bounds.height * 0.15) && !showImg{
             showImg = true
-            UIView.animate(withDuration: 0.5) {
-                self.avatorImg.isHidden = false
-            }
+            self.avatorImg.isHidden = false
             
             print("display it on the nav bar")
         }
         if  offsetY < (UIScreen.main.bounds.height * 0.15) && showImg{
             showImg = false
-            UIView.animate(withDuration: 0.5) {
-                self.avatorImg.isHidden = true
-            }
+            self.avatorImg.isHidden = true
             print("hide the img on the nav bar")
         }
         if height > 0 && offsetY > height - scrollView.frame.height{
