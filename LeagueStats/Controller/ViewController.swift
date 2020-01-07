@@ -24,6 +24,7 @@ class ViewController: UIViewController{
     
     let nameLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .black
         label.text = "Summoner ID: "
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -31,7 +32,8 @@ class ViewController: UIViewController{
     
     let nameText: UITextField = {
         let text = UITextField()
-        text.placeholder = "Please enter the name"
+        text.textColor = .black
+        text.attributedPlaceholder = NSAttributedString(string: "Please enter the name", attributes: [.foregroundColor : UIColor.winColor])
         text.translatesAutoresizingMaskIntoConstraints = false
         return text
     }()
@@ -111,6 +113,9 @@ extension ViewController{
                 nameText.text = ""
                 getSummonerInfo(name)
             }
+            let impact = UIImpactFeedbackGenerator(style: .medium)
+            impact.prepare()
+            impact.impactOccurred()
             view.endEditing(true)
         }
     }

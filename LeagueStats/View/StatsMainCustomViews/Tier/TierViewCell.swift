@@ -15,7 +15,7 @@ class TierViewCell: UICollectionViewCell{
             if let entry = entry{
                 DispatchQueue.main.async {
                     self.tierLabel.text = "\(entry.tier) \(entry.rank)"
-                    self.tierLabel.text = "\(entry.queueType)"
+                    self.typeLabel.text = "\(entry.queueType)".lowercased()
                     self.pointLabel.text = "\(entry.leaguePoints) LP"
                     self.winRateLabel.text = "\(entry.wins)W \(entry.losses)L (\(String(format: "%.2f", ( Double(entry.wins) / Double(entry.wins + entry.losses) * 100))))%"
                 }
