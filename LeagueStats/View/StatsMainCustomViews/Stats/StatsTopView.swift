@@ -11,23 +11,15 @@ import UIKit
 class StatsTopView: UICollectionReusableView{
     var summonerInfo: SummonerInfoModel? {
         didSet{
-            if let level = summonerInfo?.level {
-                levelLabel.text = " \(level) "
-            }
             
-            if let name = summonerInfo?.name{
-                nameLabel.text = name
-            }
-            
-            if let tier = summonerInfo?.tier{
-                tierLabel.text = tier
-            }
-            
-            if let point = summonerInfo?.points{
-                tierLabel.text?.append("(\(point)LP)")
-            }
-            if let name = summonerInfo?.name{
-                heroImg.loadImgWithUrl("https://avatar.leagueoflegends.com/oce/\(name).png", "\(name).png")
+            if let summoner = summonerInfo{
+                DispatchQueue.main.async {
+                    self.levelLabel.text = " \(summoner.level) "
+                    self.nameLabel.text = summoner.name
+                    self.tierLabel.text = summoner.tier
+                    self.tierLabel.text?.append("(\(summoner.points)LP)")
+                    self.heroImg.loadImgWithUrl("https://avatar.leagueoflegends.com/oce/\(summoner.name).png", "\(summoner.name).png")
+                }
             }
         }
     }

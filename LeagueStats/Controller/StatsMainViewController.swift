@@ -239,7 +239,10 @@ extension StatsMainViewController{
     // cell at each row
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.item == 0{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tierCell", for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tierCell", for: indexPath) as! TierCollectionView
+            ClientAPI.shard.getSummonerInfo { (entries) in
+                cell.entries = entries
+            }
             return cell
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! StatsViewCell
@@ -257,8 +260,10 @@ extension StatsMainViewController{
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId, for: indexPath) as! StatsTopView
             
             if let summoner = summoner{
-                let summonerInfo: SummonerInfoModel = SummonerInfoModel(name: summoner.name, level: summoner.level, tier: "Silver 1", points: 38)
-                header.summonerInfo = summonerInfo
+                ClientAPI.shard.getSummonerInfo { (entry) in
+                    let summonerInfo: SummonerInfoModel = SummonerInfoModel(name: summoner.name, level: summoner.level, tier: "\(entry[0].tier) \(entry[0].rank)", points: entry[0].leaguePoints)
+                    header.summonerInfo = summonerInfo
+                }
             }
             
             return header

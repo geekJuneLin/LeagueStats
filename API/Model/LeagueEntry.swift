@@ -12,6 +12,7 @@ struct LeagueEntry: Codable{
     var wins, losses, leaguePoints: Int
     var rank: String
     var tier: String
+    var queueType: String
     
     enum LeagueEntryCodingKeys: String, CodingKey{
         case wins
@@ -19,6 +20,7 @@ struct LeagueEntry: Codable{
         case leaguePoints
         case rank
         case tier
+        case queueType
     }
     
     init(_ decoder: Decoder) throws{
@@ -28,5 +30,6 @@ struct LeagueEntry: Codable{
         self.leaguePoints = try container.decode(Int.self, forKey: LeagueEntryCodingKeys.leaguePoints)
         self.rank = try container.decode(String.self, forKey: LeagueEntryCodingKeys.rank)
         self.tier = try container.decode(String.self, forKey: LeagueEntryCodingKeys.rank)
+        self.queueType = try container.decode(String.self, forKey: LeagueEntryCodingKeys.queueType)
     }
 }

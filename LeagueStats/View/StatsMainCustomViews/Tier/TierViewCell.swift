@@ -9,54 +9,23 @@
 import UIKit
 
 class TierViewCell: UICollectionViewCell{
-    var tierViewCellModel: TierViewCellModel!{
+    
+    var entry: LeagueEntry?{
         didSet{
-            tierImg.image = tierViewCellModel.image
-            typeLabel.text = tierViewCellModel.type
-            tierLabel.text = tierViewCellModel.tier
-            pointLabel.text = tierViewCellModel.point
-            winRateLabel.text = tierViewCellModel.winRate
+            if let entry = entry{
+                DispatchQueue.main.async {
+                    self.tierLabel.text = "\(entry.tier) \(entry.rank)"
+                    self.tierLabel.text = "\(entry.queueType)"
+                    self.pointLabel.text = "\(entry.leaguePoints) LP"
+                    self.winRateLabel.text = "\(entry.wins)W \(entry.losses)L (\(String(format: "%.2f", ( Double(entry.wins) / Double(entry.wins + entry.losses) * 100))))%"
+                }
+            }
         }
     }
     
-//    var tier: TierModel? {
-//        didSet{
-//            // load accroding tier image
-//            if let img = tier?.tier.tierImg {
-//                tierImg.image = img
-//            }
-//
-//            // load accroding game type
-//            if let type = tier?.type {
-//                typeLabel.text = type
-//            }
-//
-//            // load tier
-//            if let tier = tier?.tier.tier {
-//                tierLabel.text = tier
-//            }
-//
-//            // load current points
-//            if let points = tier?.tier.point{
-//                pointLabel.text = "\(points) LP"
-//            }
-//
-//            // load the win, lose and win rate
-//            if let win = tier?.tier.win, let loss = tier?.tier.loss {
-//                if loss == 0 && win == 0{
-//                    winRateLabel.text = "\(win)W \(loss)L (-)"
-//                }else if loss == 0 && win != 0{
-//                    winRateLabel.text = "\(win)W \(loss)L (100%)"
-//                }else{
-//                    let rate = Double(win) / (Double(win) + Double(loss)) * 100
-//                    winRateLabel.text = "\(win)W \(loss)L (\(String(format: "%.2f", rate))%)"
-//                }
-//            }
-//        }
-//    }
-    
     let tierImg: UIImageView = {
        let view = UIImageView()
+        view.image = UIImage(named: "dinosaur")
         view.layer.masksToBounds = true
         view.layer.cornerRadius = 25
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -65,6 +34,7 @@ class TierViewCell: UICollectionViewCell{
     
     let typeLabel: UILabel = {
        let label = UILabel()
+        label.text = "Flex 3:3 Rank"
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -73,6 +43,7 @@ class TierViewCell: UICollectionViewCell{
     
     let tierLabel: UILabel = {
        let label = UILabel()
+        label.text = "Unranked"
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -81,6 +52,7 @@ class TierViewCell: UICollectionViewCell{
     
     let pointLabel: UILabel = {
        let label = UILabel()
+        label.text = "0 LP"
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -89,6 +61,7 @@ class TierViewCell: UICollectionViewCell{
     
     let winRateLabel: UILabel = {
        let label = UILabel()
+        label.text = "0W 0L (-)"
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
