@@ -86,7 +86,6 @@ extension ViewController{
         cardView.topAnchor.constraint(equalTo: nameText.bottomAnchor, constant: 60).isActive = true
         cardView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9).isActive = true
         cardView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2).isActive = true
-        self.loadImg()
     }
     
     fileprivate func setUpTapReconizer(){
@@ -98,7 +97,11 @@ extension ViewController{
     fileprivate func getSummonerInfo(_ name: String){
         ClientAPI.shard.getSummonerByName(value: name, completion: {
             self.cardView.summoner = ClientAPI.shard.getSummoner()
+            ClientAPI.shard.getSummonerInfo { (entries) in
+                self.cardView.entries = entries
+            }
         })
+        cardView.hideSkeleton()
     }
     
     @objc
@@ -122,15 +125,9 @@ extension ViewController{
         viewController.transitioningDelegate = self
         self.present(viewController, animated: true, completion: nil)
     }
-    
-    fileprivate func loadImg(){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.cardView.avator.loadImgWithUrl("https://avatar.leagueoflegends.com/oce/\(ClientAPI.shard.getSummonerName()).png", "\(ClientAPI.shard.getSummonerName()).png")
-            self.cardView.hideSkeleton()
-        }
-    }
 }
 
+// MARK: - UITextFieldDelegate
 extension ViewController: UITextFieldDelegate{
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == nameText{

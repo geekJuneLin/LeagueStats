@@ -145,6 +145,22 @@ class ClientAPI{
         }
     }
     
+    func getSummonerInfo(completion: @escaping ([LeagueEntry]) -> Void){
+        let decoder = JSONDecoder()
+        let endPoint = "/lol/league/v4/entries/by-summoner/"
+        let name = getSummoner()!.summonerId
+
+        executeQuery(endPoint: endPoint, value: name) { data in
+            if let data = data,
+                let leagueEntry = try? decoder.decode([LeagueEntry].self, from: data){
+                print(leagueEntry)
+                completion(leagueEntry)
+            }else{
+                print("No data has been returned!")
+            }
+        }
+    }
+    
     func getChampNameById(_ id: Int) -> String{
         switch(id){
         case 266: return "Aatrox"
@@ -285,6 +301,8 @@ class ClientAPI{
         case 235: return "Senna"
         case 555: return "Pyke"
         case 523: return "Aphelios"
+        case 164: return "Camille"
+        case 142: return "Zoe"
         default:
             return ""
         }
