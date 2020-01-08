@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		04510DC1EE5B8E1221FF0977 /* Pods_LeagueStats.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26C4750E714CD0396AA5168D /* Pods_LeagueStats.framework */; };
 		8E1C40E923ACCEF60069F238 /* SummonerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C40E823ACCEF60069F238 /* SummonerInfo.swift */; };
+		8E2C3A2723C5BB30009297B8 /* SearchButtonAboveKB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2C3A2623C5BB30009297B8 /* SearchButtonAboveKB.swift */; };
 		8E2FE60C23989460000117A7 /* SummonerInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2FE60B23989460000117A7 /* SummonerInfoModel.swift */; };
 		8E2FE6102398A1DD000117A7 /* StatsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2FE60F2398A1DD000117A7 /* StatsItemView.swift */; };
 		8E2FE6132398E23B000117A7 /* EnlargeTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2FE6122398E23B000117A7 /* EnlargeTransitioning.swift */; };
@@ -68,6 +69,7 @@
 		45DB036B59A792DA6E8C450D /* Pods-LeagueStats.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeagueStats.debug.xcconfig"; path = "Target Support Files/Pods-LeagueStats/Pods-LeagueStats.debug.xcconfig"; sourceTree = "<group>"; };
 		63F6657DC6D298FAC145CD75 /* Pods-LeagueStats.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeagueStats.release.xcconfig"; path = "Target Support Files/Pods-LeagueStats/Pods-LeagueStats.release.xcconfig"; sourceTree = "<group>"; };
 		8E1C40E823ACCEF60069F238 /* SummonerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerInfo.swift; sourceTree = "<group>"; };
+		8E2C3A2623C5BB30009297B8 /* SearchButtonAboveKB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButtonAboveKB.swift; sourceTree = "<group>"; };
 		8E2FE60B23989460000117A7 /* SummonerInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerInfoModel.swift; sourceTree = "<group>"; };
 		8E2FE60F2398A1DD000117A7 /* StatsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsItemView.swift; sourceTree = "<group>"; };
 		8E2FE6122398E23B000117A7 /* EnlargeTransitioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnlargeTransitioning.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				8E9C505423B965A5005473F3 /* MatchStatsView */,
 				8E2FE60D2398A03F000117A7 /* MainViews */,
 				8EAE89D023952B1F003D32B3 /* StatsMainCustomViews */,
+				8E2C3A2623C5BB30009297B8 /* SearchButtonAboveKB.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				8EF159B123BEED5A00632CA3 /* TierViewCellModel.swift in Sources */,
 				8E33B27323B8A29B00D7BA08 /* UIColor+CustomizedColor.swift in Sources */,
 				8E9C505623B965C7005473F3 /* MatchStatsCell.swift in Sources */,
+				8E2C3A2723C5BB30009297B8 /* SearchButtonAboveKB.swift in Sources */,
 				8EE2B35923BAFD3F00E5E038 /* String+setColor.swift in Sources */,
 				8EE2B35F23BB314900E5E038 /* DamageBar.swift in Sources */,
 				8E6FAD4723ADC8C10031EE0B /* MatchList.swift in Sources */,

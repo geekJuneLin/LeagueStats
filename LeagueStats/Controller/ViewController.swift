@@ -45,6 +45,13 @@ class ViewController: UIViewController{
         return view
     }()
     
+    let viewAboveKB: SearcheButtonAboveKB = {
+       let view = SearcheButtonAboveKB()
+        view.backgroundColor = .lightGray
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,9 +59,8 @@ class ViewController: UIViewController{
         cardView.showAnimatedSkeleton()
         
         setUpViews()
-        
-        // register UITapGestuer which can detect whether the users finish tapping in the UITextfield
         setUpTapReconizer()
+        setUpViewAboveKB()
     }
     
     
@@ -62,6 +68,14 @@ class ViewController: UIViewController{
 
 // MARK: - other functions
 extension ViewController{
+    
+    fileprivate func setUpViewAboveKB(){
+        viewAboveKB.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismissKeyBoard)))
+        
+        nameText.inputAccessoryView = viewAboveKB
+        viewAboveKB.bounds = CGRect(x: 0, y: 0, width: view.bounds.width, height: 40)
+    }
+    
     /// set up all the views
     fileprivate func setUpViews(){
         view.backgroundColor = .white
