@@ -44,6 +44,7 @@ class StatsTopView: UICollectionReusableView{
     
     let levelLabel: UILabel = {
        let label = UILabel()
+        label.text = "0"
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 14)
         label.layer.masksToBounds = true
@@ -55,6 +56,7 @@ class StatsTopView: UICollectionReusableView{
     
     let nameLabel: UILabel = {
        let label = UILabel()
+        label.text = "Summoner"
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -62,6 +64,7 @@ class StatsTopView: UICollectionReusableView{
     
     let tierLabel: UILabel = {
        let label = UILabel()
+        label.text = "No tier"
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -80,24 +83,16 @@ class StatsTopView: UICollectionReusableView{
         background.addSubview(nameLabel)
         background.addSubview(tierLabel)
         
-        background.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        background.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        background.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9).isActive = true
-        background.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.8).isActive = true
+        background.anchors(centerX: centerXAnchor, centerY: centerYAnchor)
+        background.anchors(width: widthAnchor, widthValue: 0.9, height: heightAnchor, heightValue: 0.8)
         
-        heroImg.topAnchor.constraint(equalTo: background.topAnchor, constant: 15).isActive = true
-        heroImg.leftAnchor.constraint(equalTo: background.leftAnchor, constant: 15).isActive = true
-        heroImg.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        heroImg.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        heroImg.anchors(top: background.topAnchor, topConstant: 15, left: background.leftAnchor, leftConstant: 15, widthValue: 80, heightValue: 80)
         
-        levelLabel.bottomAnchor.constraint(equalTo: heroImg.bottomAnchor).isActive = true
-        levelLabel.centerXAnchor.constraint(equalTo: heroImg.centerXAnchor).isActive = true
+        levelLabel.anchors(centerX: heroImg.centerXAnchor, bottom: heroImg.bottomAnchor)
         
-        nameLabel.topAnchor.constraint(equalTo: heroImg.topAnchor, constant: 15).isActive = true
-        nameLabel.leftAnchor.constraint(equalTo: heroImg.rightAnchor, constant: 10).isActive = true
+        nameLabel.anchors(top: heroImg.topAnchor, topConstant: 15, left: heroImg.rightAnchor, rightConstant: 10)
         
-        tierLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5).isActive = true
-        tierLabel.leftAnchor.constraint(equalTo: nameLabel.leftAnchor).isActive = true
+        tierLabel.anchors(top: nameLabel.bottomAnchor, topConstant: 5, left: nameLabel.leftAnchor)
     }
     
     required init?(coder aDecoder: NSCoder) {

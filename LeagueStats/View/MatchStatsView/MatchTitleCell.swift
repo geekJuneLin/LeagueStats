@@ -99,48 +99,57 @@ class MatchTitleCell: UICollectionViewCell{
     
     fileprivate func setUpViews(){
         addSubview(win)
-        win.leftAnchor.constraint(equalTo: leftAnchor, constant: 5).isActive = true
-        win.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        win.anchors(centerY: centerYAnchor, left: leftAnchor, leftConstant: 5)
+//        win.leftAnchor.constraint(equalTo: leftAnchor, constant: 5).isActive = true
+//        win.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
         addSubview(statsImg)
-        statsImg.leftAnchor.constraint(equalTo: win.rightAnchor, constant: 4).isActive = true
-        statsImg.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        statsImg.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        statsImg.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        statsImg.anchors(centerY: centerYAnchor, left: win.rightAnchor, leftConstant: 4, widthValue: 20, heightValue: 20)
+//        statsImg.leftAnchor.constraint(equalTo: win.rightAnchor, constant: 4).isActive = true
+//        statsImg.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+//        statsImg.widthAnchor.constraint(equalToConstant: 20).isActive = true
+//        statsImg.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         addSubview(statsLabel)
-        statsLabel.leftAnchor.constraint(equalTo: statsImg.rightAnchor, constant: 4).isActive = true
-        statsLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        statsLabel.anchors(centerY: centerYAnchor, left: statsImg.rightAnchor, leftConstant: 4)
+//        statsLabel.leftAnchor.constraint(equalTo: statsImg.rightAnchor, constant: 4).isActive = true
+//        statsLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
         addSubview(towerCount)
-        towerCount.rightAnchor.constraint(equalTo: rightAnchor, constant: -5).isActive = true
-        towerCount.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        towerCount.anchors(centerY: centerYAnchor, right: rightAnchor, rightConstant: -5)
+//        towerCount.rightAnchor.constraint(equalTo: rightAnchor, constant: -5).isActive = true
+//        towerCount.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
         addSubview(towerImg)
-        towerImg.rightAnchor.constraint(equalTo: towerCount.leftAnchor, constant: -4).isActive = true
-        towerImg.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        towerImg.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        towerImg.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        towerImg.anchors(centerY: centerYAnchor, right: towerCount.leftAnchor, rightConstant: -4, widthValue: 20, heightValue: 20)
+//        towerImg.rightAnchor.constraint(equalTo: towerCount.leftAnchor, constant: -4).isActive = true
+//        towerImg.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+//        towerImg.widthAnchor.constraint(equalToConstant: 20).isActive = true
+//        towerImg.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         addSubview(baronCount)
-        baronCount.rightAnchor.constraint(equalTo: towerImg.leftAnchor, constant: -5).isActive = true
-        baronCount.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        baronCount.anchors(centerY: centerYAnchor, right: towerImg.leftAnchor, rightConstant: -5)
+//        baronCount.rightAnchor.constraint(equalTo: towerImg.leftAnchor, constant: -5).isActive = true
+//        baronCount.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
         addSubview(baronImg)
-        baronImg.rightAnchor.constraint(equalTo: baronCount.leftAnchor, constant: -4).isActive = true
-        baronImg.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        baronImg.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        baronImg.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        baronImg.anchors(centerY: centerYAnchor, right: baronCount.leftAnchor, rightConstant: -4, widthValue: 20, heightValue: 20)
+//        baronImg.rightAnchor.constraint(equalTo: baronCount.leftAnchor, constant: -4).isActive = true
+//        baronImg.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+//        baronImg.widthAnchor.constraint(equalToConstant: 20).isActive = true
+//        baronImg.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         addSubview(dragonCount)
-        dragonCount.rightAnchor.constraint(equalTo: baronImg.leftAnchor, constant: -5).isActive = true
-        dragonCount.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        dragonCount.anchors(centerY: centerYAnchor, right: baronImg.leftAnchor, rightConstant: -5)
+//        dragonCount.rightAnchor.constraint(equalTo: baronImg.leftAnchor, constant: -5).isActive = true
+//        dragonCount.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
         addSubview(dragonImg)
-        dragonImg.rightAnchor.constraint(equalTo: dragonCount.leftAnchor, constant: -4).isActive = true
-        dragonImg.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        dragonImg.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        dragonImg.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        dragonImg.anchors(centerY: centerYAnchor, right: dragonCount.leftAnchor, rightConstant: -4, widthValue: 20, heightValue: 20)
+//        dragonImg.rightAnchor.constraint(equalTo: dragonCount.leftAnchor, constant: -4).isActive = true
+//        dragonImg.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+//        dragonImg.widthAnchor.constraint(equalToConstant: 20).isActive = true
+//        dragonImg.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     required init?(coder: NSCoder) {

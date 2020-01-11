@@ -103,19 +103,23 @@ class CardView: UIView{
         addSubview(levelLabel)
         addSubview(tierLabel)
         
-        avator.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
-        avator.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
-        avator.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        avator.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        avator.anchors(top: topAnchor, topConstant: 15, left: leftAnchor, leftConstant: 15, widthValue: 70, heightValue: 70)
+//        avator.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
+//        avator.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
+//        avator.widthAnchor.constraint(equalToConstant: 70).isActive = true
+//        avator.heightAnchor.constraint(equalToConstant: 70).isActive = true
         
-        nameLabel.leftAnchor.constraint(equalTo: avator.rightAnchor, constant: 10).isActive = true
-        nameLabel.topAnchor.constraint(equalTo: avator.topAnchor, constant: 10).isActive = true
+        nameLabel.anchors(top: avator.topAnchor, topConstant: 10, left: avator.rightAnchor, leftConstant: 10)
+//        nameLabel.leftAnchor.constraint(equalTo: avator.rightAnchor, constant: 10).isActive = true
+//        nameLabel.topAnchor.constraint(equalTo: avator.topAnchor, constant: 10).isActive = true
         
-        levelLabel.bottomAnchor.constraint(equalTo: avator.bottomAnchor).isActive = true
-        levelLabel.rightAnchor.constraint(equalTo: avator.rightAnchor, constant: -2).isActive = true
+        levelLabel.anchors(bottom: avator.bottomAnchor, right: avator.rightAnchor, rightConstant: -2)
+//        levelLabel.bottomAnchor.constraint(equalTo: avator.bottomAnchor).isActive = true
+//        levelLabel.rightAnchor.constraint(equalTo: avator.rightAnchor, constant: -2).isActive = true
         
-        tierLabel.leftAnchor.constraint(equalTo: nameLabel.leftAnchor).isActive = true
-        tierLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10).isActive = true
+        tierLabel.anchors(top: nameLabel.bottomAnchor, topConstant: 10, left: nameLabel.leftAnchor)
+//        tierLabel.leftAnchor.constraint(equalTo: nameLabel.leftAnchor).isActive = true
+//        tierLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {

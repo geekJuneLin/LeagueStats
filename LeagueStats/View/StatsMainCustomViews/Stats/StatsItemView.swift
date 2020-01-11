@@ -110,40 +110,19 @@ class StatsItemView: UIView{
         addSubview(sixthItem)
         addSubview(seventhItem)
         
-        firstItem.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        firstItem.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        firstItem.widthAnchor.constraint(equalToConstant: 25).isActive = true
-        firstItem.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        firstItem.anchors(top: topAnchor, left: leftAnchor, widthValue: 25, heightValue: 25)
         
-        secondItem.topAnchor.constraint(equalTo: firstItem.topAnchor).isActive = true
-        secondItem.leftAnchor.constraint(equalTo: firstItem.rightAnchor, constant: 5).isActive = true
-        secondItem.widthAnchor.constraint(equalToConstant: 25).isActive = true
-        secondItem.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        secondItem.anchors(top: firstItem.topAnchor, left: firstItem.rightAnchor, leftConstant: 5, widthValue: 25, heightValue: 25)
         
-        thirdItem.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        thirdItem.leftAnchor.constraint(equalTo: secondItem.rightAnchor, constant: 5).isActive = true
-        thirdItem.widthAnchor.constraint(equalToConstant: 25).isActive = true
-        thirdItem.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        thirdItem.anchors(top: topAnchor, left: secondItem.rightAnchor, leftConstant: 5, widthValue: 25, heightValue: 25)
         
-        fourthItem.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        fourthItem.leftAnchor.constraint(equalTo: thirdItem.rightAnchor, constant: 5).isActive = true
-        fourthItem.widthAnchor.constraint(equalToConstant: 25).isActive = true
-        fourthItem.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        fourthItem.anchors(top: topAnchor, left: thirdItem.rightAnchor, leftConstant: 5, widthValue: 25, heightValue: 25)
         
-        fifthItem.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        fifthItem.leftAnchor.constraint(equalTo: fourthItem.rightAnchor, constant: 5).isActive = true
-        fifthItem.widthAnchor.constraint(equalToConstant: 25).isActive = true
-        fifthItem.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        fifthItem.anchors(top: topAnchor, left: fourthItem.rightAnchor, leftConstant: 5, widthValue: 25, heightValue: 25)
         
-        sixthItem.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        sixthItem.leftAnchor.constraint(equalTo: fifthItem.rightAnchor, constant: 5).isActive = true
-        sixthItem.widthAnchor.constraint(equalToConstant: 25).isActive = true
-        sixthItem.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        
-        seventhItem.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        seventhItem.leftAnchor.constraint(equalTo: sixthItem.rightAnchor, constant: 5).isActive = true
-        seventhItem.widthAnchor.constraint(equalToConstant: 25).isActive = true
-        seventhItem.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        sixthItem.anchors(top: topAnchor, left: fifthItem.rightAnchor, leftConstant: 5, widthValue: 25, heightValue: 25)
+
+        seventhItem.anchors(top: topAnchor, left: sixthItem.rightAnchor, leftConstant: 5, widthValue: 25, heightValue: 25)
     }
     
     required init?(coder aDecoder: NSCoder) {

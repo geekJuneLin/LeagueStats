@@ -146,51 +146,27 @@ class StatsViewCell: UICollectionViewCell{
         addSubview(dateLabel)
         addSubview(itemView)
         
-        statusView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        statusView.widthAnchor.constraint(equalToConstant: 45).isActive = true
-        statusView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+        statusView.anchors(left: leftAnchor, widthValue: 45, height: heightAnchor, heightValue: 1)
         
-        champImg.topAnchor.constraint(equalTo: topAnchor, constant: self.frame.height * 0.1).isActive = true
-        champImg.leftAnchor.constraint(equalTo: statusView.rightAnchor, constant: 8).isActive = true
-        champImg.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        champImg.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        champImg.anchors(top: topAnchor, topConstant: self.frame.height * 0.1, left: statusView.rightAnchor, leftConstant: 8, widthValue: 60, heightValue: 60)
         
-        firstSpell.topAnchor.constraint(equalTo: champImg.topAnchor).isActive = true
-        firstSpell.leftAnchor.constraint(equalTo: champImg.rightAnchor, constant: 5).isActive = true
-        firstSpell.widthAnchor.constraint(equalToConstant: 25).isActive = true
-        firstSpell.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        firstSpell.anchors(top: champImg.topAnchor, left: champImg.rightAnchor, leftConstant: 5, widthValue: 25, heightValue: 25)
         
-        secondSpell.topAnchor.constraint(equalTo: firstSpell.bottomAnchor, constant: 5).isActive = true
-        secondSpell.leftAnchor.constraint(equalTo: firstSpell.leftAnchor).isActive = true
-        secondSpell.widthAnchor.constraint(equalToConstant: 25).isActive = true
-        secondSpell.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        secondSpell.anchors(top: firstSpell.bottomAnchor, topConstant: 5, left: firstSpell.leftAnchor, widthValue: 25, heightValue: 25)
         
-        primaryRune.topAnchor.constraint(equalTo: firstSpell.topAnchor).isActive = true
-        primaryRune.leftAnchor.constraint(equalTo: firstSpell.rightAnchor, constant: 5).isActive = true
-        primaryRune.widthAnchor.constraint(equalToConstant: 25).isActive = true
-        primaryRune.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        primaryRune.anchors(top: firstSpell.topAnchor, left: firstSpell.rightAnchor, leftConstant: 5, widthValue: 25, heightValue: 25)
         
-        secondRune.topAnchor.constraint(equalTo: secondSpell.topAnchor).isActive = true
-        secondRune.leftAnchor.constraint(equalTo: primaryRune.leftAnchor).isActive = true
-        secondRune.widthAnchor.constraint(equalToConstant: 25).isActive = true
-        secondRune.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        secondRune.anchors(top: secondSpell.topAnchor, left: primaryRune.leftAnchor, widthValue: 25, heightValue: 25)
         
-        KDALabel.topAnchor.constraint(equalTo: champImg.topAnchor, constant: 10).isActive = true
-        KDALabel.leftAnchor.constraint(equalTo: primaryRune.rightAnchor, constant: 18).isActive = true
+        KDALabel.anchors(top: champImg.topAnchor, topConstant: 10, left: primaryRune.rightAnchor, rightConstant: 18)
         
-        KPLabel.topAnchor.constraint(equalTo: KDALabel.bottomAnchor, constant: 5).isActive = true
-        KPLabel.centerXAnchor.constraint(equalTo: KDALabel.centerXAnchor).isActive = true
+        KPLabel.anchors(centerX: KDALabel.centerXAnchor, top: KDALabel.bottomAnchor, topConstant: 5)
         
-        gameTypeLabel.topAnchor.constraint(equalTo: KDALabel.topAnchor).isActive = true
-        gameTypeLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25).isActive = true
-        gameTypeLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
+        gameTypeLabel.anchors(top: KDALabel.topAnchor, right: rightAnchor, rightConstant: -10, width: widthAnchor, widthValue: 0.25)
         
-        dateLabel.topAnchor.constraint(equalTo: gameTypeLabel.bottomAnchor, constant: 5).isActive = true
-        dateLabel.rightAnchor.constraint(equalTo: gameTypeLabel.rightAnchor).isActive = true
+        dateLabel.anchors(top: gameTypeLabel.bottomAnchor, topConstant: 5, right: gameTypeLabel.rightAnchor)
         
-        itemView.topAnchor.constraint(equalTo: champImg.bottomAnchor, constant: 5).isActive = true
-        itemView.leftAnchor.constraint(equalTo: champImg.leftAnchor).isActive = true
-        itemView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
+        itemView.anchors(top: champImg.bottomAnchor, topConstant: 5, bottom: bottomAnchor, bottomConstant: -5, left: champImg.leftAnchor)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -52,12 +52,6 @@ class ViewController: UIViewController{
         return view
     }()
     
-//    let blurredView: UIVisualEffectView = {
-//       let blurredView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-//        blurredView.frame = UIScreen.main.bounds
-//        blurredView.translatesAutoresizingMaskIntoConstraints = false
-//        return blurredView
-//    }()
     
     private var isMenuPresented = false
     
@@ -159,21 +153,13 @@ extension ViewController{
         
         menuView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: -UIScreen.main.bounds.width * 0.25).isActive = true
         
-        heroImg.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        heroImg.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
-        heroImg.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        heroImg.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        heroImg.anchors(centerX: view.centerXAnchor, XConstant: 0, centerY: nil, YConstant: 0, top: view.safeAreaLayoutGuide.topAnchor, topConstant: 15, widthValue: 80, heightValue: 50)
         
-        nameLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
-        nameLabel.topAnchor.constraint(equalTo: heroImg.bottomAnchor, constant: 20).isActive = true
+        nameLabel.anchors(top: heroImg.bottomAnchor, topConstant: 20, left: view.safeAreaLayoutGuide.leftAnchor, leftConstant: 20)
         
-        nameText.leftAnchor.constraint(equalTo: nameLabel.rightAnchor, constant: 5).isActive = true
-        nameText.topAnchor.constraint(equalTo: nameLabel.topAnchor).isActive = true
+        nameText.anchors(top: nameLabel.topAnchor, topConstant: 0, left: nameLabel.rightAnchor, rightConstant: 5)
         
-        cardView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        cardView.topAnchor.constraint(equalTo: nameText.bottomAnchor, constant: 60).isActive = true
-        cardView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9).isActive = true
-        cardView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2).isActive = true
+        cardView.anchors(centerX: view.centerXAnchor, top: nameText.bottomAnchor, topConstant: 60, width: view.widthAnchor, widthValue: 0.9, height: view.heightAnchor, heightValue: 0.2)
     }
     
     fileprivate func setUpTapReconizer(){

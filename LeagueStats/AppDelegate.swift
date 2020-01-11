@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // set API key
-        ClientAPI.shard.setApiKey("RGAPI-b5ac7cb0-6bb5-445a-8961-6f0e675a74da")
+        ClientAPI.shard.setApiKey("RGAPI-718c9642-1545-4fa7-95aa-f6273cadd813")
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = .darkGray

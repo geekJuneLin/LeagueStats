@@ -43,16 +43,11 @@ class StatusView: UIView{
         addSubview(separator)
         addSubview(timeLabel)
         
-        statusLabel.topAnchor.constraint(equalTo: topAnchor, constant: 25).isActive = true
-        statusLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        statusLabel.anchors(centerX: centerXAnchor, top: topAnchor, topConstant: 25)
+
+        separator.anchors(centerX: centerXAnchor, top: statusLabel.bottomAnchor, topConstant: 10, widthValue: 18, heightValue: 1.5)
         
-        separator.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 10).isActive = true
-        separator.heightAnchor.constraint(equalToConstant: 1.5).isActive = true
-        separator.widthAnchor.constraint(equalToConstant: 18).isActive = true
-        separator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        
-        timeLabel.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 10).isActive = true
-        timeLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        timeLabel.anchors(centerX: centerXAnchor, top: separator.bottomAnchor, topConstant: 10)
     }
     
     required init?(coder aDecoder: NSCoder) {

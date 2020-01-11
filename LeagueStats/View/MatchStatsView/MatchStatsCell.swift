@@ -235,111 +235,131 @@ class MatchStatsCell: UICollectionViewCell{
     
     fileprivate func setUpViews(){
         addSubview(searchedInicator)
-        searchedInicator.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.01).isActive = true
-        searchedInicator.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
-        searchedInicator.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        searchedInicator.anchors(left: leftAnchor, width: widthAnchor, widthValue: 0.01, height: heightAnchor,  heightValue: 1)
+//        searchedInicator.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.01).isActive = true
+//        searchedInicator.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+//        searchedInicator.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         
         addSubview(champImg)
-        champImg.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
-        champImg.widthAnchor.constraint(equalToConstant: 38).isActive = true
-        champImg.heightAnchor.constraint(equalToConstant: 38).isActive = true
-        champImg.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        champImg.anchors(centerY: centerYAnchor, left: leftAnchor, leftConstant: 8, widthValue: 38, heightValue: 38)
+//        champImg.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
+//        champImg.widthAnchor.constraint(equalToConstant: 38).isActive = true
+//        champImg.heightAnchor.constraint(equalToConstant: 38).isActive = true
+//        champImg.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
         addSubview(levelLabel)
-        levelLabel.rightAnchor.constraint(equalTo: champImg.rightAnchor).isActive = true
-        levelLabel.bottomAnchor.constraint(equalTo: champImg.bottomAnchor).isActive = true
+        levelLabel.anchors(bottom: champImg.bottomAnchor, right: champImg.rightAnchor)
+//        levelLabel.rightAnchor.constraint(equalTo: champImg.rightAnchor).isActive = true
+//        levelLabel.bottomAnchor.constraint(equalTo: champImg.bottomAnchor).isActive = true
         
         addSubview(spellOne)
-        spellOne.widthAnchor.constraint(equalToConstant: 18).isActive = true
-        spellOne.heightAnchor.constraint(equalToConstant: 18).isActive = true
-        spellOne.topAnchor.constraint(equalTo: champImg.topAnchor).isActive = true
-        spellOne.leftAnchor.constraint(equalTo: champImg.rightAnchor, constant: 4).isActive = true
+        spellOne.anchors(top: champImg.topAnchor, left: champImg.rightAnchor, leftConstant: 4, widthValue: 18, heightValue: 18)
+//        spellOne.widthAnchor.constraint(equalToConstant: 18).isActive = true
+//        spellOne.heightAnchor.constraint(equalToConstant: 18).isActive = true
+//        spellOne.topAnchor.constraint(equalTo: champImg.topAnchor).isActive = true
+//        spellOne.leftAnchor.constraint(equalTo: champImg.rightAnchor, constant: 4).isActive = true
         
         addSubview(spellTwo)
-        spellTwo.widthAnchor.constraint(equalToConstant: 18).isActive = true
-        spellTwo.heightAnchor.constraint(equalToConstant: 18).isActive = true
-        spellTwo.bottomAnchor.constraint(equalTo: champImg.bottomAnchor).isActive = true
-        spellTwo.leftAnchor.constraint(equalTo: spellOne.leftAnchor).isActive = true
+        spellTwo.anchors(bottom: champImg.bottomAnchor, left: spellOne.leftAnchor, widthValue: 18, heightValue: 18)
+//        spellTwo.widthAnchor.constraint(equalToConstant: 18).isActive = true
+//        spellTwo.heightAnchor.constraint(equalToConstant: 18).isActive = true
+//        spellTwo.bottomAnchor.constraint(equalTo: champImg.bottomAnchor).isActive = true
+//        spellTwo.leftAnchor.constraint(equalTo: spellOne.leftAnchor).isActive = true
         
         
         addSubview(runeOne)
-        runeOne.widthAnchor.constraint(equalToConstant: 18).isActive = true
-        runeOne.heightAnchor.constraint(equalToConstant: 18).isActive = true
-        runeOne.topAnchor.constraint(equalTo: champImg.topAnchor).isActive = true
-        runeOne.leftAnchor.constraint(equalTo: spellOne.rightAnchor, constant: 2).isActive = true
+        runeOne.anchors(top: champImg.topAnchor, left: spellOne.rightAnchor, leftConstant: 2, widthValue: 18, heightValue: 18)
+//        runeOne.widthAnchor.constraint(equalToConstant: 18).isActive = true
+//        runeOne.heightAnchor.constraint(equalToConstant: 18).isActive = true
+//        runeOne.topAnchor.constraint(equalTo: champImg.topAnchor).isActive = true
+//        runeOne.leftAnchor.constraint(equalTo: spellOne.rightAnchor, constant: 2).isActive = true
         
         addSubview(runeTwo)
-        runeTwo.widthAnchor.constraint(equalToConstant: 18).isActive = true
-        runeTwo.heightAnchor.constraint(equalToConstant: 18).isActive = true
-        runeTwo.bottomAnchor.constraint(equalTo: champImg.bottomAnchor).isActive = true
-        runeTwo.leftAnchor.constraint(equalTo: runeOne.leftAnchor).isActive = true
+        runeTwo.anchors(bottom: champImg.bottomAnchor, left: runeOne.leftAnchor, widthValue: 18, heightValue: 18)
+//        runeTwo.widthAnchor.constraint(equalToConstant: 18).isActive = true
+//        runeTwo.heightAnchor.constraint(equalToConstant: 18).isActive = true
+//        runeTwo.bottomAnchor.constraint(equalTo: champImg.bottomAnchor).isActive = true
+//        runeTwo.leftAnchor.constraint(equalTo: runeOne.leftAnchor).isActive = true
         
         addSubview(tierLabel)
-        tierLabel.topAnchor.constraint(equalTo: runeOne.topAnchor).isActive = true
-        tierLabel.leftAnchor.constraint(equalTo: runeOne.rightAnchor, constant: 2).isActive = true
+        tierLabel.anchors(top: runeOne.topAnchor, left: runeOne.rightAnchor, leftConstant: 2)
+//        tierLabel.topAnchor.constraint(equalTo: runeOne.topAnchor).isActive = true
+//        tierLabel.leftAnchor.constraint(equalTo: runeOne.rightAnchor, constant: 2).isActive = true
         
         addSubview(summonerName)
-        summonerName.topAnchor.constraint(equalTo: tierLabel.topAnchor).isActive = true
-        summonerName.leftAnchor.constraint(equalTo: tierLabel.rightAnchor, constant: 2).isActive = true
+        summonerName.anchors(top: tierLabel.topAnchor, left: tierLabel.rightAnchor, leftConstant: 2)
+//        summonerName.topAnchor.constraint(equalTo: tierLabel.topAnchor).isActive = true
+//        summonerName.leftAnchor.constraint(equalTo: tierLabel.rightAnchor, constant: 2).isActive = true
         
         addSubview(kdaLabel)
-        kdaLabel.leftAnchor.constraint(equalTo: runeTwo.rightAnchor, constant: 2).isActive = true
-        kdaLabel.bottomAnchor.constraint(equalTo: runeTwo.bottomAnchor).isActive = true
-        
+        kdaLabel.anchors(bottom: runeTwo.bottomAnchor, left: runeTwo.rightAnchor, leftConstant: 2)
+//        kdaLabel.leftAnchor.constraint(equalTo: runeTwo.rightAnchor, constant: 2).isActive = true
+//        kdaLabel.bottomAnchor.constraint(equalTo: runeTwo.bottomAnchor).isActive = true
+
         addSubview(kdaRatio)
-        kdaRatio.leftAnchor.constraint(equalTo: kdaLabel.rightAnchor, constant: 2).isActive = true
-        kdaRatio.bottomAnchor.constraint(equalTo: kdaLabel.bottomAnchor).isActive = true
+        kdaRatio.anchors(bottom: kdaLabel.bottomAnchor, left: kdaLabel.rightAnchor, leftConstant: 2)
+//        kdaRatio.leftAnchor.constraint(equalTo: kdaLabel.rightAnchor, constant: 2).isActive = true
+//        kdaRatio.bottomAnchor.constraint(equalTo: kdaLabel.bottomAnchor).isActive = true
         
         addSubview(itemSeven)
-        itemSeven.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        itemSeven.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        itemSeven.topAnchor.constraint(equalTo: topAnchor, constant: 4).isActive = true
-        itemSeven.rightAnchor.constraint(equalTo: rightAnchor, constant: -4).isActive = true
+        itemSeven.anchors(top: topAnchor, topConstant: 4, right: rightAnchor, rightConstant: -4, widthValue: 20, heightValue: 20)
+//        itemSeven.widthAnchor.constraint(equalToConstant: 20).isActive = true
+//        itemSeven.heightAnchor.constraint(equalToConstant: 20).isActive = true
+//        itemSeven.topAnchor.constraint(equalTo: topAnchor, constant: 4).isActive = true
+//        itemSeven.rightAnchor.constraint(equalTo: rightAnchor, constant: -4).isActive = true
         
         addSubview(itemSix)
-        itemSix.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        itemSix.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        itemSix.rightAnchor.constraint(equalTo: itemSeven.leftAnchor, constant: -2).isActive = true
-        itemSix.topAnchor.constraint(equalTo: itemSeven.topAnchor).isActive = true
+        itemSix.anchors(top: itemSeven.topAnchor, right: itemSeven.leftAnchor, rightConstant: -2, widthValue: 20, heightValue: 20)
+//        itemSix.widthAnchor.constraint(equalToConstant: 20).isActive = true
+//        itemSix.heightAnchor.constraint(equalToConstant: 20).isActive = true
+//        itemSix.rightAnchor.constraint(equalTo: itemSeven.leftAnchor, constant: -2).isActive = true
+//        itemSix.topAnchor.constraint(equalTo: itemSeven.topAnchor).isActive = true
         
         addSubview(itemFive)
-        itemFive.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        itemFive.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        itemFive.rightAnchor.constraint(equalTo: itemSix.leftAnchor, constant: -2).isActive = true
-        itemFive.topAnchor.constraint(equalTo: itemSeven.topAnchor).isActive = true
+        itemFive.anchors(top: itemSeven.topAnchor, right: itemSix.leftAnchor, rightConstant: -2, widthValue: 20, heightValue: 20)
+//        itemFive.widthAnchor.constraint(equalToConstant: 20).isActive = true
+//        itemFive.heightAnchor.constraint(equalToConstant: 20).isActive = true
+//        itemFive.rightAnchor.constraint(equalTo: itemSix.leftAnchor, constant: -2).isActive = true
+//        itemFive.topAnchor.constraint(equalTo: itemSeven.topAnchor).isActive = true
         
         addSubview(itemFour)
-        itemFour.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        itemFour.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        itemFour.rightAnchor.constraint(equalTo: itemFive.leftAnchor, constant: -2).isActive = true
-        itemFour.topAnchor.constraint(equalTo: itemSeven.topAnchor).isActive = true
+        itemFour.anchors(top: itemSeven.topAnchor, right: itemFive.leftAnchor, rightConstant: -2, widthValue: 20, heightValue: 20)
+//        itemFour.widthAnchor.constraint(equalToConstant: 20).isActive = true
+//        itemFour.heightAnchor.constraint(equalToConstant: 20).isActive = true
+//        itemFour.rightAnchor.constraint(equalTo: itemFive.leftAnchor, constant: -2).isActive = true
+//        itemFour.topAnchor.constraint(equalTo: itemSeven.topAnchor).isActive = true
         
         addSubview(itemThree)
-        itemThree.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        itemThree.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        itemThree.rightAnchor.constraint(equalTo: itemFour.leftAnchor, constant: -2).isActive = true
-        itemThree.topAnchor.constraint(equalTo: itemSeven.topAnchor).isActive = true
+        itemThree.anchors(top: itemSeven.topAnchor, right: itemFour.leftAnchor, rightConstant: -2, widthValue: 20, heightValue: 20)
+//        itemThree.widthAnchor.constraint(equalToConstant: 20).isActive = true
+//        itemThree.heightAnchor.constraint(equalToConstant: 20).isActive = true
+//        itemThree.rightAnchor.constraint(equalTo: itemFour.leftAnchor, constant: -2).isActive = true
+//        itemThree.topAnchor.constraint(equalTo: itemSeven.topAnchor).isActive = true
         
         addSubview(itemTwo)
-        itemTwo.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        itemTwo.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        itemTwo.rightAnchor.constraint(equalTo: itemThree.leftAnchor, constant: -2).isActive = true
-        itemTwo.topAnchor.constraint(equalTo: itemSeven.topAnchor).isActive = true
+        itemTwo.anchors(top: itemSeven.topAnchor, right: itemThree.leftAnchor, rightConstant: -2, widthValue: 20, heightValue: 20)
+//        itemTwo.widthAnchor.constraint(equalToConstant: 20).isActive = true
+//        itemTwo.heightAnchor.constraint(equalToConstant: 20).isActive = true
+//        itemTwo.rightAnchor.constraint(equalTo: itemThree.leftAnchor, constant: -2).isActive = true
+//        itemTwo.topAnchor.constraint(equalTo: itemSeven.topAnchor).isActive = true
         
         addSubview(itemOne)
-        itemOne.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        itemOne.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        itemOne.rightAnchor.constraint(equalTo: itemTwo.leftAnchor, constant: -2).isActive = true
-        itemOne.topAnchor.constraint(equalTo: itemSeven.topAnchor).isActive = true
+        itemOne.anchors(top: itemSeven.topAnchor, right: itemTwo.leftAnchor, rightConstant: -2, widthValue: 20, heightValue: 20)
+//        itemOne.widthAnchor.constraint(equalToConstant: 20).isActive = true
+//        itemOne.heightAnchor.constraint(equalToConstant: 20).isActive = true
+//        itemOne.rightAnchor.constraint(equalTo: itemTwo.leftAnchor, constant: -2).isActive = true
+//        itemOne.topAnchor.constraint(equalTo: itemSeven.topAnchor).isActive = true
         
         addSubview(minionsGoldLabel)
-        minionsGoldLabel.leftAnchor.constraint(equalTo: itemOne.leftAnchor).isActive = true
-        minionsGoldLabel.bottomAnchor.constraint(equalTo: kdaRatio.bottomAnchor).isActive = true
+        minionsGoldLabel.anchors(bottom: kdaRatio.bottomAnchor, left: itemOne.leftAnchor)
+//        minionsGoldLabel.leftAnchor.constraint(equalTo: itemOne.leftAnchor).isActive = true
+//        minionsGoldLabel.bottomAnchor.constraint(equalTo: kdaRatio.bottomAnchor).isActive = true
         
         addSubview(damageBar)
-        damageBar.rightAnchor.constraint(equalTo: itemSeven.rightAnchor).isActive = true
-        damageBar.bottomAnchor.constraint(equalTo: kdaRatio.bottomAnchor).isActive = true
-        damageBar.leftAnchor.constraint(equalTo: itemFive.leftAnchor).isActive = true
-        damageBar.topAnchor.constraint(equalTo: itemSix.bottomAnchor, constant: 8).isActive = true
+        damageBar.anchors(top: itemSix.bottomAnchor, topConstant: 8, bottom: kdaRatio.bottomAnchor, left: itemFive.leftAnchor, right: itemSeven.rightAnchor)
+//        damageBar.rightAnchor.constraint(equalTo: itemSeven.rightAnchor).isActive = true
+//        damageBar.bottomAnchor.constraint(equalTo: kdaRatio.bottomAnchor).isActive = true
+//        damageBar.leftAnchor.constraint(equalTo: itemFive.leftAnchor).isActive = true
+//        damageBar.topAnchor.constraint(equalTo: itemSix.bottomAnchor, constant: 8).isActive = true
     }
 }

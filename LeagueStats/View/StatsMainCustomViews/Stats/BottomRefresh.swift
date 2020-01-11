@@ -20,8 +20,9 @@ class BottomRefresh: UICollectionViewCell{
         
         addSubview(indicator)
         
-        indicator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        indicator.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        indicator.anchors(centerX: centerXAnchor, centerY: centerYAnchor)
+//        indicator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+//        indicator.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
     
     required init?(coder: NSCoder) {

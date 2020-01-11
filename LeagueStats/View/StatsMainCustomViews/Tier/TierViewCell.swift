@@ -87,22 +87,27 @@ class TierViewCell: UICollectionViewCell{
         addSubview(pointLabel)
         addSubview(winRateLabel)
         
-        tierImg.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        tierImg.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
-        tierImg.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        tierImg.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        tierImg.anchors(centerY: centerYAnchor, left: leftAnchor, leftConstant: 10, widthValue: 50, heightValue: 50)
+//        tierImg.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+//        tierImg.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
+//        tierImg.widthAnchor.constraint(equalToConstant: 50).isActive = true
+//        tierImg.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        typeLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5).isActive = true
-        typeLabel.leftAnchor.constraint(equalTo: tierImg.rightAnchor, constant: 10).isActive = true
+        typeLabel.anchors(top: topAnchor, topConstant: 5, left: tierImg.rightAnchor, rightConstant: 10)
+//        typeLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5).isActive = true
+//        typeLabel.leftAnchor.constraint(equalTo: tierImg.rightAnchor, constant: 10).isActive = true
         
-        tierLabel.topAnchor.constraint(equalTo: typeLabel.bottomAnchor, constant: 2).isActive  = true
-        tierLabel.leftAnchor.constraint(equalTo: typeLabel.leftAnchor).isActive = true
+        tierLabel.anchors(top: typeLabel.bottomAnchor, topConstant: 2, left: typeLabel.leftAnchor)
+//        tierLabel.topAnchor.constraint(equalTo: typeLabel.bottomAnchor, constant: 2).isActive  = true
+//        tierLabel.leftAnchor.constraint(equalTo: typeLabel.leftAnchor).isActive = true
         
-        pointLabel.topAnchor.constraint(equalTo: tierLabel.bottomAnchor, constant: 2).isActive = true
-        pointLabel.leftAnchor.constraint(equalTo: tierLabel.leftAnchor).isActive = true
+        pointLabel.anchors(top: tierLabel.bottomAnchor, topConstant: 2, left: tierLabel.leftAnchor)
+//        pointLabel.topAnchor.constraint(equalTo: tierLabel.bottomAnchor, constant: 2).isActive = true
+//        pointLabel.leftAnchor.constraint(equalTo: tierLabel.leftAnchor).isActive = true
         
-        winRateLabel.topAnchor.constraint(equalTo: pointLabel.bottomAnchor, constant: 2).isActive = true
-        winRateLabel.leftAnchor.constraint(equalTo: pointLabel.leftAnchor).isActive = true
+        winRateLabel.anchors(top: pointLabel.bottomAnchor, topConstant: 2, left: pointLabel.leftAnchor)
+//        winRateLabel.topAnchor.constraint(equalTo: pointLabel.bottomAnchor, constant: 2).isActive = true
+//        winRateLabel.leftAnchor.constraint(equalTo: pointLabel.leftAnchor).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
