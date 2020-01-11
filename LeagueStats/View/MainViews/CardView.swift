@@ -14,8 +14,10 @@ class CardView: UIView{
     var entries: [LeagueEntry]?{
         didSet{
             if let entry = entries{
-                DispatchQueue.main.async {
-                    self.tierLabel.text = "\(entry[0].tier) \(entry[0].rank) (\(entry[0].leaguePoints))"
+                if entry.count != 0 {
+                    DispatchQueue.main.async {
+                        self.tierLabel.text = "\(entry[0].tier) \(entry[0].rank) (\(entry[0].leaguePoints))"
+                    }
                 }
             }
         }

@@ -52,22 +52,91 @@ class ViewController: UIViewController{
         return view
     }()
     
+//    let blurredView: UIVisualEffectView = {
+//       let blurredView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+//        blurredView.frame = UIScreen.main.bounds
+//        blurredView.translatesAutoresizingMaskIntoConstraints = false
+//        return blurredView
+//    }()
+    
+    private var isMenuPresented = false
+    
+    let menuView: UIView = {
+        let view = UIView()
+        view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width * 0.25, height: UIScreen.main.bounds.height)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private var leftButton = UIBarButtonItem()
+    private var rightButton = UIBarButtonItem()
+    
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
         cardView.showAnimatedSkeleton()
-        
+        setUpNavigationController()
         setUpViews()
         setUpTapReconizer()
         setUpViewAboveKB()
     }
-    
-    
 }
 
 // MARK: - other functions
 extension ViewController{
+    
+    @objc
+    fileprivate func handleRightButton(){
+        print("right button has been pressed")
+    }
+    
+    @objc
+    fileprivate func handleLeftButton(){
+        print("left button pressed")
+        self.isMenuPresented.toggle()
+        UIView.animate(withDuration: 0.5) {
+            self.menuView.transform = CGAffineTransform(translationX: self.isMenuPresented ? UIScreen.main.bounds.width * 0.25 : -UIScreen.main.bounds.width * 0.25, y: 0)
+            self.tabBarController?.view.transform = CGAffineTransform(translationX: self.isMenuPresented ? UIScreen.main.bounds.width * 0.25 : 0, y: 0)
+        }
+    }
+    
+    /// init left and right buttons
+    fileprivate func setupUIBarButtons(){
+        if #available(iOS 13.0, *) {
+            let img = UIImage(systemName: "line.horizontal.3.decrease")
+            img?.withRenderingMode(.alwaysTemplate)
+            img?.withTintColor(.winColor)
+            leftButton.image = img
+            leftButton.target = self
+            leftButton.action = #selector(handleLeftButton)
+        } else {
+            // Fallback on earlier versions
+            leftButton = UIBarButtonItem(title: "More", style: .plain, target: self, action: #selector(handleLeftButton))
+        }
+        
+        if #available(iOS 13.0, *) {
+            let img = UIImage(systemName: "ellipsis")
+            img?.withRenderingMode(.alwaysTemplate)
+            img?.withTintColor(.winColor)
+            rightButton.image = img
+            rightButton.target = self
+            rightButton.action = #selector(handleRightButton)
+        } else {
+            // Fallback on earlier versions
+            rightButton = UIBarButtonItem(title: "More", style: .plain, target: self, action: #selector(handleRightButton))
+        }
+    }
+    
+    
+    /// set up navigation bar title and left and right buttons
+    fileprivate func setUpNavigationController(){
+        setupUIBarButtons()
+        
+        navigationController?.navigationBar.topItem?.title = "League of Legends"
+        navigationController?.navigationBar.topItem?.leftBarButtonItem = leftButton
+        navigationController?.navigationBar.topItem?.rightBarButtonItem = rightButton
+    }
     
     fileprivate func setUpViewAboveKB(){
         viewAboveKB.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismissKeyBoard)))
@@ -86,6 +155,9 @@ extension ViewController{
         view.addSubview(nameText)
         view.addSubview(heroImg)
         view.addSubview(cardView)
+        view.addSubview(menuView)
+        
+        menuView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: -UIScreen.main.bounds.width * 0.25).isActive = true
         
         heroImg.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         heroImg.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true

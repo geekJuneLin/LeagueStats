@@ -261,8 +261,10 @@ extension StatsMainViewController{
             
             if let summoner = summoner{
                 ClientAPI.shard.getSummonerInfo { (entry) in
-                    let summonerInfo: SummonerInfoModel = SummonerInfoModel(name: summoner.name, level: summoner.level, tier: "\(entry[0].tier) \(entry[0].rank)", points: entry[0].leaguePoints)
-                    header.summonerInfo = summonerInfo
+                    if entry.count != 0{
+                        let summonerInfo: SummonerInfoModel = SummonerInfoModel(name: summoner.name, level: summoner.level, tier: "\(entry[0].tier) \(entry[0].rank)", points: entry[0].leaguePoints)
+                        header.summonerInfo = summonerInfo
+                    }
                 }
             }
             

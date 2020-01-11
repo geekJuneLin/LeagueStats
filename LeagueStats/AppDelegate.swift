@@ -17,12 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // set API key
-        ClientAPI.shard.setApiKey("RGAPI-d1d38344-7875-4d0e-806c-0efa4962a57c")
+        ClientAPI.shard.setApiKey("RGAPI-b5ac7cb0-6bb5-445a-8961-6f0e675a74da")
         
         window = UIWindow(frame: UIScreen.main.bounds)
+        window?.backgroundColor = .darkGray
         window?.makeKeyAndVisible()
         
-        let controller = ViewController();
+        let controller = TarBarHomeViewController();
         window?.rootViewController = controller
         
         return true

@@ -19,6 +19,7 @@
 		8E33B27123B83BEB00D7BA08 /* UIImageView+loadImgWithUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33B27023B83BEB00D7BA08 /* UIImageView+loadImgWithUrl.swift */; };
 		8E33B27323B8A29B00D7BA08 /* UIColor+CustomizedColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33B27223B8A29B00D7BA08 /* UIColor+CustomizedColor.swift */; };
 		8E35F91D23C0042B006143B0 /* MatchStatsCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E35F91C23C0042B006143B0 /* MatchStatsCellModel.swift */; };
+		8E3A4FB423C93886006728DF /* TarBarHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3A4FB323C93886006728DF /* TarBarHomeViewController.swift */; };
 		8E40CA7623932BD800848F42 /* StatsMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40CA7523932BD800848F42 /* StatsMainViewController.swift */; };
 		8E40CA7823933F8700848F42 /* StatsTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40CA7723933F8700848F42 /* StatsTopView.swift */; };
 		8E52CD692396030700F8178B /* TierModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E52CD682396030700F8178B /* TierModel.swift */; };
@@ -79,6 +80,7 @@
 		8E33B27023B83BEB00D7BA08 /* UIImageView+loadImgWithUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+loadImgWithUrl.swift"; sourceTree = "<group>"; };
 		8E33B27223B8A29B00D7BA08 /* UIColor+CustomizedColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomizedColor.swift"; sourceTree = "<group>"; };
 		8E35F91C23C0042B006143B0 /* MatchStatsCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchStatsCellModel.swift; sourceTree = "<group>"; };
+		8E3A4FB323C93886006728DF /* TarBarHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TarBarHomeViewController.swift; sourceTree = "<group>"; };
 		8E40CA7523932BD800848F42 /* StatsMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsMainViewController.swift; sourceTree = "<group>"; };
 		8E40CA7723933F8700848F42 /* StatsTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTopView.swift; sourceTree = "<group>"; };
 		8E52CD682396030700F8178B /* TierModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierModel.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				8E70F4DA23920AA0005847E3 /* StatsViewNaviController.swift */,
 				8E40CA7523932BD800848F42 /* StatsMainViewController.swift */,
 				8ED2C733239C939700E132C8 /* MatchStatsViewController.swift */,
+				8E3A4FB323C93886006728DF /* TarBarHomeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -506,6 +509,7 @@
 				8EE2C791238FB83D00CE710B /* ViewController.swift in Sources */,
 				8E9C505C23B99B47005473F3 /* MatchStats.swift in Sources */,
 				8E2FE6102398A1DD000117A7 /* StatsItemView.swift in Sources */,
+				8E3A4FB423C93886006728DF /* TarBarHomeViewController.swift in Sources */,
 				8EE2C78F238FB83D00CE710B /* AppDelegate.swift in Sources */,
 				8EAE89D42395356B003D32B3 /* StatsViewCell.swift in Sources */,
 				8E33B26F23B7FD5F00D7BA08 /* DismissTransitioning.swift in Sources */,
