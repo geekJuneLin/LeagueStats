@@ -53,12 +53,8 @@ class DamageBar: UIView{
     fileprivate func setUpViews(){
         addSubview(dmgView)
         dmgView.anchors(left: leftAnchor, height: heightAnchor, heightValue: 1)
-//        dmgView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-//        dmgView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
         
         addSubview(dmgLabel)
         dmgLabel.anchors(centerY: centerYAnchor, right: rightAnchor, rightConstant: -2)
-//        dmgLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-//        dmgLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -2).isActive = true
     }
 }

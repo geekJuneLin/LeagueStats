@@ -59,29 +59,17 @@ class TitleView: UIView{
         addSubview(title)
         
         title.anchors(centerY: centerYAnchor, left: leftAnchor, leftConstant: 8, height: heightAnchor, heightValue: 0.8)
-//        title.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.8).isActive = true
-//        title.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-//        title.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
         
         addSubview(time)
         
         time.anchors(centerY: centerYAnchor, right: rightAnchor, rightConstant: -8, height: heightAnchor, heightValue: 0.5)
-//        time.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5).isActive = true
-//        time.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-//        time.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
         
         addSubview(date)
         
         date.anchors(centerY: centerYAnchor, right: time.leftAnchor, rightConstant: -8, height: heightAnchor, heightValue: 0.8)
-//        date.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.8).isActive = true
-//        date.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-//        date.rightAnchor.constraint(equalTo: time.leftAnchor, constant: -8).isActive = true
         
         addSubview(gameType)
         
         gameType.anchors(centerY: centerYAnchor, right: date.leftAnchor, rightConstant: -8, height: heightAnchor, heightValue: 0.8)
-//        gameType.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.8).isActive = true
-//        gameType.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-//        gameType.rightAnchor.constraint(equalTo: date.leftAnchor, constant: -8).isActive = true
     }
 }

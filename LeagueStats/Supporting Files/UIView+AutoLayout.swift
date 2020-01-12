@@ -39,8 +39,8 @@ extension UIView{
                            bottom != nil ? self.bottomAnchor.constraint(equalTo: bottom!, constant: bottomConstant) : nil,
                            left != nil ? self.leftAnchor.constraint(equalTo: left!, constant: leftConstant) : nil,
                            right != nil ? self.rightAnchor.constraint(equalTo: right!, constant: rightConstant) : nil,
-                           width != nil ? self.widthAnchor.constraint(equalTo: width!, multiplier: widthValue) : self.widthAnchor.constraint(equalToConstant: widthValue),
-                           height != nil ? self.heightAnchor.constraint(equalTo: height!, multiplier: heightValue) : self.heightAnchor.constraint(equalToConstant: heightValue)]
+                           width != nil ? self.widthAnchor.constraint(equalTo: width!, multiplier: widthValue) : widthValue != 0 ? self.widthAnchor.constraint(equalToConstant: widthValue) : nil,
+                           height != nil ? self.heightAnchor.constraint(equalTo: height!, multiplier: heightValue) : heightValue != 0 ? self.heightAnchor.constraint(equalToConstant: heightValue) : nil]
         
         constraints.forEach({
             $0?.isActive = true
