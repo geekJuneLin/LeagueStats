@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ClientAPI.shard.setApiKey("RGAPI-718c9642-1545-4fa7-95aa-f6273cadd813")
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.backgroundColor = .darkGray
+        window?.backgroundColor = .clear
         window?.makeKeyAndVisible()
         
         let controller = TarBarHomeViewController();

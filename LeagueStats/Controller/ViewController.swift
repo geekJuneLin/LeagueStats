@@ -57,7 +57,45 @@ class ViewController: UIViewController{
     
     let menuView: UIView = {
         let view = UIView()
-        view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width * 0.25, height: UIScreen.main.bounds.height)
+        view.backgroundColor = .darkGray
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let accountImg: UIButton = {
+       let view = UIButton(type: .system)
+        if #available(iOS 13.0, *) {
+            let img = UIImage(systemName: "person")
+            img?.withRenderingMode(.alwaysTemplate)
+            view.setTitle("Account", for: .normal)
+//            view.setImage(img, for: .normal)
+            view.isUserInteractionEnabled = true
+            view.isEnabled = true
+            view.addTarget(self, action: #selector(handleAccountImgClick), for: .touchUpInside)
+        } else {
+            // Fallback on earlier versions
+        }
+        view.tintColor = UIColor(white: 0.6, alpha: 0.8)
+        view.backgroundColor = .lightGray
+        view.layer.masksToBounds = true
+        view.layer.cornerRadius = 20
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let setting: UIButton = {
+        let view = UIButton(type: .system)
+        if #available(iOS 13.0, *) {
+            let img = UIImage(systemName: "wrench")
+            img?.withRenderingMode(.alwaysTemplate)
+            view.setImage(img, for: .normal)
+        } else {
+            // Fallback on earlier versions
+        }
+        view.tintColor = UIColor(white: 0.6, alpha: 0.8)
+        view.backgroundColor = .lightGray
+        view.layer.masksToBounds = true
+        view.layer.cornerRadius = 20
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -79,18 +117,9 @@ class ViewController: UIViewController{
 
 // MARK: - other functions
 extension ViewController{
-    
-    @objc
-    fileprivate func handleRightButton(){
-        print("right button has been pressed")
-    }
-    
-    @objc
-    fileprivate func handleLeftButton(){
-        print("left button pressed")
+    fileprivate func hideOrShowMenuView(){
         self.isMenuPresented.toggle()
         UIView.animate(withDuration: 0.5) {
-            self.menuView.transform = CGAffineTransform(translationX: self.isMenuPresented ? UIScreen.main.bounds.width * 0.25 : -UIScreen.main.bounds.width * 0.25, y: 0)
             self.tabBarController?.view.transform = CGAffineTransform(translationX: self.isMenuPresented ? UIScreen.main.bounds.width * 0.25 : 0, y: 0)
         }
     }
@@ -144,16 +173,23 @@ extension ViewController{
         view.backgroundColor = .white
         
         cardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleClick)))
+        tabBarController?.view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:))))
         
         view.addSubview(nameLabel)
         view.addSubview(nameText)
         view.addSubview(heroImg)
         view.addSubview(cardView)
-        view.addSubview(menuView)
+        tabBarController?.view.addSubview(menuView)
         
-        menuView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: -UIScreen.main.bounds.width * 0.25).isActive = true
+        menuView.addSubview(accountImg)
+        menuView.addSubview(setting)
         
-        heroImg.anchors(centerX: view.centerXAnchor, XConstant: 0, centerY: nil, YConstant: 0, top: view.safeAreaLayoutGuide.topAnchor, topConstant: 15, widthValue: 80, heightValue: 50)
+        setting.anchors(centerX: menuView.centerXAnchor, bottom: menuView.bottomAnchor, bottomConstant: -25, widthValue: 40, heightValue: 40)
+        accountImg.anchors(centerX: menuView.centerXAnchor, bottom: setting.topAnchor, bottomConstant: -10, widthValue: 40, heightValue: 40)
+        
+        menuView.anchors(right: (tabBarController?.view.leftAnchor)!, widthValue: UIScreen.main.bounds.width * 0.25, heightValue: UIScreen.main.bounds.height)
+        
+        heroImg.anchors(centerX: view.centerXAnchor, top: view.safeAreaLayoutGuide.topAnchor, topConstant: 15, widthValue: 80, heightValue: 50)
         
         nameLabel.anchors(top: heroImg.bottomAnchor, topConstant: 20, left: view.safeAreaLayoutGuide.leftAnchor, leftConstant: 20)
         
@@ -193,7 +229,8 @@ extension ViewController{
     }
     
     /// handle the click event of the card view
-    @objc fileprivate func handleClick(){
+    @objc
+    fileprivate func handleClick(){
         print("Card view clicked!")
         let viewController = StatsViewNaviController()
 
@@ -201,6 +238,32 @@ extension ViewController{
         viewController.modalPresentationStyle = .custom
         viewController.transitioningDelegate = self
         self.present(viewController, animated: true, completion: nil)
+    }
+    
+    
+    @objc
+    fileprivate func handleRightButton(){
+        print("right button has been pressed")
+    }
+    
+    @objc
+    fileprivate func handleLeftButton(){
+        print("left button pressed")
+        hideOrShowMenuView()
+    }
+    
+    @objc
+    fileprivate func handlePanGesture(_ reconizer: UIPanGestureRecognizer){
+        let value = reconizer.velocity(in: self.tabBarController?.view)
+        print("\(value)")
+        if abs(value.x) > abs(value.y){
+            hideOrShowMenuView()
+        }
+    }
+    
+    @objc
+    fileprivate func handleAccountImgClick(){
+        print("account image pressed!")
     }
 }
 
