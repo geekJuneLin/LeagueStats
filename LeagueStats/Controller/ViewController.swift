@@ -57,7 +57,7 @@ class ViewController: UIViewController{
     
     let menuView: UIView = {
         let view = UIView()
-        view.backgroundColor = .darkGray
+        view.backgroundColor = UIColor(red: 66/255, green: 66/255, blue: 65/255, alpha: 1.0)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -67,18 +67,16 @@ class ViewController: UIViewController{
         if #available(iOS 13.0, *) {
             let img = UIImage(systemName: "person")
             img?.withRenderingMode(.alwaysTemplate)
-            view.setTitle("Account", for: .normal)
-//            view.setImage(img, for: .normal)
+            view.setImage(img, for: .normal)
             view.isUserInteractionEnabled = true
             view.isEnabled = true
-            view.addTarget(self, action: #selector(handleAccountImgClick), for: .touchUpInside)
         } else {
             // Fallback on earlier versions
         }
         view.tintColor = UIColor(white: 0.6, alpha: 0.8)
-        view.backgroundColor = .lightGray
+        view.backgroundColor = UIColor(red: 92/255, green: 91/255, blue: 90/255, alpha: 1.0)
         view.layer.masksToBounds = true
-        view.layer.cornerRadius = 20
+        view.layer.cornerRadius = 25
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -93,9 +91,9 @@ class ViewController: UIViewController{
             // Fallback on earlier versions
         }
         view.tintColor = UIColor(white: 0.6, alpha: 0.8)
-        view.backgroundColor = .lightGray
+        view.backgroundColor = UIColor(red: 92/255, green: 91/255, blue: 90/255, alpha: 1.0)
         view.layer.masksToBounds = true
-        view.layer.cornerRadius = 20
+        view.layer.cornerRadius = 25
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -110,6 +108,7 @@ class ViewController: UIViewController{
         cardView.showAnimatedSkeleton()
         setUpNavigationController()
         setUpViews()
+        setupSlideMenuView()
         setUpTapReconizer()
         setUpViewAboveKB()
     }
@@ -121,6 +120,7 @@ extension ViewController{
         self.isMenuPresented.toggle()
         UIView.animate(withDuration: 0.5) {
             self.tabBarController?.view.transform = CGAffineTransform(translationX: self.isMenuPresented ? UIScreen.main.bounds.width * 0.25 : 0, y: 0)
+            self.menuView.transform = CGAffineTransform(translationX: self.isMenuPresented ? 0 : -UIScreen.main.bounds.width * 0.25, y: 0)
         }
     }
     
@@ -171,23 +171,12 @@ extension ViewController{
     /// set up all the views
     fileprivate func setUpViews(){
         view.backgroundColor = .white
-        
         cardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleClick)))
-        tabBarController?.view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:))))
         
         view.addSubview(nameLabel)
         view.addSubview(nameText)
         view.addSubview(heroImg)
         view.addSubview(cardView)
-        tabBarController?.view.addSubview(menuView)
-        
-        menuView.addSubview(accountImg)
-        menuView.addSubview(setting)
-        
-        setting.anchors(centerX: menuView.centerXAnchor, bottom: menuView.bottomAnchor, bottomConstant: -25, widthValue: 40, heightValue: 40)
-        accountImg.anchors(centerX: menuView.centerXAnchor, bottom: setting.topAnchor, bottomConstant: -10, widthValue: 40, heightValue: 40)
-        
-        menuView.anchors(right: (tabBarController?.view.leftAnchor)!, widthValue: UIScreen.main.bounds.width * 0.25, heightValue: UIScreen.main.bounds.height)
         
         heroImg.anchors(centerX: view.centerXAnchor, top: view.safeAreaLayoutGuide.topAnchor, topConstant: 15, widthValue: 80, heightValue: 50)
         
@@ -214,6 +203,26 @@ extension ViewController{
         cardView.hideSkeleton()
     }
     
+    fileprivate func setupSlideMenuView(){
+        if let window = UIApplication.shared.keyWindow{
+            menuView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleMenuViewClick)))
+            menuView.transform = CGAffineTransform(translationX: -UIScreen.main.bounds.width * 0.25, y: 0)
+            
+            window.addSubview(menuView)
+            menuView.anchors(left: window.rootViewController!.view.leftAnchor, widthValue: UIScreen.main.bounds.width * 0.25, heightValue: UIScreen.main.bounds.height)
+            
+            accountImg.addTarget(self, action: #selector(handleAccountImgClick), for: .touchUpInside)
+            setting.addTarget(self, action: #selector(handleSettingClick), for: .touchUpInside)
+            menuView.addSubview(setting)
+            setting.anchors(centerX: menuView.centerXAnchor, bottom: menuView.bottomAnchor, bottomConstant: -10, widthValue: 50, heightValue: 50)
+            menuView.addSubview(accountImg)
+            accountImg.anchors(centerX: menuView.centerXAnchor, bottom: setting.topAnchor, bottomConstant: -10, widthValue: 50, heightValue: 50)
+        }
+    }
+}
+
+// MARK: - selector functions
+extension ViewController{
     @objc
     fileprivate func handleDismissKeyBoard(){
         if isTapping{
@@ -244,6 +253,9 @@ extension ViewController{
     @objc
     fileprivate func handleRightButton(){
         print("right button has been pressed")
+        let serverController = ServerSelectionViewController()
+        serverController.modalPresentationStyle = .overFullScreen
+        self.present(serverController, animated: true, completion: nil)
     }
     
     @objc
@@ -253,17 +265,22 @@ extension ViewController{
     }
     
     @objc
-    fileprivate func handlePanGesture(_ reconizer: UIPanGestureRecognizer){
-        let value = reconizer.velocity(in: self.tabBarController?.view)
-        print("\(value)")
-        if abs(value.x) > abs(value.y){
-            hideOrShowMenuView()
+    fileprivate func handleMenuViewClick(){
+        isMenuPresented.toggle()
+        UIView.animate(withDuration: 0.5) {
+            self.tabBarController?.view.transform = CGAffineTransform(translationX: self.isMenuPresented ? UIScreen.main.bounds.width * 0.25 : 0, y: 0)
+            self.menuView.transform = CGAffineTransform(translationX: self.isMenuPresented ? 0 : -UIScreen.main.bounds.width * 0.25, y: 0)
         }
     }
     
     @objc
     fileprivate func handleAccountImgClick(){
         print("account image pressed!")
+    }
+    
+    @objc
+    fileprivate func handleSettingClick(){
+        print("setting image pressed!")
     }
 }
 
