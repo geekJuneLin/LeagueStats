@@ -13,7 +13,9 @@ class ViewController: UIViewController{
     
     // MARK: - Variables
     
-    var isTapping = false
+    private var isTapping = false
+    
+    private var isMenuPresented = false
     
     let heroImg: UIImageView = {
        let view = UIImageView()
@@ -51,9 +53,6 @@ class ViewController: UIViewController{
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-    
-    private var isMenuPresented = false
     
     let menuView: UIView = {
         let view = UIView()
@@ -150,7 +149,6 @@ extension ViewController{
             rightButton = UIBarButtonItem(title: "More", style: .plain, target: self, action: #selector(handleRightButton))
         }
     }
-    
     
     /// set up navigation bar title and left and right buttons
     fileprivate func setUpNavigationController(){

@@ -90,7 +90,7 @@ class StatsTopView: UICollectionReusableView{
         
         levelLabel.anchors(centerX: heroImg.centerXAnchor, bottom: heroImg.bottomAnchor)
         
-        nameLabel.anchors(top: heroImg.topAnchor, topConstant: 15, left: heroImg.rightAnchor, rightConstant: 10)
+        nameLabel.anchors(top: heroImg.topAnchor, topConstant: 15, left: heroImg.rightAnchor, leftConstant: 10)
         
         tierLabel.anchors(top: nameLabel.bottomAnchor, topConstant: 5, left: nameLabel.leftAnchor)
     }
