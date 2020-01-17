@@ -26,7 +26,7 @@ extension UIImageView{
         guard let cUrl = URL(string: url) else{ return }
         URLSession.shared.dataTask(with: cUrl, completionHandler: { (data, response, error) in
             guard error == nil else{
-                print("Executing url with error \(error)")
+                print("Executing url with error \(String(describing: error))")
                 return
             }
             guard let response = response as? HTTPURLResponse, response.statusCode == 200,

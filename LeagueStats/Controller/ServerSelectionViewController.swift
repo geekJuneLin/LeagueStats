@@ -11,7 +11,7 @@ import UIKit
 class ServerSelectionViewController: UIViewController{
     
     let serverCollectionView: UICollectionView = {
-       let view = UICollectionView()
+        let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

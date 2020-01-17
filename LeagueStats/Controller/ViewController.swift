@@ -9,6 +9,10 @@
 import UIKit
 import SkeletonView
 
+protocol selectServerDelegate{
+    func selectedServer(_ name: String)
+}
+
 class ViewController: UIViewController{
     
     // MARK: - Variables
@@ -94,6 +98,19 @@ class ViewController: UIViewController{
         view.layer.masksToBounds = true
         view.layer.cornerRadius = 25
         view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let serverView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        return view
+    }()
+    
+    let serverCollectionView: ServerCollectionView = {
+       let view = ServerCollectionView()
+        view.backgroundColor = .cyan
+        view.layer.masksToBounds = true
+        view.layer.cornerRadius = 15
         return view
     }()
     
@@ -251,9 +268,25 @@ extension ViewController{
     @objc
     fileprivate func handleRightButton(){
         print("right button has been pressed")
-        let serverController = ServerSelectionViewController()
-        serverController.modalPresentationStyle = .overFullScreen
-        self.present(serverController, animated: true, completion: nil)
+//        let serverController = ServerSelectionViewController()
+//        serverController.modalPresentationStyle = .overFullScreen
+//        self.present(serverController, animated: true, completion: nil)
+        
+        if let window = UIApplication.shared.keyWindow{
+            window.addSubview(serverView)
+            serverView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleServerSelection)))
+            serverView.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+            serverView.alpha = 0
+            
+            window.addSubview(serverCollectionView)
+            serverCollectionView.delegate = self
+            serverCollectionView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.7)
+            
+            UIView.animate(withDuration: 0.5) {
+                self.serverView.alpha = 1
+                self.serverCollectionView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height * 0.3, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.7)
+            }
+        }
     }
     
     @objc
@@ -280,6 +313,20 @@ extension ViewController{
     fileprivate func handleSettingClick(){
         print("setting image pressed!")
     }
+    
+    @objc
+    fileprivate func handleServerSelection(_ view: UIView){
+        UIView.animate(withDuration: 0.5) {
+            
+        }
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.serverView.alpha = 0
+            self.serverCollectionView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.7)
+        }) { (finished) in
+            self.serverView.removeFromSuperview()
+        }
+    }
 }
 
 // MARK: - UITextFieldDelegate
@@ -304,6 +351,12 @@ extension ViewController: UIViewControllerTransitioningDelegate{
 extension ViewController: cardViewDelegate{
     func recoverCardView() {
         print("recovering")
+    }
+}
+
+extension ViewController: selectServerDelegate{
+    func selectedServer(_ name: String) {
+        print("ViewController select \(name)")
     }
 }
 
