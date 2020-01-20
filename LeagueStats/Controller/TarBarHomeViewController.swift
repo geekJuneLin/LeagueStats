@@ -27,7 +27,7 @@ class TarBarHomeViewController: UITabBarController{
             // Fallback on earlier versions
         }
         
-        let secondVC = UIViewController()
+        let secondVC = UINavigationController(rootViewController: ChampionAnalysisViewController())
         secondVC.view.backgroundColor = .cyan
         secondVC.navigationController?.navigationBar.topItem?.title = "Champion"
         if #available(iOS 13.0, *) {

@@ -11,6 +11,7 @@ import SkeletonView
 
 protocol selectServerDelegate{
     func selectedServer(_ name: String)
+    func dismiss()
 }
 
 class ViewController: UIViewController{
@@ -19,7 +20,7 @@ class ViewController: UIViewController{
     
     private var isTapping = false
     
-    private var isMenuPresented = false
+    var isMenuPresented = false
     
     let heroImg: UIImageView = {
        let view = UIImageView()
@@ -28,18 +29,25 @@ class ViewController: UIViewController{
         return view
     }()
     
-    let nameLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .black
-        label.text = "Summoner ID: "
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     let nameText: UITextField = {
         let text = UITextField()
         text.textColor = .black
-        text.attributedPlaceholder = NSAttributedString(string: "Please enter the name", attributes: [.foregroundColor : UIColor.winColor])
+        text.placeholder = "Search a Summoner"
+        text.backgroundColor = .backgroudColor
+        text.clipsToBounds = true
+        text.layer.cornerRadius = 8
+        text.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: 1))
+        text.leftViewMode = .always
+        if #available(iOS 13.0, *) {
+            let btn = UIImageView(image: UIImage(systemName: "magnifyingglass")?
+                .withRenderingMode(.alwaysTemplate))
+            btn.tintColor = .placeholderText
+            text.rightView = btn
+            text.rightViewMode = .always
+        } else {
+            // Fallback on earlier versions
+        }
+//        text.attributedPlaceholder = NSAttributedString(string: "Please enter the name", attributes: [.foregroundColor : UIColor.winColor])
         text.translatesAutoresizingMaskIntoConstraints = false
         return text
     }()
@@ -57,49 +65,9 @@ class ViewController: UIViewController{
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+
     
-    let menuView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(red: 66/255, green: 66/255, blue: 65/255, alpha: 1.0)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    let accountImg: UIButton = {
-       let view = UIButton(type: .system)
-        if #available(iOS 13.0, *) {
-            let img = UIImage(systemName: "person")
-            img?.withRenderingMode(.alwaysTemplate)
-            view.setImage(img, for: .normal)
-            view.isUserInteractionEnabled = true
-            view.isEnabled = true
-        } else {
-            // Fallback on earlier versions
-        }
-        view.tintColor = UIColor(white: 0.6, alpha: 0.8)
-        view.backgroundColor = UIColor(red: 92/255, green: 91/255, blue: 90/255, alpha: 1.0)
-        view.layer.masksToBounds = true
-        view.layer.cornerRadius = 25
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    let setting: UIButton = {
-        let view = UIButton(type: .system)
-        if #available(iOS 13.0, *) {
-            let img = UIImage(systemName: "wrench")
-            img?.withRenderingMode(.alwaysTemplate)
-            view.setImage(img, for: .normal)
-        } else {
-            // Fallback on earlier versions
-        }
-        view.tintColor = UIColor(white: 0.6, alpha: 0.8)
-        view.backgroundColor = UIColor(red: 92/255, green: 91/255, blue: 90/255, alpha: 1.0)
-        view.layer.masksToBounds = true
-        view.layer.cornerRadius = 25
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+
     
     let serverView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
@@ -114,6 +82,8 @@ class ViewController: UIViewController{
         return view
     }()
     
+    let launcher = SlideMenuViewLauncher()
+    
     private var leftButton = UIBarButtonItem()
     private var rightButton = UIBarButtonItem()
     
@@ -124,7 +94,7 @@ class ViewController: UIViewController{
         cardView.showAnimatedSkeleton()
         setUpNavigationController()
         setUpViews()
-        setupSlideMenuView()
+//        setupSlideMenuView()
         setUpTapReconizer()
         setUpViewAboveKB()
     }
@@ -132,14 +102,6 @@ class ViewController: UIViewController{
 
 // MARK: - other functions
 extension ViewController{
-    fileprivate func hideOrShowMenuView(){
-        self.isMenuPresented.toggle()
-        UIView.animate(withDuration: 0.5) {
-            self.tabBarController?.view.transform = CGAffineTransform(translationX: self.isMenuPresented ? UIScreen.main.bounds.width * 0.25 : 0, y: 0)
-            self.menuView.transform = CGAffineTransform(translationX: self.isMenuPresented ? 0 : -UIScreen.main.bounds.width * 0.25, y: 0)
-        }
-    }
-    
     /// init left and right buttons
     fileprivate func setupUIBarButtons(){
         if #available(iOS 13.0, *) {
@@ -185,19 +147,19 @@ extension ViewController{
     
     /// set up all the views
     fileprivate func setUpViews(){
+        launcher.mainVC = self
+        
         view.backgroundColor = .white
         cardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleClick)))
         
-        view.addSubview(nameLabel)
+//        view.addSubview(nameLabel)
         view.addSubview(nameText)
         view.addSubview(heroImg)
         view.addSubview(cardView)
         
         heroImg.anchors(centerX: view.centerXAnchor, top: view.safeAreaLayoutGuide.topAnchor, topConstant: 15, widthValue: 80, heightValue: 50)
         
-        nameLabel.anchors(top: heroImg.bottomAnchor, topConstant: 20, left: view.safeAreaLayoutGuide.leftAnchor, leftConstant: 20)
-        
-        nameText.anchors(top: nameLabel.topAnchor, topConstant: 0, left: nameLabel.rightAnchor, rightConstant: 5)
+        nameText.anchors(centerX: view.centerXAnchor, top: heroImg.bottomAnchor, topConstant: 20, width: view.widthAnchor, widthValue: 0.9, heightValue: 35)
         
         cardView.anchors(centerX: view.centerXAnchor, top: nameText.bottomAnchor, topConstant: 60, width: view.widthAnchor, widthValue: 0.9, height: view.heightAnchor, heightValue: 0.2)
     }
@@ -218,22 +180,7 @@ extension ViewController{
         cardView.hideSkeleton()
     }
     
-    fileprivate func setupSlideMenuView(){
-        if let window = UIApplication.shared.keyWindow{
-            menuView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleMenuViewClick)))
-            menuView.transform = CGAffineTransform(translationX: -UIScreen.main.bounds.width * 0.25, y: 0)
-            
-            window.addSubview(menuView)
-            menuView.anchors(left: window.rootViewController!.view.leftAnchor, widthValue: UIScreen.main.bounds.width * 0.25, heightValue: UIScreen.main.bounds.height)
-            
-            accountImg.addTarget(self, action: #selector(handleAccountImgClick), for: .touchUpInside)
-            setting.addTarget(self, action: #selector(handleSettingClick), for: .touchUpInside)
-            menuView.addSubview(setting)
-            setting.anchors(centerX: menuView.centerXAnchor, bottom: menuView.bottomAnchor, bottomConstant: -10, widthValue: 50, heightValue: 50)
-            menuView.addSubview(accountImg)
-            accountImg.anchors(centerX: menuView.centerXAnchor, bottom: setting.topAnchor, bottomConstant: -10, widthValue: 50, heightValue: 50)
-        }
-    }
+    
 }
 
 // MARK: - selector functions
@@ -292,34 +239,14 @@ extension ViewController{
     @objc
     fileprivate func handleLeftButton(){
         print("left button pressed")
-        hideOrShowMenuView()
-    }
-    
-    @objc
-    fileprivate func handleMenuViewClick(){
         isMenuPresented.toggle()
-        UIView.animate(withDuration: 0.5) {
-            self.tabBarController?.view.transform = CGAffineTransform(translationX: self.isMenuPresented ? UIScreen.main.bounds.width * 0.25 : 0, y: 0)
-            self.menuView.transform = CGAffineTransform(translationX: self.isMenuPresented ? 0 : -UIScreen.main.bounds.width * 0.25, y: 0)
-        }
+        isMenuPresented ? launcher.showSlideMenuView() : launcher.hideSlideMenuView()
     }
     
-    @objc
-    fileprivate func handleAccountImgClick(){
-        print("account image pressed!")
-    }
+
     
     @objc
-    fileprivate func handleSettingClick(){
-        print("setting image pressed!")
-    }
-    
-    @objc
-    fileprivate func handleServerSelection(_ view: UIView){
-        UIView.animate(withDuration: 0.5) {
-            
-        }
-        
+    fileprivate func handleServerSelection(){
         UIView.animate(withDuration: 0.5, animations: {
             self.serverView.alpha = 0
             self.serverCollectionView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.7)
@@ -357,6 +284,10 @@ extension ViewController: cardViewDelegate{
 extension ViewController: selectServerDelegate{
     func selectedServer(_ name: String) {
         print("ViewController select \(name)")
+    }
+    
+    func dismiss() {
+        self.handleServerSelection()
     }
 }
 

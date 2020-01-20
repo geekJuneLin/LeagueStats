@@ -86,5 +86,6 @@ extension ServerCollectionView: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.selectedServer(servers[indexPath.item])
+        delegate?.dismiss()
     }
 }
