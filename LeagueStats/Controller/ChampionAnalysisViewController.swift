@@ -8,11 +8,23 @@
 
 import UIKit
 
+protocol DataFromHeaderDelegate {
+    func passDataFromHeader(indexPath: IndexPath)
+}
+
+protocol DataFromCellDelegate {
+    func passDataFromCell(indexPath: IndexPath)
+}
+
+
 class ChampionAnalysisViewController: UIViewController{
     
     let cellId = "cellId"
     let headerSearchId = "headerSearchId"
     let headerTypeId = "headerTypeId"
+    
+    var headerDelegate: DataFromHeaderDelegate?
+    var cellDelegate: DataFromCellDelegate?
     
     private var leftButton = UIBarButtonItem()
     
@@ -33,7 +45,7 @@ class ChampionAnalysisViewController: UIViewController{
         tableView.delegate = self
         tableView.register(ChampionAnalysisSearchHeader.self, forHeaderFooterViewReuseIdentifier: headerSearchId)
         tableView.register(ChampionAnalysisTypeHeader.self, forHeaderFooterViewReuseIdentifier: headerTypeId)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(ChampionAnalysisTableViewCell.self, forCellReuseIdentifier: cellId)
         tableView.anchors(width: view.widthAnchor, widthValue: 1, height: view.heightAnchor, heightValue: 1)
     }
     
@@ -79,13 +91,14 @@ extension ChampionAnalysisViewController: UITableViewDataSource{
         if section == 0{
             return 0
         }else{ // second section
-            return 20
+            return 1
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        cell.backgroundColor = .yellow
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ChampionAnalysisTableViewCell
+        headerDelegate = (cell as DataFromHeaderDelegate)
+        cell.delegate = self
         return cell
     }
 }
@@ -98,6 +111,8 @@ extension ChampionAnalysisViewController: UITableViewDelegate{
             return header
         }else{
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerTypeId) as! ChampionAnalysisTypeHeader
+            header.delegate = self
+            cellDelegate = (header as DataFromCellDelegate)
             return header
         }
     }
@@ -108,5 +123,25 @@ extension ChampionAnalysisViewController: UITableViewDelegate{
         }else{
             return 50
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UIScreen.main.bounds.height * 0.6
+    }
+}
+
+// MARK: - DataFromHeaderDelegate
+extension ChampionAnalysisViewController: DataFromHeaderDelegate{
+    func passDataFromHeader(indexPath: IndexPath) {
+        print("selected index in header is: \(indexPath.item)")
+        self.headerDelegate?.passDataFromHeader(indexPath: indexPath)
+    }
+}
+
+// MARK: - DataFromCellDelegate
+extension ChampionAnalysisViewController: DataFromCellDelegate{
+    func passDataFromCell(indexPath: IndexPath){
+        print("selected index in cell is: \(indexPath.item)")
+        self.cellDelegate?.passDataFromCell(indexPath: indexPath)
     }
 }

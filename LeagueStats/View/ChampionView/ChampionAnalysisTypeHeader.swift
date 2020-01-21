@@ -18,11 +18,22 @@ class ChampionAnalysisTypeHeader: UITableViewHeaderFooterView{
                 "BOTTOM",
                 "SUPPORT"]
     
+    var delegate: DataFromHeaderDelegate?
+    
     let backgroundV: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        view.backgroundColor = .green
+        view.backgroundColor = .white
+        view.layer.borderWidth = 2
+        view.layer.borderColor = UIColor.backgroudColor.cgColor
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let bar: UIView = {
+       let view = UIView()
+        view.backgroundColor = .backgroudColor
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -44,10 +55,14 @@ class ChampionAnalysisTypeHeader: UITableViewHeaderFooterView{
         self.addSubview(backgroundV)
         backgroundV.anchors(width: self.backgroundView?.widthAnchor, widthValue: 1, height: self.backgroundView?.heightAnchor, heightValue: 1)
         
+        backgroundV.isScrollEnabled = false
         backgroundV.showsHorizontalScrollIndicator = false
         backgroundV.dataSource = self
         backgroundV.delegate = self
         backgroundV.register(ChampionAnalysisTypeHeaderCell.self, forCellWithReuseIdentifier: cellId)
+        backgroundV.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: [])
+        
+        backgroundV.addSubview(bar)
     }
 }
 
@@ -66,13 +81,23 @@ extension ChampionAnalysisTypeHeader: UICollectionViewDataSource{
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension ChampionAnalysisTypeHeader: UICollectionViewDelegateFlowLayout{
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width / 5, height: collectionView.bounds.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.passDataFromHeader(indexPath: indexPath)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         if let cell = collectionView.cellForItem(at: indexPath) as? ChampionAnalysisTypeHeaderCell{
             cell.isSelected = true
         }
+    }
+}
+
+extension ChampionAnalysisTypeHeader: DataFromCellDelegate{
+    func passDataFromCell(indexPath: IndexPath) {
+        print("header get the index from cell: \(indexPath.item)")
+        backgroundV.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
     }
 }

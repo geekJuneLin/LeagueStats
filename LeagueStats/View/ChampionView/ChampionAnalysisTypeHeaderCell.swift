@@ -10,17 +10,6 @@ import UIKit
 
 class ChampionAnalysisTypeHeaderCell: UICollectionViewCell{
     
-//    var isClicked: Bool?{
-//        didSet{
-//            if let clicked = isClicked{
-//                UIView.animate(withDuration: 1) {
-//                    self.indicator.isHidden = !clicked
-//                    self.typeLbl.textColor = clicked ? .winColor : .black
-//                }
-//            }
-//        }
-//    }
-    
     override var isSelected: Bool{
         didSet{
             UIView.animate(withDuration: 1) {

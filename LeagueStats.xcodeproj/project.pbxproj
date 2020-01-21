@@ -19,6 +19,7 @@
 		8E33B27123B83BEB00D7BA08 /* UIImageView+loadImgWithUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33B27023B83BEB00D7BA08 /* UIImageView+loadImgWithUrl.swift */; };
 		8E33B27323B8A29B00D7BA08 /* UIColor+CustomizedColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33B27223B8A29B00D7BA08 /* UIColor+CustomizedColor.swift */; };
 		8E35F91D23C0042B006143B0 /* MatchStatsCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E35F91C23C0042B006143B0 /* MatchStatsCellModel.swift */; };
+		8E36740923D66455001F18E5 /* ChampionAnalysisTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36740823D66455001F18E5 /* ChampionAnalysisTableViewCell.swift */; };
 		8E3A4FB423C93886006728DF /* TarBarHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3A4FB323C93886006728DF /* TarBarHomeViewController.swift */; };
 		8E40CA7623932BD800848F42 /* StatsMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40CA7523932BD800848F42 /* StatsMainViewController.swift */; };
 		8E40CA7823933F8700848F42 /* StatsTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40CA7723933F8700848F42 /* StatsTopView.swift */; };
@@ -88,6 +89,7 @@
 		8E33B27023B83BEB00D7BA08 /* UIImageView+loadImgWithUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+loadImgWithUrl.swift"; sourceTree = "<group>"; };
 		8E33B27223B8A29B00D7BA08 /* UIColor+CustomizedColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomizedColor.swift"; sourceTree = "<group>"; };
 		8E35F91C23C0042B006143B0 /* MatchStatsCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchStatsCellModel.swift; sourceTree = "<group>"; };
+		8E36740823D66455001F18E5 /* ChampionAnalysisTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionAnalysisTableViewCell.swift; sourceTree = "<group>"; };
 		8E3A4FB323C93886006728DF /* TarBarHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TarBarHomeViewController.swift; sourceTree = "<group>"; };
 		8E40CA7523932BD800848F42 /* StatsMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsMainViewController.swift; sourceTree = "<group>"; };
 		8E40CA7723933F8700848F42 /* StatsTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTopView.swift; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				8EC7545A23D517EA0040F620 /* ChampionAnalysisSearchHeader.swift */,
 				8EC7545C23D52CAE0040F620 /* ChampionAnalysisTypeHeader.swift */,
 				8EC7545E23D53C990040F620 /* ChampionAnalysisTypeHeaderCell.swift */,
+				8E36740823D66455001F18E5 /* ChampionAnalysisTableViewCell.swift */,
 			);
 			path = ChampionView;
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 				8E55AB3A23AF34A4007632F6 /* MatchDetail.swift in Sources */,
 				8E626C5923C1637800CC3F29 /* MatchStatsCellViewModel.swift in Sources */,
 				8E325072239489AD002B47E1 /* TierCollectionView.swift in Sources */,
+				8E36740923D66455001F18E5 /* ChampionAnalysisTableViewCell.swift in Sources */,
 				8E61327123C3FF05000C7B07 /* LeagueEntry.swift in Sources */,
 				8EAAA70423D18993007D8D5E /* SlideMenuViewLauncher.swift in Sources */,
 				8EEB52BA23C96489005FAEA4 /* UIView+AutoLayout.swift in Sources */,
