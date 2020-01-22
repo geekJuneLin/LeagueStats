@@ -47,7 +47,6 @@ class ViewController: UIViewController{
         } else {
             // Fallback on earlier versions
         }
-//        text.attributedPlaceholder = NSAttributedString(string: "Please enter the name", attributes: [.foregroundColor : UIColor.winColor])
         text.translatesAutoresizingMaskIntoConstraints = false
         return text
     }()
@@ -65,10 +64,7 @@ class ViewController: UIViewController{
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
-    
-
-    
+ 
     let serverView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         return view
@@ -94,7 +90,6 @@ class ViewController: UIViewController{
         cardView.showAnimatedSkeleton()
         setUpNavigationController()
         setUpViews()
-//        setupSlideMenuView()
         setUpTapReconizer()
         setUpViewAboveKB()
     }
@@ -152,10 +147,7 @@ extension ViewController{
         view.backgroundColor = .white
         cardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleClick)))
         
-//        view.addSubview(nameLabel)
-        view.addSubview(nameText)
-        view.addSubview(heroImg)
-        view.addSubview(cardView)
+        view.addSubView(nameText, heroImg, cardView)
         
         heroImg.anchors(centerX: view.centerXAnchor, top: view.safeAreaLayoutGuide.topAnchor, topConstant: 15, widthValue: 80, heightValue: 50)
         
@@ -215,14 +207,11 @@ extension ViewController{
     @objc
     fileprivate func handleRightButton(){
         print("right button has been pressed")
-//        let serverController = ServerSelectionViewController()
-//        serverController.modalPresentationStyle = .overFullScreen
-//        self.present(serverController, animated: true, completion: nil)
         
         if let window = UIApplication.shared.keyWindow{
             window.addSubview(serverView)
             serverView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleServerSelection)))
-            serverView.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+            serverView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
             serverView.alpha = 0
             
             window.addSubview(serverCollectionView)

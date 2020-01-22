@@ -41,7 +41,15 @@ class ChampionAnalysisViewController: UIViewController{
         
         view.backgroundColor = .white
         setUpNavigationBarButton()
-        
+        setUpTableView() 
+    }
+    
+}
+
+// MARK: - other functions
+extension ChampionAnalysisViewController{
+    
+    fileprivate func setUpTableView(){
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
@@ -51,10 +59,6 @@ class ChampionAnalysisViewController: UIViewController{
         tableView.anchors(width: view.widthAnchor, widthValue: 1, height: view.heightAnchor, heightValue: 1)
     }
     
-}
-
-// MARK: - other functions
-extension ChampionAnalysisViewController{
     fileprivate func setUpNavigationBarButton(){
         if #available(iOS 13.0, *) {
             let img = UIImage(systemName: "line.horizontal.3.decrease")
@@ -158,6 +162,7 @@ extension ChampionAnalysisViewController: DataFromCellDelegate{
     }
 }
 
+// MARK: - Champion scroll delegate
 extension ChampionAnalysisViewController: ChampionAnalysisScrollDelegate{
     func needToScroll(offsetY: CGFloat) {
         

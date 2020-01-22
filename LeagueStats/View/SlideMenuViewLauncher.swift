@@ -70,18 +70,19 @@ class SlideMenuViewLauncher: NSObject{
             menuView.addSubview(accountImg)
             accountImg.anchors(centerX: menuView.centerXAnchor, bottom: setting.topAnchor, bottomConstant: -10, widthValue: 50, heightValue: 50)
             
-            UIView.animate(withDuration: 0.5) {
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
                 self.mainVC?.tabBarController?.view.transform = CGAffineTransform(translationX: self.mainVC?.isMenuPresented ?? false ? UIScreen.main.bounds.width * 0.25 : 0, y: 0)
                 self.menuView.transform = CGAffineTransform(translationX: self.mainVC?.isMenuPresented ?? false ? 0 : -UIScreen.main.bounds.width * 0.25, y: 0)
-            }
+            }, completion: nil)
         }
     }
     
     func hideSlideMenuView(){
-        UIView.animate(withDuration: 0.5) {
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
             self.mainVC?.tabBarController?.view.transform = CGAffineTransform(translationX: self.mainVC?.isMenuPresented ?? false ? UIScreen.main.bounds.width * 0.25 : 0, y: 0)
             self.menuView.transform = CGAffineTransform(translationX: self.mainVC?.isMenuPresented ?? false ? 0 : -UIScreen.main.bounds.width * 0.25, y: 0)
-        }
+        }, completion: nil)
     }
     
     @objc
