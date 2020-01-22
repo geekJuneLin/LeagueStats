@@ -52,10 +52,8 @@ extension ChampionAnalysisTableViewCell: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let colors = [UIColor.cyan, UIColor.yellow, UIColor.green, UIColor.pumpkin, UIColor.systemPink]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChampionAnalysisCollectionViewCell
         cell.delegate = scrollDelegate
-        cell.backgroundColor = colors[indexPath.item]
         return cell
     }
 }

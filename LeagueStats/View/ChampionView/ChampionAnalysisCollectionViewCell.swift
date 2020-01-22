@@ -40,7 +40,7 @@ class ChampionAnalysisCollectionViewCell: UICollectionViewCell{
         collecionView.dataSource = self
         collecionView.delegate = self
         collecionView.showsVerticalScrollIndicator = false
-        collecionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collecionView.register(ChampionAnalysisChampViewCell.self, forCellWithReuseIdentifier: cellId)
         
         addSubview(collecionView)
         collecionView.anchors(width: widthAnchor, widthValue: 1, height: heightAnchor, heightValue: 1)
@@ -50,13 +50,12 @@ class ChampionAnalysisCollectionViewCell: UICollectionViewCell{
 // MARK: - UICollectionView data source
 extension ChampionAnalysisCollectionViewCell: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 50
+        return 15
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-        cell.backgroundColor = .pumpkin
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChampionAnalysisChampViewCell
         return cell
     }
 }
@@ -71,7 +70,11 @@ extension ChampionAnalysisCollectionViewCell: UICollectionViewDelegateFlowLayout
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 50)
+        return CGSize(width: collectionView.bounds.width, height: 80)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
     }
     
 }

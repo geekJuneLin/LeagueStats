@@ -32,6 +32,8 @@
 		8E6FAD4723ADC8C10031EE0B /* MatchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6FAD4623ADC8C10031EE0B /* MatchList.swift */; };
 		8E70F4D92391ECB3005847E3 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E70F4D82391ECB3005847E3 /* CardView.swift */; };
 		8E70F4DB23920AA0005847E3 /* StatsViewNaviController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E70F4DA23920AA0005847E3 /* StatsViewNaviController.swift */; };
+		8E84EBF023D7D6E9008B4A02 /* ChampionAnalysisChampViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84EBEF23D7D6E9008B4A02 /* ChampionAnalysisChampViewCell.swift */; };
+		8E84EBF223D7E17B008B4A02 /* UIView+addSubViewVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84EBF123D7E17B008B4A02 /* UIView+addSubViewVariadic.swift */; };
 		8E9BD78D23D047C3004ED0B1 /* ServerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9BD78C23D047C3004ED0B1 /* ServerCollectionView.swift */; };
 		8E9C505623B965C7005473F3 /* MatchStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C505523B965C7005473F3 /* MatchStatsCell.swift */; };
 		8E9C505823B965D4005473F3 /* MatchTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C505723B965D4005473F3 /* MatchTitleCell.swift */; };
@@ -103,6 +105,8 @@
 		8E6FAD4623ADC8C10031EE0B /* MatchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchList.swift; sourceTree = "<group>"; };
 		8E70F4D82391ECB3005847E3 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		8E70F4DA23920AA0005847E3 /* StatsViewNaviController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewNaviController.swift; sourceTree = "<group>"; };
+		8E84EBEF23D7D6E9008B4A02 /* ChampionAnalysisChampViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionAnalysisChampViewCell.swift; sourceTree = "<group>"; };
+		8E84EBF123D7E17B008B4A02 /* UIView+addSubViewVariadic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+addSubViewVariadic.swift"; sourceTree = "<group>"; };
 		8E9BD78C23D047C3004ED0B1 /* ServerCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerCollectionView.swift; sourceTree = "<group>"; };
 		8E9C505523B965C7005473F3 /* MatchStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchStatsCell.swift; sourceTree = "<group>"; };
 		8E9C505723B965D4005473F3 /* MatchTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTitleCell.swift; sourceTree = "<group>"; };
@@ -176,6 +180,7 @@
 				8E33B27223B8A29B00D7BA08 /* UIColor+CustomizedColor.swift */,
 				8EE2B35823BAFD3F00E5E038 /* String+setColor.swift */,
 				8EEB52B923C96489005FAEA4 /* UIView+AutoLayout.swift */,
+				8E84EBF123D7E17B008B4A02 /* UIView+addSubViewVariadic.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -300,6 +305,7 @@
 				8EC7545E23D53C990040F620 /* ChampionAnalysisTypeHeaderCell.swift */,
 				8E36740823D66455001F18E5 /* ChampionAnalysisTableViewCell.swift */,
 				8EA6D87623D6CFAB00E984B7 /* ChampionAnalysisCollectionViewCell.swift */,
+				8E84EBEF23D7D6E9008B4A02 /* ChampionAnalysisChampViewCell.swift */,
 			);
 			path = ChampionView;
 			sourceTree = "<group>";
@@ -552,6 +558,7 @@
 				8E325072239489AD002B47E1 /* TierCollectionView.swift in Sources */,
 				8E36740923D66455001F18E5 /* ChampionAnalysisTableViewCell.swift in Sources */,
 				8E61327123C3FF05000C7B07 /* LeagueEntry.swift in Sources */,
+				8E84EBF023D7D6E9008B4A02 /* ChampionAnalysisChampViewCell.swift in Sources */,
 				8EAAA70423D18993007D8D5E /* SlideMenuViewLauncher.swift in Sources */,
 				8EEB52BA23C96489005FAEA4 /* UIView+AutoLayout.swift in Sources */,
 				8E9BD78D23D047C3004ED0B1 /* ServerCollectionView.swift in Sources */,
@@ -571,6 +578,7 @@
 				8E35F91D23C0042B006143B0 /* MatchStatsCellModel.swift in Sources */,
 				8EF159AF23BEE23800632CA3 /* StatsViewCellModel.swift in Sources */,
 				8E32507423948DC1002B47E1 /* TierViewCell.swift in Sources */,
+				8E84EBF223D7E17B008B4A02 /* UIView+addSubViewVariadic.swift in Sources */,
 				8E9C505823B965D4005473F3 /* MatchTitleCell.swift in Sources */,
 				8ED2C734239C939700E132C8 /* MatchStatsViewController.swift in Sources */,
 				8E70F4D92391ECB3005847E3 /* CardView.swift in Sources */,
