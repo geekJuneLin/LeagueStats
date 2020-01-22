@@ -11,6 +11,7 @@ import UIKit
 class ChampionAnalysisTableViewCell: UITableViewCell{
     
     var delegate: DataFromCellDelegate?
+    var scrollDelegate: ChampionAnalysisScrollDelegate?
     
     let cellId = "cellId"
     
@@ -37,7 +38,8 @@ class ChampionAnalysisTableViewCell: UITableViewCell{
         collectionView.dataSource = (self as UICollectionViewDataSource)
         collectionView.delegate = self
         collectionView.isPagingEnabled = true
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.register(ChampionAnalysisCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         addSubview(collectionView)
         collectionView.anchors(width: widthAnchor, widthValue: 1, height: heightAnchor, heightValue: 1)
     }
@@ -51,7 +53,8 @@ extension ChampionAnalysisTableViewCell: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let colors = [UIColor.cyan, UIColor.yellow, UIColor.green, UIColor.pumpkin, UIColor.systemPink]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChampionAnalysisCollectionViewCell
+        cell.delegate = scrollDelegate
         cell.backgroundColor = colors[indexPath.item]
         return cell
     }
@@ -59,6 +62,7 @@ extension ChampionAnalysisTableViewCell: UICollectionViewDataSource{
 
 // MARK: - UIcollectionview delegate flow layout
 extension ChampionAnalysisTableViewCell: UICollectionViewDelegateFlowLayout{
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
     }
@@ -76,6 +80,6 @@ extension ChampionAnalysisTableViewCell: UICollectionViewDelegateFlowLayout{
 
 extension ChampionAnalysisTableViewCell: DataFromHeaderDelegate{
     func passDataFromHeader(indexPath: IndexPath) {
-        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
     }
 }

@@ -23,6 +23,8 @@ class ChampionAnalysisViewController: UIViewController{
     let headerSearchId = "headerSearchId"
     let headerTypeId = "headerTypeId"
     
+    var isCollapsed = false
+    
     var headerDelegate: DataFromHeaderDelegate?
     var cellDelegate: DataFromCellDelegate?
     
@@ -66,6 +68,7 @@ extension ChampionAnalysisViewController{
             leftButton = UIBarButtonItem(title: "More", style: .plain, target: self, action: #selector(handleLeftButton))
         }
         
+        navigationController?.view.backgroundColor = .white
         navigationController?.navigationBar.topItem?.leftBarButtonItem = leftButton
         navigationController?.navigationBar.topItem?.title = "Champion Analysis"
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -89,17 +92,22 @@ extension ChampionAnalysisViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // first section
         if section == 0{
-            return 0
+            return 1
         }else{ // second section
             return 1
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ChampionAnalysisTableViewCell
-        headerDelegate = (cell as DataFromHeaderDelegate)
-        cell.delegate = self
-        return cell
+        if indexPath.section == 1{
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ChampionAnalysisTableViewCell
+            headerDelegate = (cell as DataFromHeaderDelegate)
+            cell.delegate = self
+            cell.scrollDelegate = self
+            return cell
+        }else{
+            return UITableViewCell()
+        }
     }
 }
 
@@ -126,7 +134,11 @@ extension ChampionAnalysisViewController: UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UIScreen.main.bounds.height * 0.6
+        if indexPath.section == 1{
+            return UIScreen.main.bounds.height * 0.8
+        }else{
+            return 0
+        }
     }
 }
 
@@ -143,5 +155,19 @@ extension ChampionAnalysisViewController: DataFromCellDelegate{
     func passDataFromCell(indexPath: IndexPath){
         print("selected index in cell is: \(indexPath.item)")
         self.cellDelegate?.passDataFromCell(indexPath: indexPath)
+    }
+}
+
+extension ChampionAnalysisViewController: ChampionAnalysisScrollDelegate{
+    func needToScroll(offsetY: CGFloat) {
+        
+        if offsetY > 10 && !isCollapsed {
+            tableView.scrollToRow(at: IndexPath(item: 0, section: 1), at: .bottom, animated: true)
+            isCollapsed.toggle()
+        }
+        if offsetY < 0 && isCollapsed{
+            tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .none, animated: true)
+            isCollapsed.toggle()
+        }
     }
 }
